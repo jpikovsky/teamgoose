@@ -110,7 +110,7 @@ app.get('/team', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    var about =reader.readFileSync("about.txt").toString().split('/n')
+    var about =reader.readFileSync("about.txt");
     res.render('about', {
       about,
       
@@ -132,6 +132,10 @@ app.get('/profile', (req, res) => {
 
 app.get('/courses', (req, res) => {
   res.render('courses');
+});
+
+app.get('/course_details', (req, res) => {
+  res.render('course_details');
 });
 
 app.get('/major', (req, res) => {
