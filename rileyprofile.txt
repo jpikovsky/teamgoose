@@ -1,0 +1,2 @@
+Riley Condon is a graduating senior at the University of Massachusetts Amherst. He is a computer science major with a specificied concentration in security and privacy. In creating the web application Riley will help with the designing of the webpage logo and will work on creating the basic user interface for the application. He will also work on providing a way for users to enter their personal data such as courses they have already taken. 
+
