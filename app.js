@@ -104,6 +104,25 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
+app.get('/courses', (req, res) => {
+  res.render('courses');
+});
+
+app.get('/major', (req, res) => {
+  res.render('major');
+});
+
+app.get('/layout', (req, res) => {
+  res.render('layout');
+});
+
+app.get('/admin', (req, res) => {
+  res.render('admin');
+});
 
 //////////////////////////////////////////////////////////////////////
 ///// Error Middleware ///////////////////////////////////////////////
