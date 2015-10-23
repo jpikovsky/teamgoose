@@ -82,16 +82,7 @@ app.use(testmw);
 var team = require('./lib/team.js');
 
 app.get('/', (req, res) => {
-  // TODO
-  var result = team.all();
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
-  }
+  res.render('home');
 });
 
 app.get('/team', (req, res) => {
@@ -128,6 +119,10 @@ app.get('/about', (req, res) => {
     });
 
 
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
 });
 
 
