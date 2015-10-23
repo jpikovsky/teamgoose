@@ -1,4 +1,34 @@
-Here's some stuff
-about the team
-fellas
+getInSPIREd
+
+Team Members: Alex Lassalle, Niketh Murali, Josh Pikovsky, Andrew Gramigna, Tim Contois, Riley Condon
+
+
+MOTIVATION: We were motivated to create this app because we have all had problems with SPIRE. We have also changed majors multiple times, and have had to use pencil and paper to find out what we needed to do and how many classes we would have left. A change of major form requires multiple signatures, and then a trip to Whitmore to make a major change official. Only then would your academic requirements change on SPIRE. We want to make picking classes and changing majors less stressful. UMass just eliminated the Undeclared Major so we feel getInSPIREd is coming at the perfect time. 
+
+
+APPLICATION NAME: getInSPIREd
+
+
+SHORT CATCHY PHRASE: “We help students make major changes to their academic career”
+
+DESCRIPTION OF APPLICATION: Our application aims to help students navigate their academic requirements and learn more about other major requirements. Students can see what courses they have left to take in an easy to read list, and even see what order would be the most efficient. 
+
+
+PROBLEM WE SOLVE: SPIRE! The website is difficult to navigate and it can be hard to find the information one needs.  If you want to change your major, and want to see what remaining courses you would need to take, there is no way to find this one SPIRE. You would have to go to that major department’s website and manually count and see how many courses are left to take. You would then also have to see if this could possibly fit your schedule. getInSPIREd does all this with a click of a button. Simply select which major you switch to and see what courses you would need to take. 
+
+
+USE CASES:
+On Spire there is no way to look at both your remaining requirements and courses offered next semester. This application allows a user to plan their classes for an upcoming semester.
+
+You can either create an account or log into your account on getInSPIREd
+You can check your profile to look at the courses you are currently taking and your progress so far regarding course requirements for a given major and academic college
+You can view your progress in graph form which will make your progress more visually pleasing
+You can see what courses you have left for your given major which makes it easier to choose what you would like to fulfill
+You can add more courses to your getInSPIREd schedule or remove courses at your own wish as you go through the process of figuring out your future
+You can look for different courses and sort by various course attributes such as general education courses, different majors, course types, number of credits, etc.
+You can view your course requirement progress for other majors and determine if you could potentially switch majors successfully or add a major to your curriculum
+You can send an email to your advisor if you have any questions that need to be answered regarding courses and scheduling
+
+Overall using this application will eliminate any problems that a user may encounter while choosing classes or determining a major path on Spire!
+
 
