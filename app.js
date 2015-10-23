@@ -134,6 +134,10 @@ app.get('/courses', (req, res) => {
   res.render('courses');
 });
 
+app.get('/course_details', (req, res) => {
+  res.render('course_details');
+});
+
 app.get('/major', (req, res) => {
   res.render('major');
 });
