@@ -1,3 +1,3 @@
-Josh Pikovsky is a senior at the University of Massachusetts, where he is a Computer Science major. He will be working on the primary algorithm with Tim "localhost:3000" Contois, and helping Niketh "Niketh Murali" Murali with building the databases. Josh is new to web development, but has a strong background in Java and Lisp. He is not an avid golfer. 
+Josh Pikovsky is a senior at the University of Massachusetts, where he is a Computer Science major. He will be working on the primary algorithm with Tim Contois, and helping Niketh Murali with building the databases. Josh is new to web development, but has a strong background in Java and Lisp. 
 
 In his free time, Josh likes hiking, reading, playing guitar, and not playing golf. 
