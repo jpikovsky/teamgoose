@@ -21,6 +21,13 @@ var app = express();
 // know what an evironment variable is) or port 3000.
 app.set('port', process.env.PORT || 3000);
 
+function readF(file){
+  reader.readFile(file,'utf8', function(err,data){
+    if (err) throw err;
+    return data;
+  });
+}
+
 // This does the setup for handlebars. It first creates a new
 // handlebars object giving it the default layout. This indicates
 // that the default layout is called main.js in the views/layouts
@@ -32,6 +39,9 @@ var view = handlebars.create({ defaultLayout: 'main' });
 app.engine('handlebars', view.engine);
 app.set('view engine', 'handlebars');
 
+handlebars.registerHelper("readf",function(file){
+      return handlebars.SafeString(readF(file));
+      });
 // This does the setup for static file serving. It uses express'
 // static middleware to look for files in /public if no other route
 // matches. We use the __dirname special variable which indicates the
@@ -59,6 +69,9 @@ function testmw(req, res, next) {
   // Passes the request to the next route handler.
   next();
 }
+
+
+
 
 // This adds our testing middleware to the express app.
 app.use(testmw);
@@ -101,13 +114,22 @@ app.get('/team', (req, res) => {
 });
 
 
-app.get('/about', (req, res) => {
 
+
+app.get('/about', (req, res) => {
+    var file = "about.txt;"
+    
     res.render('about', {
+      
+     
       pageTestScript: '/qa/tests-team.js'
+
+      
     });
-  
+
+
 });
+
 
 
 //////////////////////////////////////////////////////////////////////
@@ -136,12 +158,7 @@ function internalServerError500(err, req, res, next) {
   res.render('500');
 }
 
-function readF(file){
-  reader.readFile(file,'utf8', function(err,data){
-    if (err) throw err;
-    return data;
-  });
-}
+
 
 // This adds the two middleware functions as the last two middleware
 // functions. Because they are at the end they will only be invoked if

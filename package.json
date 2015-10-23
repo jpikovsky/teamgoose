@@ -1,5 +1,5 @@
 {
-  "name": "02-basic-app",
+  "name": "express",
   "version": "1.0.0",
   "description": "02 Basic Expression Application",
   "main": "app.js",
@@ -16,6 +16,18 @@
     "archiver": "^0.15.1",
     "chai": "^3.3.0",
     "fs-extra": "^0.24.0",
+    "handlebars-helpers": "^0.5.8",
     "mocha": "^2.3.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcontois1/teamgoose.git"
+  },
+  "keywords": [
+    "'"
+  ],
+  "bugs": {
+    "url": "https://github.com/tcontois1/teamgoose/issues"
+  },
+  "homepage": "https://github.com/tcontois1/teamgoose#readme"
 }
