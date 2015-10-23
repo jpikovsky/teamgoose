@@ -9,12 +9,12 @@ MOTIVATION: We were motivated to create this app because we have all had problem
 APPLICATION NAME: getInSPIREd
 
 
-SHORT CATCHY PHRASE: ìWe help students make major changes to their academic careerî
+SHORT CATCHY PHRASE: ‚ÄúWe help students make major changes to their academic career‚Äù
 
 DESCRIPTION OF APPLICATION: Our application aims to help students navigate their academic requirements and learn more about other major requirements. Students can see what courses they have left to take in an easy to read list, and even see what order would be the most efficient. 
 
 
-PROBLEM WE SOLVE: SPIRE! The website is difficult to navigate and it can be hard to find the information one needs.  If you want to change your major, and want to see what remaining courses you would need to take, there is no way to find this one SPIRE. You would have to go to that major departmentís website and manually count and see how many courses are left to take. You would then also have to see if this could possibly fit your schedule. getInSPIREd does all this with a click of a button. Simply select which major you switch to and see what courses you would need to take. 
+PROBLEM WE SOLVE: SPIRE! The website is difficult to navigate and it can be hard to find the information one needs.  If you want to change your major, and want to see what remaining courses you would need to take, there is no way to find this one SPIRE. You would have to go to that major department‚Äôs website and manually count and see how many courses are left to take. You would then also have to see if this could possibly fit your schedule. getInSPIREd does all this with a click of a button. Simply select which major you switch to and see what courses you would need to take. 
 
 
 USE CASES:

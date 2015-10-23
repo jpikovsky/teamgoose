@@ -110,13 +110,12 @@ app.get('/team', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    var file = "about.txt;"
-    
+    var about =reader.readFileSync("about.txt").toString().split('/n')
     res.render('about', {
+      about,
       
-     
       pageTestScript: '/qa/tests-team.js'
-
+      
       
     });
 
