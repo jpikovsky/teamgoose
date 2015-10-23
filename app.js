@@ -39,9 +39,6 @@ var view = handlebars.create({ defaultLayout: 'main' });
 app.engine('handlebars', view.engine);
 app.set('view engine', 'handlebars');
 
-handlebars.registerHelper("readf",function(file){
-      return handlebars.SafeString(readF(file));
-      });
 // This does the setup for static file serving. It uses express'
 // static middleware to look for files in /public if no other route
 // matches. We use the __dirname special variable which indicates the
@@ -90,22 +87,27 @@ app.get('/team', (req, res) => {
   var result;
   if(query_string == null){
     result = team.all();
+    if (!result.success) {
+      notFound404(req, res);
+    } else {
+      res.render('team', {
+        members: result.data,
+        pageTestScript: '/qa/tests-team.js'
+      });
+    }
   }
   else{
     result = team.one(query_string)
+    if (!result.success) {
+      notFound404(req, res);
+    } else {
+      res.render('teammember', {
+        members: result.data,
+        pageTestScript: '/qa/tests-team.js'
+      });
   }
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
   }
 });
-
-
-
 
 app.get('/about', (req, res) => {
     var file = "about.txt;"

@@ -1,0 +1,11 @@
+<h1>Team Portfolio</h1>
+
+<h2>Team Member:</h2>
+<ul>
+  {{#each members}}
+  <li><strong><a href="/team?user={{this.user}}">{{this.fname}} {{this.lname}}</a></strong> - {{this.year}}</li>
+  <p>
+  {{this.writeup}}
+  </p>
+  {{/each}}
+</ul>
