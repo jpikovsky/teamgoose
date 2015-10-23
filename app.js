@@ -80,87 +80,15 @@ app.get('/', (req, res) => {
   }
 });
 
-app.get('/team/jdoe', (req, res) => {
-  // TODO
-  var result = team.one('jdoe');
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
+app.get('/team', (req, res) => {
+  var query_string = req.query.user;
+  var result;
+  if(query_string == null){
+    result = team.all();
   }
-});
-
-app.get('/team/tcontois', (req, res) => {
-  // TODO
-  var result = team.one('tcontois');
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
+  else{
+    result = team.one(query_string)
   }
-});
-
-app.get('/team/alassall', (req, res) => {
-  // TODO
-  var result = team.one('alassall');
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
-  }
-});
-
-app.get('/team/agramign', (req, res) => {
-  // TODO
-  var result = team.one('agramign');
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
-  }
-});
-
-app.get('/team/jpikovsk', (req, res) => {
-  // TODO
-  var result = team.one('jpikovsk');
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
-  }
-});
-
-app.get('/team/rbcondon', (req, res) => {
-  // TODO
-  var result = team.one('rbcondon');
-  if (!result.success) {
-    notFound404(req, res);
-  } else {
-    res.render('team', {
-      members: result.data,
-      pageTestScript: '/qa/tests-team.js'
-    });
-  }
-});
-
-app.get('/team/nmurali', (req, res) => {
-  // TODO
-  var result = team.one('nmurali');
   if (!result.success) {
     notFound404(req, res);
   } else {
