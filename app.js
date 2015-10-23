@@ -3,6 +3,7 @@
 // (2) handlebars - this provides the handlebars templating framework
 var express    = require('express');
 var handlebars = require('express-handlebars');
+var reader = require('fs');
 
 //////////////////////////////////////////////////////////////////////
 ///// Express App Setup //////////////////////////////////////////////
@@ -124,6 +125,13 @@ function internalServerError500(err, req, res, next) {
   console.error(err.stack);
   res.status(500);
   res.render('500');
+}
+
+function readF(file){
+  reader.readFile(file,'utf8', function(err,data){
+    if (err) throw err;
+    return data;
+  });
 }
 
 // This adds the two middleware functions as the last two middleware
