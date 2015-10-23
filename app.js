@@ -110,7 +110,7 @@ app.get('/team', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    var about =reader.readFileSync("about.txt").toString().split('/n')
+    var about =reader.readFileSync("about.txt");
     res.render('about', {
       about,
       
