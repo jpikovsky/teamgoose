@@ -16,13 +16,12 @@ router.get('/', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-	console.log(req.body);
 	var dept = req.body.dept;
-    var num = req.body.num;
+  var num = req.body.num;
 	var course = {dept : dept, num : num};
-    helper.add(course, (error, new_course) => {
-      	res.redirect('/');
-    });
+  helper.add(course, (error, new_course) => {
+    res.redirect('/courses');
+  });
 });
 
 module.exports = router;

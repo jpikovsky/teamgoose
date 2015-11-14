@@ -4,6 +4,7 @@
 var express    = require('express');
 var handlebars = require('express-handlebars');
 var reader = require('fs');
+var bodyParser = require('body-parser');
 
 //////////////////////////////////////////////////////////////////////
 ///// Express App Setup //////////////////////////////////////////////
@@ -72,6 +73,10 @@ function testmw(req, res, next) {
 
 // This adds our testing middleware to the express app.
 app.use(testmw);
+
+// Body Parser:
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //////////////////////////////////////////////////////////////////////
 ///// User Defined Routes ////////////////////////////////////////////
