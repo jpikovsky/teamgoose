@@ -76,6 +76,8 @@ app.use(testmw);
 //////////////////////////////////////////////////////////////////////
 ///// User Defined Routes ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+app.use('/courses', require('./routes/courses'));
+
 var team = require('./lib/team.js');
 
 app.get('/', (req, res) => {
@@ -130,9 +132,9 @@ app.get('/profile', (req, res) => {
   res.render('profile');
 });
 
-app.get('/courses', (req, res) => {
-  res.render('courses');
-});
+// app.get('/courses', (req, res) => {
+//   res.render('courses');
+// });
 
 app.get('/course_details', (req, res) => {
   res.render('course_details');

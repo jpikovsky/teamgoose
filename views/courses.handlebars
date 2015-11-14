@@ -1,1 +1,28 @@
-<img src="/img/courses_view.png" />
+<h1>Courses</h1>
+<table>
+  <tr>
+    <td>
+      Department
+    </td>
+    <td>
+      Number
+    </td>
+  </tr>
+  {{#each courses}}
+    <tr>
+      <td>
+        {{dept}}
+      </td>
+      <td>
+        {{num}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+
+<h4>Add Course</h4>
+<form method="post" action="/courses/add">
+  Department: <input type="text" name="dept"> <br>
+  Number:  <input type="text" name="num"> <br>
+  <button>Add Course</button>
+</form>
