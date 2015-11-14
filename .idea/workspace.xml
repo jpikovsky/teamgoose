@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f91c057-a6e8-4065-9ce4-f06922bcaa2f" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/courses.handlebars" afterPath="$PROJECT_DIR$/views/courses.handlebars" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
     </list>
     <ignored path="teamgoose.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,21 +28,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="courses.handlebars" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/courses.handlebars">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-10.555555">
               <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+=======
+      <file leaf-file-name="courses.handlebars" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/courses.handlebars">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.697074">
+              <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+=======
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.555555">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
               <folding />
             </state>
           </provider>
@@ -71,6 +91,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/README.md" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/views/courses.handlebars" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
       </list>
     </option>
   </component>
@@ -276,12 +300,20 @@
       <created>1447534264490</created>
       <option name="number" value="Default" />
       <updated>1447534264490</updated>
+<<<<<<< HEAD
       <workItem from="1447534265876" duration="1616000" />
+=======
+      <workItem from="1447534265876" duration="1758000" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="1616000" />
+=======
+    <option name="totallyTimeSpent" value="1758000" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="23" width="1235" height="705" extended-state="0" />
@@ -344,6 +376,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/views/courses.handlebars">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.555555">
@@ -352,6 +385,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
     <entry file="file://$PROJECT_DIR$/about.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.0">
@@ -365,8 +400,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="-10.555555">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/courses.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.697074">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+>>>>>>> a4a551b0ba0ee4d05d3beebc61ab216aa73a2d80
           <folding />
         </state>
       </provider>
