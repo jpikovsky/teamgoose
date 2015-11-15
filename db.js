@@ -71,6 +71,35 @@ exports.getCourseDesc = (c_num,c_dept,semester, year,cb)=>{
   }
 };
 
+// Only admin should be able access to remove course
+exports.removeCourse() = (c_num, c_dept, semester, year,cb){
+
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+    var quer  = "DELETE from courses where name = $1 and dept = $2 and semester = $3 and year = $4";
+
+    client.query(quer, [c_num, c_dept,semester,year], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined,result);
+    });
+
+  }
+
+}
+
 //Add new users to database.
 
 exports.addUsers = (user,cb)=>{
@@ -173,6 +202,34 @@ exports.getUser = (user,pass, cb)=>{
 
   });
 };
+
+exports.removeUser() = (name,cb){
+
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+    var quer  = "DELETE from users where name = $1";
+
+    client.query(quer, [name], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined,result);
+    });
+
+  }
+
+}
 
 
 
