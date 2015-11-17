@@ -72,7 +72,7 @@ exports.getCourseDesc = (c_num,c_dept,semester, year,cb)=>{
 };
 
 // Only admin should be able access to remove course
-exports.removeCourse() = (c_num, c_dept, semester, year,cb){
+exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
 
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -96,9 +96,9 @@ exports.removeCourse() = (c_num, c_dept, semester, year,cb){
       cb(undefined,result);
     });
 
-  }
+  });
 
-}
+};
 
 //Add new users to database.
 
@@ -176,7 +176,7 @@ exports.getUser = (user,pass, cb)=>{
       return;
     }
     var quer = 'SELECT * from users where name = $1';
-    client.query(quer,[user.name] (err, result) => {
+    client.query(quer,[user.name], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
@@ -203,7 +203,7 @@ exports.getUser = (user,pass, cb)=>{
   });
 };
 
-exports.removeUser() = (name,cb){
+exports.removeUser = (name,cb) => {
 
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -227,14 +227,14 @@ exports.removeUser() = (name,cb){
       cb(undefined,result);
     });
 
-  }
+  });
 
-}
+};
 
 
 
 /*
 
-db.getRequirements();
+db.getRequirements;
 
 */
