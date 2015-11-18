@@ -9,9 +9,9 @@ exports.addCourse = (course,cb)=>{
       return;
     }
 
-    var quer = 'INSERT INTO courses values ($1, $2)';
+    var quer = 'INSERT INTO courses values ($1, $2, $3, $4, $5, $6)';
 
-    client.query(quer, [course.num,course.dept,course.description,course.instructor,course.semester, course.year], (err, result) => {
+    client.query(quer, [course.num,course.dept,course.semester, course.year,course.instructor,course.description], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
