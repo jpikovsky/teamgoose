@@ -1,5 +1,5 @@
 var pg = require('pg');
-var constr = "  postgres://nejpbuvb:V6ODEh0_o8CITVRn4LPxPNAWQBBo7A93@pellefant.db.elephantsql.com:5432/nejpbuvb";
+var constr = "postgres://wcdszfyc:0f0OH7YVlbuxfiK6YV7e0D5CBkJouUmk@pellefant.db.elephantsql.com:5432/wcdszfyc";
 
 exports.addCourse = (course,cb)=>{
   pg.connect(constr, (err, client, done) => {
