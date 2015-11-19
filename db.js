@@ -110,11 +110,9 @@ exports.addUser = (user,cb)=>{
       return;
     }
 
-    // var quer = 'INSERT INTO users values ($1, $2, $3)';
-    var quer = sprintf('INSERT INTO users values (%s, %s, %s)', user.name, user.pass, user.admin);
+    var quer = 'INSERT INTO users values ($1, $2, $3)';
 
-    // client.query(quer, [user.name,user.password,user.admin], (err, result) => {
-    client.query(quer, (err, result) => {
+    client.query(quer, [user.name,user.pass,user.admin], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
