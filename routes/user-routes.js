@@ -60,6 +60,27 @@ router.post('/auth', (req, res) => {
   }
 });
 
+router.post('/new', (req, res) => {
+  res.redirect('/user/new');
+});
+
+router.post('/new/create', (req, res) => {
+  var name = req.body.name;
+  var pass = req.body.pass;
+  var admin = false;
+  var user = {name : name, pass : pass, admin : admin};
+  model.add(user, (error, newuser) => {
+    if(error){
+      console.log("ERROR");
+    }
+  });
+  res.redirect('/user/login');
+});
+
+router.get('/new', function(req, res) {
+  res.render('create_user');
+});
+
 // Performs logout functionality - it does nothing!
 router.get('/logout', function(req, res) {
   // Grab the user session if logged in.

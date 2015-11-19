@@ -12,7 +12,7 @@ var flash      = require('connect-flash');
 // The cookie parser is used to parse cookies in an HTTP header.
 var cookieParser = require('cookie-parser');
 // Morgan for server logging.
-var morgan = require('morgan');
+// var morgan = require('morgan');
 
 //////////////////////////////////////////////////////////////////////
 ///// Express App Setup //////////////////////////////////////////////
@@ -104,7 +104,7 @@ app.use(flash());
 
 // Morgan Logging Support.
 // Using 'conbined' gives you Apache-style logging support.
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 //////////////////////////////////////////////////////////////////////
 ///// User Defined Routes ////////////////////////////////////////////

@@ -102,7 +102,7 @@ exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
 
 //Add new users to database.
 
-exports.addUsers = (user,cb)=>{
+exports.addUser = (user,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -110,14 +110,17 @@ exports.addUsers = (user,cb)=>{
       return;
     }
 
-    var quer = 'INSERT INTO users values ($1, $2, $3)';
+    // var quer = 'INSERT INTO users values ($1, $2, $3)';
+    var quer = sprintf('INSERT INTO users values (%s, %s, %s)', user.name, user.pass, user.admin);
 
-    client.query(quer, [user.name,user.password,user.admin], (err, result) => {
+    // client.query(quer, [user.name,user.password,user.admin], (err, result) => {
+    client.query(quer, (err, result) => {
       // call done to release the client back to the pool:
       done();
 
       // (4) check if there was an error querying database:
       if (err) {
+        console.log(err);
         cb('could not connect to the database: ' + err);
         return;
       }
