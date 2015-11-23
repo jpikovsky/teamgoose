@@ -1,1 +1,15 @@
-<img src="/img/admin_view.png" />
+<h1>Admin View</h1>
+<div>{{message}}</div>
+
+<h4>Add Admin</h4>
+<form method="post" action="/admin/user">
+  User Name: <input type="text" name="name"> <br>
+  Password:  <input type="password" name="pass"> <br>
+  Admin:
+    <select name="admin">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <br>
+  <button>Add User</button>
+</form>
