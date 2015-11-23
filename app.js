@@ -163,7 +163,7 @@ app.get('/about', (req, res) => {
 // });
 
 app.get('/profile', (req, res) => {
-  res.render('profile');
+  res.render('profile',{name:req.session.user.name});
 });
 
 // app.get('/courses', (req, res) => {
