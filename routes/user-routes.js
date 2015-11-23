@@ -50,7 +50,23 @@ router.post('/auth', (req, res) => {
       res.redirect('/user/login');
     }
     else {
-      model.lookup(name, pass, function(error, user) {
+      // model.lookup(name, pass, function(error, user) {
+        // if (error) {
+        //   // Pass a message to login:
+        //   req.flash('login', error);
+        //   res.redirect('/user/login');
+        // }
+        // else {
+
+        //   // create a session variable to represent stateful connection
+        //   req.session.user = user;
+
+        //   // Pass a message to main:
+        //   req.flash('main', 'authentication successful');
+        //   res.redirect('/user/main');
+        // }
+      // });
+      model.verify(name, pass, function(error, user) {
         if (error) {
           // Pass a message to login:
           req.flash('login', error);

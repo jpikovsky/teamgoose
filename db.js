@@ -131,7 +131,7 @@ exports.addUser = (user,cb)=>{
 };
 
 // Lookup user for login
-exports.verifyUser = (user,cb)=>{
+exports.verifyUser = (name, pass, cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -141,7 +141,7 @@ exports.verifyUser = (user,cb)=>{
 
     var quer = 'select * from users where username=$1 and pass=$2';
 
-    client.query(quer, [user.name,user.pass], (err, result) => {
+    client.query(quer, [name,pass], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
@@ -157,8 +157,12 @@ exports.verifyUser = (user,cb)=>{
         return;
       }
 
+      //make user
+      var admin = result.rows[0].admin;
+      var user = {user: user, name: name, admin: admin};
+
       // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined);
+      cb(undefined, user);
     });
 
   });
