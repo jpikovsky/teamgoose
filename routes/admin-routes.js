@@ -25,22 +25,6 @@ router.get('/', (req, res) => {
     req.flash('main', 'Not an Admin');
     res.redirect('/user/main')
   }
-
-=======
-router.get('/admin', (req, res) => {
-  var user = req.session.user;
-  if (!user){
-    req.flash('main', 'user session object does not exist');
-    res.redirect('/user/login')
-  }
-  else if (!online[user.name]){
-    req.flash('main', 'login expired');
-    res.redirect('/user/login')
-  }
-  else if (!user.admin){
-    req.flash('main', 'not an admin');
-    res.redirect('/user/main')
-  }
   
 >>>>>>> 46ef8de247a0764edf2f2bf38405e5fc3772a5b3
   else if (user.admin){
