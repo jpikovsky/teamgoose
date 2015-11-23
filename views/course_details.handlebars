@@ -1,14 +1,36 @@
 <h1>Course Details</h1>
+<h3>Select Course</h3>
+<form method="post" action="/admin/user">
+  Major:
+    <select name="Select Major">
+      <option value="Computer Science">CMPSCI</option>
+      <option value="Mathematics">MATH</option>
+    </select>
+    Course:
+    <select name="Select Course">
+      <option value="CS 121">CS 121</option>
+      <option value="CS 187">CS 187</option>
+    </select>
+    Semester:
+    <select name="Semester">
+      <option value="Fall">Fall</option>
+      <option value="Spring">Spring</option>
+    </select>
+    </br>
+</form>
 
 <form method="post" action="/admin/user">
-  Select Course:
-    <select name="Select Course">
-      <option value="CS 121">Yes</option>
-      <option value="CS 187">No</option>
+</br>
+    Required Class:
+    <select name="Required Class?">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
-    <br>
-  <button>Add User</button>
+    </br>
 </form>
+
+
+
 
 
 <img src="/img/explore_courses_view.png" />
