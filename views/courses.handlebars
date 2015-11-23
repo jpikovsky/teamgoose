@@ -27,23 +27,28 @@
   <button>Add Course</button>
 </form>
 
+
+<form method="post" action="/courses/add">
 <p>  
   <label>Major:</label>
-  <select name="config[mode]">    
+  <select name="major">    
     <option value=""></option>
     <option value="Math">Math</option>
-    <option value="Computer Science" selected="selected">Computer Science</option>    
+    <option value="Computer Science">Computer Science</option>    
   </select>
 </p>  
 <p>  
   <label>Class Number:</label>
-  <select name="config[pair]">      
+  <select name="classNum">      
     <option value=""></option>      
-    <option value="ltc_btc" selected="selected">121</option>
-    <option value="nmc_btc">187</option>
-    <option value="nmc_btc">220</option>
-    <option value="nmc_btc">230</option>
-    <option value="nmc_btc">240</option>
-    <option value="nmc_btc">250</option>
+    <option value="121">121</option>
+    <option value="187">187</option>
+    <option value="220">220</option>
+    <option value="230">230</option>
+    <option value="240">240</option>
+    <option value="250">250</option>
   </select>
+    <button>Add Course</button>
 </p>  
+
+
