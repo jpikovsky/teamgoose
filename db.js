@@ -130,6 +130,39 @@ exports.addUser = (user,cb)=>{
   });
 };
 
+// Lookup user for login
+exports.verifyUser = (user,cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select * from users where username=$1 and pass=$2';
+
+    client.query(quer, [user.name,user.pass], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        console.log(err);
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined);
+    });
+
+  });
+};
 
 //Admin ability to access all users data or particular user.
 
