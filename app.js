@@ -111,7 +111,7 @@ app.use(flash());
 //////////////////////////////////////////////////////////////////////
 app.use('/courses', require('./routes/courses'));
 app.use('/user', require('./routes/user-routes'));
-
+app.use('/admin', require('./routes/admin-routes'));
 var team = require('./lib/team.js');
 
 app.get('/', (req, res) => {
@@ -182,9 +182,9 @@ app.get('/layout', (req, res) => {
   res.render('layout');
 });
 
-app.get('/admin', (req, res) => {
+/*app.get('/admin', (req, res) => {
   res.render('admin');
-});
+});*/
 
 
 //////////////////////////////////////////////////////////////////////
