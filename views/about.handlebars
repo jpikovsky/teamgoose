@@ -1,5 +1,38 @@
-<h1>About</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+.moveBox {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    -webkit-animation: myfirst 5s linear 2s infinite alternate; /* Chrome, Safari, Opera */
+    animation: myfirst 2s linear 1s infinite alternate;
+}
 
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+    0%   {background-color:red; left:0px; top:0px;}
+    100%  {background-color:yellow; left:200px; top:0px;}
+/*    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}*/
+}
+
+/* Standard syntax */
+@keyframes myfirst {
+    0%   {background-color:red; left:0px; top:0px;}
+    100%  {background-color:yellow; left:1000px; top:0px;}
+/*    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}*/
+}
+</style>
+</head>
+<body>
+
+<div class ="moveBox"><h1>About</h1></div>
 <p> Application Name: getInSPIREd </p>
 
 <p>Team Members: Alex Lassalle, Niketh Murali, Josh Pikovsky, Andrew Gramigna, Tim Contois, Riley Condon</p>
@@ -20,14 +53,14 @@
 <p> USE CASES:
 On Spire there is no way to look at both your remaining requirements and courses offered next semester. This application allows a user to plan their classes for an upcoming semester. </p>
 <ul>
-	<li> You can either create an account or log into your account on getInSPIREd </li>
-	<li> You can check your profile to look at the courses you are currently taking and your progress so far regarding course requirements for a given major and academic college </li>
-	<li> You can view your progress in graph form which will make your progress more visually pleasing </li>
-	<li> You can see what courses you have left for your given major which makes it easier to choose what you would like to fulfill </li>
-	<li> You can add more courses to your getInSPIREd schedule or remove courses at your own wish as you go through the process of figuring out your future </li>
-	<li> You can look for different courses and sort by various course attributes such as general education courses, different majors, course types, number of credits, etc. </li>
-	<li> You can view your course requirement progress for other majors and determine if you could potentially switch majors successfully or add a major to your curriculum </li>
-	<li> You can send an email to your advisor if you have any questions that need to be answered regarding courses and scheduling </li>
+    <li> You can either create an account or log into your account on getInSPIREd </li>
+    <li> You can check your profile to look at the courses you are currently taking and your progress so far regarding course requirements for a given major and academic college </li>
+    <li> You can view your progress in graph form which will make your progress more visually pleasing </li>
+    <li> You can see what courses you have left for your given major which makes it easier to choose what you would like to fulfill </li>
+    <li> You can add more courses to your getInSPIREd schedule or remove courses at your own wish as you go through the process of figuring out your future </li>
+    <li> You can look for different courses and sort by various course attributes such as general education courses, different majors, course types, number of credits, etc. </li>
+    <li> You can view your course requirement progress for other majors and determine if you could potentially switch majors successfully or add a major to your curriculum </li>
+    <li> You can send an email to your advisor if you have any questions that need to be answered regarding courses and scheduling </li>
 </ul>
 
 <p> Overall using this application will eliminate any problems that a user may encounter while choosing classes or determining a major path on Spire! </p>
@@ -37,4 +70,5 @@ On Spire there is no way to look at both your remaining requirements and courses
 
 
 
-
+</body>
+</html>
