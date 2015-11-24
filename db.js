@@ -100,9 +100,40 @@ exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
 
 };
 
-//Add new users to database.
+exports.userExists = (name, cb) => {
+  
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' +err);
+      return;
+    }
+    
+    var quer = 'select * from users where username=$1';
+    client.query(quer, [name], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
 
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length != 0){
+        // console.log('in function: user already exists');
+        cb('user already exists');
+        return;
+      }
+      // console.log('in function: user does not already exist');
+      cb(undefined);
+    });
+  });
+}
+
+//Add new users to database.
 exports.addUser = (user,cb)=>{
+
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -118,7 +149,7 @@ exports.addUser = (user,cb)=>{
 
       // (4) check if there was an error querying database:
       if (err) {
-        console.log(err);
+        // console.log('in add user later: ' + err);
         cb('could not connect to the database: ' + err);
         return;
       }
@@ -147,7 +178,7 @@ exports.verifyUser = (name, pass, cb)=>{
 
       // (4) check if there was an error querying database:
       if (err) {
-        console.log(err);
+        // console.log("in verify user: " + err);
         cb('could not connect to the database: ' + err);
         return;
       }

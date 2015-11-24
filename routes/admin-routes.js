@@ -3,6 +3,7 @@ var express = require('express');
 // This gives us access to the user "model".
 var model = require('../lib/user');
 
+
 // A list of users who are online:
 
 //var online = require('../lib/online').online;
@@ -28,6 +29,22 @@ router.get('/', (req, res) => {
 
 });
 
+router.post('/create', (req, res) => {
+  var name = req.body.name;
+  var pass = req.body.pass;
+  var admin=false;
+  if (req.body.admin === 'yes'){
+    admin = true;
+  }
+  var user = {name : name, pass : pass, admin : admin};
+  model.add(user, (error, newuser) => {
+    if(error){
+      console.log("ERROR");
+    }
+  });
+  req.flash('admin',"User Added");
+  res.redirect('/admin');
+});
 
 module.exports = router;
 
