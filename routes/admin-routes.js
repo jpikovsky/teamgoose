@@ -46,5 +46,31 @@ router.post('/create', (req, res) => {
   res.redirect('/admin');
 });
 
+router.get('/list', (req, res) => {
+  var user = req.session.user;
+  if (!user){
+    req.flash('main', 'user session object does not exist');
+    res.redirect('/user/login')
+  }
+  else if (!user.admin){
+    req.flash('main', 'not an admin');
+    res.redirect('/user/main')
+  } 
+  else if (user.admin){
+    var uselist;
+    model.list( (error,arr) =>{
+      if (error !== undefined){
+        req.flash('main', error);
+        res.redirect('/user/main');
+      }
+      uselist = arr;
+    } );
+    var errmess = req.flash('user-list') || '';
+    //res.render('user-list', {users : uselist, message : errmess});
+    res.render('user-list', {users : uselist, message : errmess});
+  }
+
+});
+
 module.exports = router;
 

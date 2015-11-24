@@ -209,7 +209,7 @@ exports.getUsers = (user,cb)=>{
       return;
     }
     var quer;
-    if(user == NULL)
+    if(user === null)
       quer = 'SELECT * from users';
   	else
   	  quer = 'SELECT * from users where fname = '+user.name;
@@ -229,7 +229,8 @@ exports.getUsers = (user,cb)=>{
       }
 
       // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined, result);
+      console.log(result.rows);
+      cb(undefined, result.rows);
     });
 
   });
