@@ -17,7 +17,8 @@ router.get('/login', (req, res) => {
     res.redirect('/user/main');
   }
   else{
-    res.render('login');
+    var message = req.flash('login') || '';
+    res.render('login', { title: 'User Login', message: message});
   }
 });
 
@@ -85,6 +86,7 @@ router.get('/profile', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
 
+  // Redirects user to login if they are no logged in
   if (!user) {
     res.redirect('/user/login');
   }
