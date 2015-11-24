@@ -101,14 +101,14 @@ exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
 };
 
 exports.userExists = (name, cb) => {
-  
+
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
       cb('could not connect to the database: ' +err);
       return;
     }
-    
+
     var quer = 'select * from users where username=$1';
     client.query(quer, [name], (err, result) => {
       // call done to release the client back to the pool:
@@ -161,6 +161,34 @@ exports.addUser = (user,cb)=>{
   });
 };
 
+exports.changePassword = (pass, cb) => {
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'Change value of users password where pass=$2';
+
+    client.query(quer, [user.name,user.pass,user.admin], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        // console.log('in add user later: ' + err);
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined);
+    });
+
+  });
+};
+
 // Lookup user for login
 exports.verifyUser = (name, pass, cb)=>{
   pg.connect(constr, (err, client, done) => {
@@ -190,7 +218,7 @@ exports.verifyUser = (name, pass, cb)=>{
 
       //make user
       var admin = result.rows[0].admin;
-      var user = {user: user, name: name, admin: admin};
+      var user = {user: user, pass: pass, admin: admin};
 
       // (7) otherwise, we invoke the callback with the user data.
       cb(undefined, user);
@@ -302,14 +330,14 @@ exports.removeUser = (name,cb) => {
 };
 
 exports.listCourses = (major, cb) => {
-  
+
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
       cb('could not connect to the database: ' +err);
       return;
     }
-    
+
     var quer = 'select * from $1';
     client.query(quer, [major], (err, result) => {
       // call done to release the client back to the pool:
