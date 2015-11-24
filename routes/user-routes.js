@@ -67,7 +67,6 @@ router.post('/new', (req, res) => {
 router.post('/new/create', (req, res) => {
   var name = req.body.name;
   var pass = req.body.pass;
-  console.log(pass);
   var admin = false;
   var user = {name : name, pass : pass, admin : admin};
   model.add(user, (error, newuser) => {
