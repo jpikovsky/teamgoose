@@ -16,11 +16,13 @@ In order to run our application, all you will need to do is enter: "node app.js"
 ####Views:
 * **Home**: This is essentially an About Page, describes the purpose of getinSPIREd and its origin story
 * **Courses**: Add new courses to profile. 
+* **Course Details**: This view will allow the user to enter a course, and see information about the class, such as its description and class times.
 * **getinSPIREd**: Shows you other majors you may be close to completing and what those changes would require
 * **Login**: Logging in will bring you to your profile
 * **Team**: List of team members
   * Team Member's individual pages with small non-fiction biography
-* **Profile**: Shows information about the user such as current major, expected date of graduation, etc.
+* **Profile**: Shows information about the user such as current major, expected date of graduation, courses taken, etc.
+* **Admin**: Allows admin to add new user accounts with the option of admin privelages.
 
 ####Statefulness:
 Provide a detailed writeup of how your application uses sessions to maintain statefulness. You must make references to specific files in your project repository and links to the associated files. We will be reviewing your work through github and using the README.md file as an entry point.
