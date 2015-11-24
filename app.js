@@ -112,6 +112,7 @@ app.use(flash());
 app.use('/courses', require('./routes/courses'));
 app.use('/user', require('./routes/user-routes'));
 app.use('/admin', require('./routes/admin-routes'));
+app.use('/major', require('./routes/major-routes'));
 var team = require('./lib/team.js');
 
 app.get('/', (req, res) => {
@@ -174,9 +175,9 @@ app.get('/course_details', (req, res) => {
   res.render('course_details');
 });
 
-app.get('/major', (req, res) => {
-  res.render('major');
-});
+//app.get('/major', (req, res) => {
+// res.render('major');
+//});
 
 app.get('/layout', (req, res) => {
   res.render('layout');

@@ -1,1 +1,35 @@
-<img src="/img/major_view.png" /
+<h1>Major</h1>
+
+<form method="post" action="/major/select">
+<p>  
+  <label>Major:</label>
+  <select name="major">    
+    <option value=""></option>
+    <option value="cs">Computer Science</option>    
+  </select>
+  <button> Choose </button>
+</p> 
+<div> Selected Major : {{major}} </div>
+
+<table>
+  <tr>
+    <td>
+      Department:
+    </td>
+    <td>
+      Number:
+    </td>
+  </tr>
+  {{#each courses}}
+    <tr>
+      <td>
+        {{dept}}
+      </td>
+      <td>
+        {{num}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+
+
