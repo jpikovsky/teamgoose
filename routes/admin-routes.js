@@ -16,7 +16,7 @@ var router = express.Router();
 router.get('/', (req, res) => {
   var user = req.session.user;
   if (!user){
-    req.flash('login', 'user session object does not exist');
+    req.flash('login', 'Please login as admin to go to the admin page');
     res.redirect('/user/login')
   }
   else if (!user.admin){
