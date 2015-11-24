@@ -9,6 +9,9 @@ _We help_ _students_ _make_ _**major**_ _changes_ _to_ _their_ _academic career_
 * Assist users to find the best path to complete college and/or major requirements.
 * Link a student review interface to allow users to make informed choices when choosing classes.
 
+####How To Run:
+In order to run our application, all you will need to do is enter: "node app.js" into your favorite command line! 
+
 ####Views:
 * **Home**: This is essentially an About Page, describes the purpose of getinSPIREd and its origin story
 * **Courses**: Add new courses to profile, see remaining required courses, and may contain a rough sketch of future semseters' schedule'
