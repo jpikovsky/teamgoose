@@ -7,6 +7,10 @@ var model = require('../lib/user');
 // particular routes from the main application.
 var router = express.Router();
 
+router.get('/', (req, res) => {
+  res.redirect('/user/main');
+});
+
 // Provides a login view
 router.get('/login', (req, res) => {
   // Grab the session if the user is logged in.
