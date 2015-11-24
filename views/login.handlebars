@@ -1,7 +1,24 @@
+<!DOCTYPE html>
+<html>
+<style>
+.brighten img {
+  -webkit-filter: brightness(-5%);
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+ 
+.brighten img:hover {
+  -webkit-filter: brightness(100%);
+}
+</style>
 <h1>{{title}}</h1>
 <p>Enter your credentials</p>
-
+<div class="brighten">
 <img src="/img/schoolrocks_1.gif" alt="Computer man" style="float:right;width:250px;height:250px;">
+</div>
 <div>{{message}}</div><br>
 
 
@@ -19,3 +36,4 @@
 <form method="post" action="/user/new">
   <button>Create Account</button>
 </form><br>
+</html>
