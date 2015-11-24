@@ -5,8 +5,11 @@ var helper = require('../lib/major_helper');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-	
-  res.render('major');
+  var major = req.query.major;
+  var list = '';
+	res.render('major', {
+    courses: list, major : major
+  });
 });
 
 router.post('/select', (req, res) => {
@@ -16,9 +19,7 @@ router.post('/select', (req, res) => {
       list = courses || '';
     });
 
-  res.render('major', {
-      courses: list, major : major
-    });
+  res.redirect('/major/?major=' + major);
   
 });
 
