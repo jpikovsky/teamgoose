@@ -88,12 +88,34 @@ router.get('/profile', (req, res) => {
 
   // Redirects user to login if they are no logged in
   if (!user) {
-    req.flash('login','Please login to access profile');
     res.redirect('/user/login');
   }
   else{
-    res.render('profile', {name: user.name});
+    var message = req.flash('profile') || '';
+    res.render('profile', {name: user.name, message: message});
   }
+
+
+});
+
+router.post('/profile/change', (req, res) => {
+  var old = req.body.old;
+  var newp = req.body.new;
+  var confirm = req.body.confirm;
+  if(newp !== confirm){
+    req.flash('profile', 'passwords do not match');
+  }
+  //var user = {name : name, pass : pass, admin : admin};
+  //model.add(user, (error, newuser) => {
+  //  if(error){
+  //    console.log("ERROR");
+  //  }
+  //});
+  res.redirect('/user/profile');
+});
+
+router.get('/new', function(req, res) {
+  res.render('create_user');
 });
 
 // Performs logout functionality - it does nothing!

@@ -1,6 +1,14 @@
 <h1>User Profile</h1>
 
-<div><p>User: {{name}}</p><div>
+<div><p>User: {{name}}</p><div><br>
 
+<div>{{message}}</div><br>
+
+  <form method="post" action="/user/profile/change">
+    Old Password: <input type="password" name="old"> <br>
+    New Password:  <input type="password" name="newp"> <br>
+    Confirm New Password:  <input type="password" name="confirm"> <br>
+    <button>Update</button>
+  </form>
 
 <img src="/img/user_profile_view.png" />
