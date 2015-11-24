@@ -89,8 +89,10 @@ router.get('/profile', (req, res) => {
     res.redirect('/user/login');
   }
   else{
-    res.render('profile');
+    res.render('profile', {name: user.name});
   }
+
+
 });
 
 // Performs logout functionality - it does nothing!
