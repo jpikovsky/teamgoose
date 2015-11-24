@@ -82,6 +82,18 @@ router.get('/new', function(req, res) {
   res.render('create_user');
 });
 
+router.get('/profile', (req, res) => {
+  // Grab the session if the user is logged in.
+  var user = req.session.user;
+
+  if (!user) {
+    res.redirect('/user/login');
+  }
+  else{
+    res.render('profile');
+  }
+});
+
 // Performs logout functionality - it does nothing!
 router.get('/logout', function(req, res) {
   // Grab the user session if logged in.
