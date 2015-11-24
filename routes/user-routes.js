@@ -7,16 +7,6 @@ var model = require('../lib/user');
 // particular routes from the main application.
 var router = express.Router();
 
-
-router.get('/admin', (req, res) => {
-  console.log("here")
-  var user = req.session.user;
-  if (!user.admin){
-    req.flash('main', 'not an admin');
-    res.redirect('/user/main');
-  }});
-
-
 // Provides a login view
 router.get('/login', (req, res) => {
   // Grab the session if the user is logged in.
@@ -50,22 +40,6 @@ router.post('/auth', (req, res) => {
       res.redirect('/user/login');
     }
     else {
-      // model.lookup(name, pass, function(error, user) {
-        // if (error) {
-        //   // Pass a message to login:
-        //   req.flash('login', error);
-        //   res.redirect('/user/login');
-        // }
-        // else {
-
-        //   // create a session variable to represent stateful connection
-        //   req.session.user = user;
-
-        //   // Pass a message to main:
-        //   req.flash('main', 'authentication successful');
-        //   res.redirect('/user/main');
-        // }
-      // });
       model.verify(name, pass, function(error, user) {
         if (error) {
           // Pass a message to login:
@@ -94,7 +68,7 @@ router.post('/new/create', (req, res) => {
   var name = req.body.name;
   var pass = req.body.pass;
   console.log(pass);
-  var admin = 'no';
+  var admin = false;
   var user = {name : name, pass : pass, admin : admin};
   model.add(user, (error, newuser) => {
     if(error){
