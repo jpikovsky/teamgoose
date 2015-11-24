@@ -103,8 +103,8 @@ router.post('/profile/change', (req, res) => {
   var old = req.body.old;
   var newp = req.body.newp;
   var confirm = req.body.confirm;
-  var realpass = req.session.user.pass;
-  if(old !== realpass){
+  var user = req.session.user;
+  if(old !== user.pass){
     req.flash('profile', 'Incorrect old password entered');
   }
   else if(newp !== confirm){
@@ -116,6 +116,11 @@ router.post('/profile/change', (req, res) => {
   //    console.log("ERROR");
   //  }
   //});
+  model.changePassword(user, newp, (err) => {
+    if(err){
+      req.flash('profile', err);
+    }
+  });
   res.redirect('/user/profile');
 });
 

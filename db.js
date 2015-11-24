@@ -161,7 +161,7 @@ exports.addUser = (user,cb)=>{
   });
 };
 
-exports.changePassword = (pass, cb) => {
+exports.changePassword = (user, newpass, cb) => {
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -169,10 +169,14 @@ exports.changePassword = (pass, cb) => {
       return;
     }
 
-    var quer = 'Change value of users password where pass=$2';
+    var quer = 'update users set pass=$1 where username=$2';
+    console.log(user.pass);
+    console.log(user.name);
 
-    client.query(quer, [user.name,user.pass,user.admin], (err, result) => {
+    client.query(quer, [newpass,user.name], (err, result) => {
       // call done to release the client back to the pool:
+      console.log(err);
+      console.log(result);
       done();
 
       // (4) check if there was an error querying database:
@@ -218,7 +222,7 @@ exports.verifyUser = (name, pass, cb)=>{
 
       //make user
       var admin = result.rows[0].admin;
-      var user = {user: user, pass: pass, admin: admin};
+      var user = {name: name, pass: pass, admin: admin};
 
       // (7) otherwise, we invoke the callback with the user data.
       cb(undefined, user);
