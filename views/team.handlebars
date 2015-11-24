@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:600px;
+    width:200px;
+    float:left;
+    padding:5px;	      
+}
+section {
+    width:300px;
+    float:right;
+    padding:10px;	 	 
+}
+
+video {
+    width: 30%;
+    height: auto;
+}
+
 #buser_img {
     opacity: 0.4;
     filter: alpha(opacity=40); 
@@ -53,7 +74,11 @@
 
 
 </style>
+<<<<<<< HEAD
 <head>	
+=======
+<section>
+>>>>>>> 8dd51acae89787548a8e1e47ee96c3394a38fe6e
 		<a href="/team?user=tcontois">
 		<img id="buser_img" src="/img/tim.png" alt="Logo" style="float:left;width:110px;height:110px;"> 
 		</a>
@@ -73,14 +98,11 @@
 		<img id="buser_img" src="/img/niketh.png" alt="Logo" style="float:left;width:110px;height:110px;"> 
 		</a>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+</section>
 
+<head>
 </head>
+<nav>
 <h1>Team Portfolio</h1>
 <h2>Team Members</h2>
 <h2>Total: ({{members.length}})</h2>
@@ -89,4 +111,12 @@
   <li><strong><a href="/team?user={{this.user}}">{{this.fname}} {{this.lname}}</a></strong> - {{this.year}}</li>
   {{/each}}
 </ul>
+</nav>
+
+
+<video width="200" controls>
+  <source src="/img/team.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<br> <br> <br>
 </html>
