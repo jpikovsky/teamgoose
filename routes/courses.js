@@ -18,10 +18,14 @@ router.get('/', (req, res) => {
 router.post('/add', (req, res) => {
 	var dept = req.body.dept;
   var num = req.body.num;
+  if(!dept || !num){
+
+  }else{
 	var course = {dept : dept, num : num};
   helper.add(course, (error, new_course) => {
     res.redirect('/courses');
   });
+}
 });
 
 module.exports = router;
