@@ -88,13 +88,12 @@ router.get('/profile', (req, res) => {
 
   // Redirects user to login if they are no logged in
   if (!user) {
+    req.flash('login','Please login to access profile');
     res.redirect('/user/login');
   }
   else{
     res.render('profile', {name: user.name});
   }
-
-
 });
 
 // Performs logout functionality - it does nothing!
