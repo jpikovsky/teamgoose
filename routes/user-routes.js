@@ -88,6 +88,7 @@ router.get('/profile', (req, res) => {
 
   // Redirects user to login if they are no logged in
   if (!user) {
+    req.flash('login', 'You must be logged in to access your profile');
     res.redirect('/user/login');
   }
   else{
@@ -100,9 +101,13 @@ router.get('/profile', (req, res) => {
 
 router.post('/profile/change', (req, res) => {
   var old = req.body.old;
-  var newp = req.body.new;
+  var newp = req.body.newp;
   var confirm = req.body.confirm;
-  if(newp !== confirm){
+  var realpass = req.session.user.pass;
+  if(old !== realpass){
+    req.flash('profile', 'Incorrect old password entered');
+  }
+  else if(newp !== confirm){
     req.flash('profile', 'passwords do not match');
   }
   //var user = {name : name, pass : pass, admin : admin};
