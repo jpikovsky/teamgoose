@@ -1,8 +1,16 @@
-<h1>User Profile</h1>
+<!DOCTYPE html>
+<html>
+<h1>{{name}}'s Profile</h1>
 
 <div><p>User: {{name}}</p><div><br>
 
+
 <div>{{message}}</div><br>
+<form method="post" action="/courses/userAdd">
+  Department: <input type="text" name="dept"> <br>
+  Number:  <input type="text" name="num"> <br>
+  <button>Add Course</button>
+</form>
 
   <form method="post" action="/user/profile/change">
     Old Password: <input type="password" name="old"> <br>
@@ -20,3 +28,4 @@
   </form>
 
 <img src="/img/user_profile_view.png" />
+</html>

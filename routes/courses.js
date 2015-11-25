@@ -30,4 +30,17 @@ router.post('/add', (req, res) => {
 }
 });
 
+router.post('/userAdd', (req, res) => {
+  var dept = req.body.dept;
+  var num = req.body.num;
+  var user = req.session.user;
+  var course = {dept : dept, num : num};
+
+  helper.userAdd(course,user.name,(error, new_course) => {
+    if(error)
+      req.flash('profile',error);
+    res.redirect('/profile');
+  });
+});
+
 module.exports = router;
