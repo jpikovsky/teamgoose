@@ -1,54 +1,120 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body {
-    margin: 0;
-    padding: 0;
+
+* {
+    box-sizing: border-box;
+}
+.header {
+    border: 1px solid red;
+    padding: 15px;
+}
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid blue;
+}
+.col-1 {width: 35%;}
+.col-2 {width: 30%;}
+.col-3 {width: 35%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+table {
+    border-collapse: collapse;
 }
 
-.container {
-    position: relative;
-    width: 100%;
+table, td, th {
+    border: 0px solid black;
 }
 
-.right {
-    position: absolute;
-    right: 0px;
-    width: 300px;
-    background-color: red;
-}
 </style>
-<h1>{{name}}'s Profile</h1>
+<!-- <h1>{{name}}'s Profile</h1>
 
 <div><p>User: {{name}}</p><div><br>
-
-<div class="container">
-  <div class="right">
-    <p><b>Note: </b>Page currently under construction.</p>
-  </div>
+ -->
+<div class="col-12">
+    <h2 alight="left">{{name}}'s Profile</h2>
+  <p align="right"> <b>Current Major:</b> Computer Science;) <b>Estimated Time of Graduation:</b> Soon </p>
 </div>
 
-<div>{{message}}</div><br>
-<form method="post" action="/courses/userAdd">
-  Department: <input type="text" name="dept"> <br>
-  Number:  <input type="text" name="num"> <br>
-  <button>Add Course</button>
-</form>
-
+<div class ="col-3">
+<div><p>User Name: {{name}}</p></div>
+<table>
   <form method="post" action="/user/profile/change">
-    Old Password: <input type="password" name="old"> <br>
-    New Password:  <input type="password" name="newp"> <br>
-    Confirm New Password:  <input type="password" name="confirm"> <br>
-    <button>Update</button>
-  </form>
-<br>
-<br>
-<br>
-<br>
-<br>
-  <form method="get" action="/user/profile/delete">
+    <tr><td>Old Password: </td> <td><input type="password" name="old"> </td></tr>
+    <tr><td>New Password:  </td> <td> <input type="password" name="newp"> </td> </tr>
+    <tr><td>Confirm New Password: </td>  <td><input type="password" name="confirm"> </td></tr>
+    <tr><td><button>Update</button></td></tr>
+    <tr><td>  <form method="get" action="/user/profile/delete">
     <button>Delete Account</button>
+  </form></td></tr>
   </form>
+</table>
+</div>
+<div class="col-2">
+<h3>Current Classes</h3>
+<table>
+  <tr>
+    <td>
+      <ins>Department</ins>
+    </td>
+    <td>
+      <ins>Number</ins>
+    </td>
+  </tr>
+  {{#each courses}}
+    <tr>
+      <td>
+        {{dept}}
+      </td>
+      <td>
+        {{num}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
 
-<img src="/img/user_profile_view.png" />
+</div>
+
+<div class="col-1">
+  <h3>Your Progress</h3>
+    <a href="/major">
+    <img src="/img/pie_chart.jpg" alt="Logo" style="float:center;width:200px;height:200px;"> 
+    </a>
+</div>
+
+<br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+
 </html>
