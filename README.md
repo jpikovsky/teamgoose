@@ -40,3 +40,5 @@ Our app will eventually make extensive use of databases related to UMass classes
 For example, our addCourse function takes a course on input from the user, connects to our database, and then inserts the class into the table. If our app then calls a function like getAllCourses, this function will now be listed. 
 
 We still have more work to do in the area of adding courses and specifying major requirements, but are user creation/login/deletion is a good example of persistence on our web app. To see this, go to the login page and click "Create Account". Make a new account with whatever username and password you like. Then terminate app.js from the command line. Restart app.js and login with the username and password you just made. In IPA03 this would not have worked, but in our app this will work because of our use of a real database. Another example is changing your password on the profile page. This will update your password in the actual database. Account deletion is another working option on the profile page.
+
+To see a figure of our database tables go to the /db_figures folder.
