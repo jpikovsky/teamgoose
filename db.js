@@ -339,7 +339,9 @@ exports.listCourses = (major, cb) => {
     }
 
     var quer = 'select * from $1';
-    client.query(quer, [major], (err, result) => {});
+    client.query(quer, [major], (err, result) => {
+      done();
+    });
   });
 };
 
