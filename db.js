@@ -11,7 +11,7 @@ exports.addCourse = (course,cb)=>{
 
     var quer = 'INSERT INTO courses values ($1, $2, $3, $4, $5, $6)';
 
-    client.query(quer, [course.num,course.dept,course.semester, course.year,course.instructor,course.description], (err, result) => {
+    client.query(quer, [course.num,course.dept], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
@@ -80,9 +80,9 @@ exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
       cb('could not connect to the database: ' + err);
       return;
     }
-    var quer  = "DELETE from courses where name = $1 and dept = $2 and semester = $3 and year = $4";
+    var quer  = "DELETE from courses where name = $1 and dept = $2";
 
-    client.query(quer, [c_num, c_dept,semester,year], (err, result) => {
+    client.query(quer, [c_num, c_dept], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
@@ -343,31 +343,81 @@ exports.listCourses = (major, cb) => {
     }
 
     var quer = 'select * from $1';
-    client.query(quer, [major], (err, result) => {
+    client.query(quer, [major], (err, result) => {});
+  });
+};
+
+exports.addUserCourse = (course,username,cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var course_id;
+    var user_id;
+
+    var quer = 'select id from courses where dept =$1 and num=$2 UNION select id from users where username =$3';
+    client.query(quer, [course.dept,course.num,username], (err, result) => {
       // call done to release the client back to the pool:
-      done();
+      
 
       // (4) check if there was an error querying database:
       if (err) {
         cb('could not connect to the database: ' + err);
         return;
       }
+      // (7) otherwise, we invoke the callback with the user data.
 
-      if(result.rows.length === 0){
-        // console.log('in function: user already exists');
-        cb('Could not find major');
+      if(result.rows.length < 2){
+        cb("no results returned");
         return;
       }
+      course_id = result.rows[0].id;
+      console.log("cid >>>>>> "+course_id);
+      user_id = result.rows[1].id;
+      console.log("cid >>>>>> "+user_id);
 
-      for (var i = 0; i < result.rows.length; i++) {
-        console.log(result.rows[i]);
-      };
+      done();
 
-      // console.log('in function: user does not already exist');
+      insert(course_id,user_id,cb);
+
+    });
+
+
+    
+      
+  });
+};
+
+function insert(course_id,user_id,cb){
+  
+
+pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    quer = 'insert into student_courses values ($1,$2)';
+
+    client.query(quer, [course_id,user_id], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+      
       cb(undefined);
     });
   });
-};
+
+}
+
 
 /*
 

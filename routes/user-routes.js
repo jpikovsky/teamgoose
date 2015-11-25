@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
-
   // Redirect to main if session and user is online:
   if (user) {
     res.redirect('/user/main');
@@ -30,7 +29,6 @@ router.get('/login', (req, res) => {
 router.post('/auth', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
-
   // Redirect to main if session and user is online:
   if (user) {
     res.redirect('/user/main');
