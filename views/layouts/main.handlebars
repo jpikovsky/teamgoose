@@ -2,6 +2,18 @@
 <html>
 	<head>
 		<style>
+
+.grow img{
+transition: 0.4s ease;
+}
+.grow img:hover{
+-webkit-transform: scale(1.4);
+-ms-transform: scale(1.4);
+transform: scale(1.4);
+transition: 0.5s ease;
+}
+
+
 ul#menu {
 	float: right;
     padding: 0;
@@ -38,6 +50,7 @@ a:hover {
     color: red;
     background-color: transparent;
     text-decoration: underline;
+
 }
 a:active {
     color: yellow;
@@ -45,8 +58,12 @@ a:active {
     text-decoration: underline;
 }
 
-
-
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
 
 </style>
 		<meta charset="utf-8">
@@ -65,13 +82,14 @@ a:active {
 		<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 	</head>
 	<header>
-		<div>
+		<div class="grow">
 		<a href="/">
 		<img src="/img/logo.png" alt="Logo" style="float:left;width:110px;height:110px;"> 
 		</a>
 
 
 		<h2 style="text-align:right"><span style="color:blue">getInSPIREd</span>: We help students make <i>major</i> changes to their academic career ;)</h2>
+
 <ul style="align:right" id="menu">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
@@ -110,11 +128,9 @@ a:active {
 			<script>mocha.run();</script>
 		{{/if}}
 	</body>
-
 	<hr>
-	<footer>
-		<p style="text-align:right">                
-<!-- 		<a href="/">Home</a>
+	<footer>               
+<!-- 	<a href="/">Home</a>
 		<a href="/about">About</a>
 		<a href="/team">Team</a>
 		<a href="/user/login">Login</a>
@@ -124,13 +140,16 @@ a:active {
 		<a href="/major">Major</a>
 		<a href="/admin">Admin</a>
 		<a href="/user/logout">Logout</a> -->
-		Confused? Need help? Have feedback?
-<a href="mailto:tcontois@umass.edu?Subject=You%20up?" target="_top">
-Email us.</a>
-		<p>
-<p>
+		
 
-</p>
+	<div id="footer">
+  		<p class="alignleft">&copy; 2015</p>
+  		<p class="alignright">Confused? Need help? Have feedback?
+		<a href="mailto:tcontois@umass.edu?Subject=You%20up?" target="_top">
+			Email us.</a></p>
+	</div>
+	<div style="clear: both;"></div>
+
 
 	</footer>
 </html>
