@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    background-color: red;
+}
+</style>
 <h1>{{name}}'s Profile</h1>
 
 <div><p>User: {{name}}</p><div><br>
 
+<div class="container">
+  <div class="right">
+    <p><b>Note: </b>Page currently under construction.</p>
+  </div>
+</div>
 
 <div>{{message}}</div><br>
 <form method="post" action="/courses/userAdd">
