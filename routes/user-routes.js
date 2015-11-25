@@ -116,17 +116,57 @@ router.post('/profile/change', (req, res) => {
   //    console.log("ERROR");
   //  }
   //});
-  model.changePassword(user, newp, (err) => {
-    if(err){
-      req.flash('profile', err);
-    }
-  });
+  else{
+    model.changePassword(user, newp, (err) => {
+      if(err){
+        req.flash('profile', err);
+      }
+    });
+    user.pass=newp;
+    req.flash('profile' ,'Password Updated!');
+  }
   res.redirect('/user/profile');
 });
 
-router.get('/new', function(req, res) {
-  res.render('create_user');
+router.get('/profile/delete', (req, res) => {
+  var user = req.session.user;
+
+  // If no session, redirect to login.
+  if (!user) {
+    req.flash('login', 'Not logged in');
+    res.redirect('/user/login');
+  }
+  else{
+    var message = req.flash('delete_user') || '';
+    res.render('delete_user',{name: user.name, message: message});
+  }
 });
+
+router.post('/profile/delete/deny', (req, res) => {
+  res.redirect('/user/profile');
+});
+
+router.post('/profile/delete/confirm', (req, res) => {
+  var user = req.session.user;
+  if(req.body.pass !== user.pass){
+    req.flash('delete_user', 'Cannot delete unless password is correct');
+    res.redirect('/user/profile/delete');
+  }
+  else{
+    model.removeUser(user.name, (err)=>{
+      if (err){
+        req.flash('delete_user',err);
+        res.redirect('/user/profile/delete');
+      }
+      else{
+        delete req.session.user;
+        req.flash('login', 'User successfully deleted');
+        res.redirect('/user/login');
+      }
+    });
+  }
+});
+
 
 // Performs logout functionality - it does nothing!
 router.get('/logout', function(req, res) {

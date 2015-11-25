@@ -1,0 +1,16 @@
+<h1>Delete User</h1>
+
+<div><p>User: {{name}}</p><div><br>
+
+<div>{{message}}</div><br>
+
+
+
+<form method="post" action="/user/profile/delete/confirm">
+  Password:  <input type="password" name="pass"> <br>
+  <button>Yes</button>
+</form>
+
+<form method="post" action="/user/profile/delete/deny">
+  <button>No</button>
+</form>

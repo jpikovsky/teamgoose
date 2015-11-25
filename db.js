@@ -170,13 +170,9 @@ exports.changePassword = (user, newpass, cb) => {
     }
 
     var quer = 'update users set pass=$1 where username=$2';
-    console.log(user.pass);
-    console.log(user.name);
 
     client.query(quer, [newpass,user.name], (err, result) => {
       // call done to release the client back to the pool:
-      console.log(err);
-      console.log(result);
       done();
 
       // (4) check if there was an error querying database:
@@ -313,7 +309,7 @@ exports.removeUser = (name,cb) => {
       cb('could not connect to the database: ' + err);
       return;
     }
-    var quer  = "DELETE from users where name = $1";
+    var quer  = "DELETE from users where username = $1";
 
     client.query(quer, [name], (err, result) => {
       // call done to release the client back to the pool:
@@ -326,7 +322,7 @@ exports.removeUser = (name,cb) => {
       }
 
       // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined,result);
+      cb(undefined);
     });
 
   });
