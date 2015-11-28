@@ -329,7 +329,69 @@ exports.removeUser = (name,cb) => {
 
 };
 
-exports.listCourses = (major, cb) => {
+exports.getMajors = (cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select distinct major from majors';
+
+    client.query(quer, (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+
+  });
+};
+
+exports.getConcentrations = (major, cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select concentration from majors where major=$1';
+
+    client.query(quer, [major], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+
+  });
+};
+
+exports.listCourses = (major, concentration, cb) => {
 
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -338,7 +400,13 @@ exports.listCourses = (major, cb) => {
       return;
     }
 
-    var quer = 'select * from $1';
+    var quer = 'select reqs.req_num, course_list.dept, course_list.num
+                from reqs
+                  join majors
+                    on reqs.major_id=majors.major_id
+                  join course_list
+                    on course_list.course_id=reqs.course_id
+                  where majors.major=$1 and majors.concentration=$2';
     client.query(quer, [major], (err, result) => {
       done();
     });

@@ -1,33 +1,49 @@
 <h1>Major</h1>
 
 <form method="post" action="/major/select">
-<p>  
   <label>Major:</label>
-  <select name="major">    
+  <select name="major">
     <option value=""></option>
-    <option value="CS">Computer Science</option>    
-    <option value="MATH">Mathematics</option>    
+    {{#each majors}}
+      <option>{{this.major}}</option>
+    {{/each}}
   </select>
-  <button> Choose </button>
-</p>
-
+  <button name="selection" value="major"> Choose </button>
+  <br>
+  <label>Concentration:</label>
+  <select name="concentration">    
+    <option value=""></option>
+    {{#each concentrations}}
+      <option>{{this.concentration}}</option>
+    {{/each}}
+  </select>
+  <button name="selection" value="concentration"> Choose </button>
+</form>
+<br>
 <div> Selected Major : {{major}} </div>
+<div> Selected Concentration : {{concentration}} </div>
 <table>
   <tr>
     <td>
-      Department:
+      Requirements:
     </td>
     <td>
-      Number:
+      Course:
+    </td>
+    <td>
+      Satisfied:
     </td>
   </tr>
   {{#each courses}}
     <tr>
       <td>
-        {{dept}}
+        {{req_num}}
       </td>
       <td>
-        {{num}}
+        {{course_id}}
+      </td>
+      <td>
+        No
       </td>
     </tr>
   {{/each}}

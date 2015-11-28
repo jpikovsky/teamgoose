@@ -127,6 +127,7 @@ app.get('/team', (req, res) => {
     if (!result.success) {
       notFound404(req, res);
     } else {
+      console.log(result.data);
       res.render('team', {
         members: result.data,
         pageTestScript: '/qa/tests-team.js'
