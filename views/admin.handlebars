@@ -1,15 +1,17 @@
 <h1>Admin View</h1>
 <div>{{message}}</div>
 
-<h4>Add Admin</h4>
-<form method="post" action="/admin/create">
-  User Name: <input type="text" name="name"> <br>
-  Password:  <input type="password" name="pass"> <br>
-  Admin:
-    <select name="admin">
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
-    <br>
+<h2>Users</h2>
+<form action="/admin/users">
   <button>Add User</button>
+</form>
+
+<h3>UMass Courses</h3>
+<form action="/admin/courses">
+	<button>Add Course</button>
+</form>
+
+<h4>Major Requirements</h4>
+<form action="/admin/requirements">
+	<button>Add Requirement</button>
 </form>

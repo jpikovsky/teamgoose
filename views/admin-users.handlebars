@@ -1,5 +1,20 @@
-<h1>User List</h1>
+<h1>Users</h1>
 <div>{{message}}</div>
+
+<h2>Add User</h2>
+<form method="post" action="/admin/users/create">
+  User Name: <input type="text" name="name"> <br>
+  Password:  <input type="password" name="pass"> <br>
+  Admin:
+    <select name="admin">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <br>
+  <button>Add User</button>
+</form>
+
+<h3>Users</h3>
 <table>
   <tr>
     <td>
@@ -32,16 +47,3 @@
     </tr>
   {{/each}}
 </table>
-
-<h4>Add a New User</h4>
-<form method="post" action="/admin/user">
-  User Name: <input type="text" name="name"> <br>
-  Password:  <input type="password" name="pass"> <br>
-  Admin:
-    <select name="admin">
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
-    <br>
-  <button>Add User</button>
-</form>

@@ -26,10 +26,9 @@ router.get('/', (req, res) => {
   else if (user.admin){
     res.render('admin');
   }
-
 });
 
-router.post('/create', (req, res) => {
+router.post('/users/create', (req, res) => {
   var name = req.body.name;
   var pass = req.body.pass;
   var admin=false;
@@ -41,35 +40,65 @@ router.post('/create', (req, res) => {
     if(error){
       console.log("ERROR");
     }
+    else{
+      req.flash('admin-users',"User Added");
+      res.redirect('/admin/users');
+    }
   });
-  req.flash('admin',"User Added");
-  res.redirect('/admin');
 });
 
-router.get('/list', (req, res) => {
+router.get('/users', (req, res) => {
   var user = req.session.user;
   if (!user){
-    req.flash('main', 'user session object does not exist');
+    req.flash('login', 'Please login as admin to go to the admin page');
     res.redirect('/user/login')
   }
   else if (!user.admin){
-    req.flash('main', 'not an admin');
+    req.flash('main', 'Not an Admin');
     res.redirect('/user/main')
-  } 
+  }
   else if (user.admin){
-    var uselist;
     model.list( (error,arr) =>{
       if (error !== undefined){
         req.flash('main', error);
         res.redirect('/user/main');
       }
-      uselist = arr;
-    } );
-    var errmess = req.flash('user-list') || '';
-    //res.render('user-list', {users : uselist, message : errmess});
-    res.render('user-list', {users : uselist, message : errmess});
+      else{
+        var errmess = req.flash('admin-users') || '';
+        res.render('admin-users', {users : arr, message : errmess});
+      }
+    });
   }
+});
 
+router.get('/courses', (req, res) => {
+  var user = req.session.user;
+  if (!user){
+    req.flash('login', 'Please login as admin to go to the admin page');
+    res.redirect('/user/login')
+  }
+  else if (!user.admin){
+    req.flash('main', 'Not an Admin');
+    res.redirect('/user/main')
+  }
+  else if (user.admin){
+    res.render('admin-courses');
+  }
+});
+
+router.get('/requirements', (req, res) => {
+  var user = req.session.user;
+  if (!user){
+    req.flash('login', 'Please login as admin to go to the admin page');
+    res.redirect('/user/login')
+  }
+  else if (!user.admin){
+    req.flash('main', 'Not an Admin');
+    res.redirect('/user/main')
+  }
+  else if (user.admin){
+    res.render('admin-requirements');
+  }
 });
 
 module.exports = router;

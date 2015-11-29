@@ -237,7 +237,7 @@ exports.getUsers = (user,cb)=>{
       return;
     }
     var quer;
-    if(user === null)
+    if(!user)
       quer = 'SELECT * from users';
   	else
   	  quer = 'SELECT * from users where fname = '+user.name;
@@ -257,7 +257,6 @@ exports.getUsers = (user,cb)=>{
       }
 
       // (7) otherwise, we invoke the callback with the user data.
-      console.log(result.rows);
       cb(undefined, result.rows);
     });
 
@@ -403,7 +402,6 @@ exports.listCourses = (major, concentration, cb) => {
     var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id where majors.major=$1 and majors.concentration=$2';
     client.query(quer, [major, concentration], (err, result) => {
       done();
-      console.log(result);
       if (err) {
         cb('could not connect to the database: ' + err);
         return;
