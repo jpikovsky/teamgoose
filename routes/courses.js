@@ -5,6 +5,15 @@ var helper = require('../lib/course_helper');
 var router = express.Router();
 
 router.get('/', (req, res) => {
+
+  var user = req.session.user;
+
+  // Redirects user to login if they are no logged in
+  if (!user) {
+    req.flash('login', 'You must be logged in to access your profile');
+    res.redirect('/user/login');
+  }
+
 	var list;
     helper.list( (error, courses) => {
       list = courses;
