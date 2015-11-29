@@ -5,7 +5,7 @@
   <select name="major">
     <option value=""></option>
     {{#each majors}}
-      <option>{{this.major}}</option>
+      <option value={{this.major}}>{{this.major}}</option>
     {{/each}}
   </select>
   <button name="selection" value="major"> Choose </button>
@@ -14,7 +14,7 @@
   <select name="concentration">    
     <option value=""></option>
     {{#each concentrations}}
-      <option>{{this.concentration}}</option>
+      <option value={{this.concentration}}>{{this.concentration}}</option>
     {{/each}}
   </select>
   <button name="selection" value="concentration"> Choose </button>
@@ -22,6 +22,7 @@
 <br>
 <div> Selected Major : {{major}} </div>
 <div> Selected Concentration : {{concentration}} </div>
+<br>
 <table>
   <tr>
     <td>
@@ -40,7 +41,7 @@
         {{req_num}}
       </td>
       <td>
-        {{course_id}}
+        {{req_desc}}
       </td>
       <td>
         No

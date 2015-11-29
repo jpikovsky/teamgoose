@@ -20,24 +20,29 @@ router.get('/', (req, res) => {
         if(err){
           console.log(err);
         }
-        var list;
         if(concentration){
-          helper.list(major, concentration, (err, result) => {
+          helper.list(major, concentration, (err, list) => {
             if(err){
               console.log(err);
             }
-            else{
-              list = result;
-            }
+            var courses = helper.formatCourseInfo(list);
+            res.render('major', {
+              major: major,
+              concentration: concentration,
+              majors: majors,
+              concentrations: concentrations,
+              courses: courses
+            });
           });
         }
-        res.render('major', {
-          major: major,
-          concentration: concentration,
-          majors: majors,
-          concentrations: concentrations,
-          courses: list
-        });
+        else{
+          res.render('major', {
+            major: major,
+            concentration: concentration,
+            majors: majors,
+            concentrations: concentrations
+          });
+        }
       });
     }
     else{

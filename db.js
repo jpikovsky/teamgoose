@@ -400,15 +400,21 @@ exports.listCourses = (major, concentration, cb) => {
       return;
     }
 
-    var quer = 'select reqs.req_num, course_list.dept, course_list.num
-                from reqs
-                  join majors
-                    on reqs.major_id=majors.major_id
-                  join course_list
-                    on course_list.course_id=reqs.course_id
-                  where majors.major=$1 and majors.concentration=$2';
-    client.query(quer, [major], (err, result) => {
+    var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id where majors.major=$1 and majors.concentration=$2';
+    client.query(quer, [major, concentration], (err, result) => {
       done();
+      console.log(result);
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
     });
   });
 };
