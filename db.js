@@ -361,7 +361,6 @@ exports.removeUser = (name,cb) => {
 
 };
 
-<<<<<<< HEAD
 exports.getMajors = (cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:

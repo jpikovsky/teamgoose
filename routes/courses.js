@@ -10,17 +10,6 @@ router.get('/', (req, res) => {
 
   // Redirects user to login if they are no logged in
   if (!user) {
-    req.flash('login', 'You must be logged in to access your profile');
-    res.redirect('/user/login');
-  }
-
-	var list;
-    helper.list( (error, courses) => {
-      list = courses;
-    });
-
-  // Redirects user to login if they are no logged in
-  if (!user) {
     req.flash('login', 'You must be logged in to access your courses');
     res.redirect('/user/login');
   }
