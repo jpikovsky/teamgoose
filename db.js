@@ -62,6 +62,38 @@ exports.getAllCourses = (semester, year,cb,c_num,c_dept)=>{
   });
 };
 
+exports.getUserCourses = (user)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'SELECT * from student_courses where user_id = $1';
+
+    client.query(quer, [user.id], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned.");
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined,result);
+    });
+
+  });
+};
+
 // Get course description for given semester and year
 
 exports.getCourseDesc = (c_num,c_dept,semester, year,cb)=>{
@@ -237,7 +269,7 @@ exports.getUsers = (user,cb)=>{
       return;
     }
     var quer;
-    if(!user)
+    if(user === null)
       quer = 'SELECT * from users';
   	else
   	  quer = 'SELECT * from users where fname = '+user.name;
@@ -257,6 +289,7 @@ exports.getUsers = (user,cb)=>{
       }
 
       // (7) otherwise, we invoke the callback with the user data.
+      console.log(result.rows);
       cb(undefined, result.rows);
     });
 
@@ -328,6 +361,7 @@ exports.removeUser = (name,cb) => {
 
 };
 
+<<<<<<< HEAD
 exports.getMajors = (cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -422,7 +456,6 @@ exports.listDepartments = (cb)=>{
 };
 
 exports.listCourses = (major, concentration, cb) => {
-
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -430,11 +463,12 @@ exports.listCourses = (major, concentration, cb) => {
       return;
     }
 
-    var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id where majors.major=$1 and majors.concentration=$2';
+    var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id  where majors.major=$1 and majors.concentration=$2';
     client.query(quer, [major, concentration], (err, result) => {
       done();
-      if (err) {
-        cb('could not connect to the database: ' + err);
+
+      if(err) {
+        cb(err);
         return;
       }
 
