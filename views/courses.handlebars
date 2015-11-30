@@ -1,4 +1,19 @@
-<h1>Courses</h1>
+<h1>Add Course</h1>
+<form method="post" action="/courses/add">
+  <label>Department:</label>
+  <select name="dept">
+    <option value=""></option>
+    {{#each depts}}
+      <option value={{this.dept}}>{{this.dept}}</option>
+    {{/each}}
+  </select>
+  <br>
+  <label>Number:</label>
+    <input type="text" name="num"> <br>
+  <button>Add Course</button>
+</form>
+
+<h2>Courses</h2>
 <table>
   <tr>
     <td>
@@ -19,35 +34,3 @@
     </tr>
   {{/each}}
 </table>
-
-<h4>Add Course</h4>
-<form method="post" action="/courses/add">
-  Department: <input type="text" name="dept"> <br>
-  Number:  <input type="text" name="num"> <br>
-  <button>Add Course</button>
-</form>
-
-
-<form method="post" action="/courses/add">
-<p>
-  <label>Major:</label>
-  <select name="major">
-    <option value=""></option>
-    <option value="Math">Math</option>
-    <option value="Computer Science">Computer Science</option>
-  </select>
-</p>
-<p>
-  <label>Class Number:</label>
-  <select name="classnum">
-    <option value=""></option>
-    <option value="121">121</option>
-    <option value="187">187</option>
-    <option value="220">220</option>
-    <option value="230">230</option>
-    <option value="240">240</option>
-    <option value="250">250</option>
-  </select>
-    <button>Add Course</button>
-</p>
-</form>

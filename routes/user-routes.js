@@ -3,6 +3,8 @@ var express = require('express');
 // This gives us access to the user "model".
 var model = require('../lib/user');
 
+var helper = require('../lib/course_helper');
+
 // This creates an express "router" that allows us to separate
 // particular routes from the main application.
 var router = express.Router();
@@ -95,10 +97,17 @@ router.get('/profile', (req, res) => {
   }
   else{
     var message = req.flash('profile') || '';
-    res.render('profile', {name: user.name, message: message});
+    helper.listUserCourses(user.name, (error, courses) => {
+        if(error){
+          req.flash('courses', error);
+        }
+        res.render('profile', {
+          name: user.name,
+          message: message,
+          courses: courses
+        });
+      });
   }
-
-
 });
 
 router.post('/profile/change', (req, res) => {

@@ -390,6 +390,37 @@ exports.getConcentrations = (major, cb)=>{
   });
 };
 
+exports.listDepartments = (cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select distinct dept from course_list';
+
+    client.query(quer, (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+
+  });
+};
+
 exports.listCourses = (major, concentration, cb) => {
 
   pg.connect(constr, (err, client, done) => {
@@ -425,13 +456,10 @@ exports.addUserCourse = (course,username,cb)=>{
       return;
     }
 
-    var course_id;
-    var user_id;
-
-    var quer = 'select id from courses where dept =$1 and num=$2 UNION select id from users where username =$3';
+    var quer = 'insert into user_courses(course_id, users_id) values((select course_id from course_list where dept=$1 and num=$2), (select id from users where username=$3))';
     client.query(quer, [course.dept,course.num,username], (err, result) => {
       // call done to release the client back to the pool:
-      
+      done();
 
       // (4) check if there was an error querying database:
       if (err) {
@@ -440,24 +468,43 @@ exports.addUserCourse = (course,username,cb)=>{
       }
       // (7) otherwise, we invoke the callback with the user data.
 
-      if(result.rows.length < 2){
+      if(result.rows.length < 1){
         cb("no results returned");
         return;
       }
-      course_id = result.rows[0].id;
-      console.log("cid >>>>>> "+course_id);
-      user_id = result.rows[1].id;
-      console.log("cid >>>>>> "+user_id);
+      cb(undefined);
 
+    }); 
+  });
+};
+
+exports.listUserCourses = (username,cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select course_list.dept, course_list.num from user_courses join course_list on user_courses.course_id=course_list.course_id join users on user_courses.users_id=users.id where users.username=$1';
+    client.query(quer, [username], (err, result) => {
+      // call done to release the client back to the pool:
       done();
 
-      insert(course_id,user_id,cb);
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+      // (7) otherwise, we invoke the callback with the user data.
 
-    });
+      if(result.rows.length < 1){
+        cb("no results returned");
+        return;
+      }
+      cb(undefined, result.rows);
 
-
-    
-      
+    }); 
   });
 };
 
