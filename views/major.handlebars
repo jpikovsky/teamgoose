@@ -2,7 +2,7 @@
 
 <form method="post" action="/major/select">
   <label>Major:</label>
-  <select name="major">
+  <select name="major" id="major">
     <option value=""></option>
     {{#each majors}}
       <option value={{this.major}}>{{this.major}}</option>
@@ -10,8 +10,9 @@
   </select>
   <button name="selection" value="major"> Choose </button>
   <br>
+
   <label>Concentration:</label>
-  <select name="concentration">    
+  <select name="concentration" id="concentration">    
     <option value=""></option>
     {{#each concentrations}}
       <option value={{this.concentration}}>{{this.concentration}}</option>
@@ -20,6 +21,23 @@
   <button name="selection" value="concentration"> Choose </button>
 </form>
 <br>
+
+<script type="text/javascript">
+  function getParamValuesByName (queryString) {
+    var qstring = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < qstring.length; i++){
+      var urlparam = qstring[i].split('=');
+      if(urlparam[0] == queryString) {
+        return urlparam[1];
+      }
+    }
+  }
+  var major = getParamValuesByName('major');
+  var concentration = getParamValuesByName('concentration');
+  document.getElementById('major').value=major;
+  document.getElementById('concentration').value=concentration;
+</script>
+
 <div> Selected Major : {{major}} </div>
 <div> Selected Concentration : {{concentration}} </div>
 <br>
