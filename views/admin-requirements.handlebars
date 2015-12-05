@@ -1,8 +1,10 @@
 <h1>Major Requirements</h1>
 
+<h3>Display Major Requirements</h3>
+
 <form method="post" action="/admin/major/select">
   <label>Major:</label>
-  <select name="major">
+  <select name="major" id="major">
     <option value=""></option>
     {{#each majors}}
       <option value={{this.major}}>{{this.major}}</option>
@@ -11,7 +13,7 @@
   <button name="selection" value="major"> Choose </button>
   <br>
   <label>Concentration:</label>
-  <select name="concentration">    
+  <select name="concentration" id="major">    
     <option value=""></option>
     {{#each concentrations}}
       <option value={{this.concentration}}>{{this.concentration}}</option>
@@ -22,6 +24,40 @@
 <br>
 <div> Selected Major : {{major}} </div>
 <div> Selected Concentration : {{concentration}} </div>
+<br>
+
+<script type="text/javascript">
+  function getParamValuesByName (queryString) {
+    var qstring = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < qstring.length; i++){
+      var urlparam = qstring[i].split('=');
+      if(urlparam[0] == queryString) {
+        return urlparam[1];
+      }
+    }
+  }
+  var major = getParamValuesByName('major');
+  var concentration = getParamValuesByName('concentration');
+  document.getElementById('major').value=major;
+  document.getElementById('concentration').value=concentration;
+</script>
+
+<h3>Add Requirement</h3>
+
+<form visible={{major}} method="post" action="/admin/courses/add" >
+  <label>Department:</label>
+  <select name="dept">
+    <option value=""></option>
+    {{#each depts}}
+      <option value={{this.dept}}>{{this.dept}}</option>
+    {{/each}}
+  </select>
+  <br>
+  <label>Number:</label>
+    <input type="text" name="num"> <br>
+  <button>Add Course</button>
+</form>
+
 <br>
 <table>
   <tr>
