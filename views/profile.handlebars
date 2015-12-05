@@ -48,6 +48,7 @@ table, td, th {
  -->
 <div class="col-12">
     <h2 alight="left">{{name}}'s Profile</h2>
+    <p>{{message}}</p><br>
 </div>
 <div class="col-11">
   <p align="right"> <b>Current Major:</b> Computer Science ;) <b>Estimated Time of Graduation:</b> Soon </p>
@@ -66,11 +67,11 @@ table, td, th {
     <tr><td>New Password:  </td> <td> <input type="password" name="newp"> </td> </tr>
     <tr><td>Confirm New Password: </td>  <td><input type="password" name="confirm"> </td></tr>
     <tr><td><button>Update</button></td></tr>
-    <tr><td>  <form method="get" action="/user/profile/delete">
-    <button>Delete Account</button>
-  </form></td></tr>
   </form>
-</table>
+</table><br>
+<form method="get" action="/user/profile/delete">
+<button>Delete Account</button>
+</form>
 </div>
 <div class="col-2">
 <h3>Current Classes</h3>
@@ -100,7 +101,7 @@ table, td, th {
 <div class="col-1">
   <h3>Your Progress</h3>
     <a href="/major">
-    <img src="/img/pie_chart.jpg" alt="Logo" style="float:center;width:200px;height:200px;"> 
+    <img src="/img/pie_chart.jpg" alt="Logo" style="float:center;width:200px;height:200px;">
     </a>
 </div>
 
