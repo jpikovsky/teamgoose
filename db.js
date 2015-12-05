@@ -104,7 +104,7 @@ exports.getCourseDesc = (c_num,c_dept,semester, year,cb)=>{
 };
 
 // Only admin should be able access to remove course
-exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
+exports.removeCourse = (c,cb)=>{
 
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -112,9 +112,9 @@ exports.removeCourse = (c_num, c_dept, semester, year,cb)=>{
       cb('could not connect to the database: ' + err);
       return;
     }
-    var quer  = "DELETE from courses where name = $1 and dept = $2";
+    var quer  = "DELETE from course_list where dept = $1 and num = $2";
 
-    client.query(quer, [c_num, c_dept], (err, result) => {
+    client.query(quer, [c.dept, c.num], (err, result) => {
       // call done to release the client back to the pool:
       done();
 

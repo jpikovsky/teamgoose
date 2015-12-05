@@ -114,6 +114,17 @@ router.post('/courses/add', (req, res) => {
       });
   });
 
+router.post('/courses/delete', (req, res) => {
+  var dept = req.body.dept;
+  var num = req.body.num;
+  var course = {dept : dept, num : num};
+  helper.deleteCourse(course, (error, new_course) => {
+        if(error){
+          console.log(error);
+        }
+        res.redirect('/admin/courses');
+      });
+  });
 
 router.get('/requirements', (req, res) => {
   var user = req.session.user;
