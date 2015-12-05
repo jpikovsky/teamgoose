@@ -11,9 +11,19 @@ transition: 0.4s ease;
 -ms-transform: scale(1.4);
 transform: scale(1.4);
 transition: 0.5s ease;
+background-position: left;
+}
+body{
+	background-color: #F5F5F5;
 }
 
-
+#example1 {
+    background-image: url("/img/umass2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 60px;
+}
 
 ul#menu {
 	float: right;
@@ -68,13 +78,11 @@ a:active {
 
 </style>
 
-
+<div id="example1">
 		<meta charset="utf-8">
 		<title>getInSPIREd</title>
 		<!-- We are conditionally including test support if the showTests
          variables has been set. -->
-
-
 
 		{{#if showTests}}
 			<link rel="stylesheet" href="/vendor/mocha.css">
@@ -89,10 +97,8 @@ a:active {
 		<a href="/">
 		<img src="/img/logo.png" alt="Logo" style="float:left;width:110px;height:110px;"> 
 		</a>
-
-
 		<h2 style="text-align:right"><span style="color:blue">getInSPIREd</span>: We help students make <i>major</i> changes to their academic career ;)</h2>
-
+		</div>
 <ul style="align:right" id="menu">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
@@ -106,13 +112,11 @@ a:active {
   <li><a href="/user/logout">Logout</a></li>
 </ul>  
 
-		</div>
 	</header>
-<br>
-<br>
-<br>
-	<body>
+	</div>
 					<hr>
+	<body>
+
 		{{{body}}}
 
 		{{#if showTests}}
