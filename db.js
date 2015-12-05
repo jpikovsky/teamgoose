@@ -479,6 +479,33 @@ exports.listCourses = (major, concentration, cb) => {
       cb(undefined, result.rows);
     });
   });
+
+
+exports.listAllCourses = (cb) => {
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' +err);
+      return;
+    }
+
+    var quer = 'select dept,num from course_list';
+    client.query(quer, (err, result) => {
+      done();
+
+      if(err) {
+        cb(err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+  });
 };
 
 exports.addUserCourse = (course,username,cb)=>{
