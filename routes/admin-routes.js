@@ -4,6 +4,7 @@ var express = require('express');
 var model = require('../lib/user');
 
 var helper = require('../lib/course_helper');
+var majorhelper = require('../lib/major_helper');
 // A list of users who are online:
 
 //var online = require('../lib/online').online;
@@ -137,7 +138,55 @@ router.get('/requirements', (req, res) => {
     res.redirect('/user/main')
   }
   else if (user.admin){
-    res.render('admin-requirements');
+
+      var major = req.query.major;
+  var concentration = req.query.concentration;
+  // var list;
+  // helper.list( major, (error, courses) => {
+  //   list = courses || '';
+  // });
+  majorhelper.getMajors( (err, majors) =>{
+    if(err){
+      console.log(err);
+    }
+    if(major){
+      majorhelper.getConcentrations(major, (err, concentrations) => {
+        if(err){
+          console.log(err);
+        }
+        if(concentration){
+          majorhelper.list(major, concentration, (err, list) => {
+            if(err){
+              console.log(err);
+            }
+            var courses = majorhelper.formatCourseInfo(list);
+            res.render('admin-requirements', {
+              major: major,
+              concentration: concentration,
+              majors: majors,
+              concentrations: concentrations,
+              courses: courses
+            });
+          });
+        }
+        else{
+          res.render('admin-requirements', {
+            major: major,
+            concentration: concentration,
+            majors: majors,
+            concentrations: concentrations
+          });
+        }
+      });
+    }
+    else{
+      res.render('admin-requirements', {
+        major: major,
+        concentration: concentration,
+        majors: majors
+      });
+    }
+  });
   }
 });
 
