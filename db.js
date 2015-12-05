@@ -40,7 +40,7 @@ exports.getAllCourses = (semester, year,cb,c_num,c_dept)=>{
 
     var quer = 'SELECT * from courses where semester = $1 and year = $2)';
 
-    client.query(quer, [course.semester, course.year], (err, result) => {
+  client.query(quer, [course.semester, course.year], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
@@ -59,10 +59,10 @@ exports.getAllCourses = (semester, year,cb,c_num,c_dept)=>{
       cb(undefined,result);
     });
 
-  });
+});
 };
 
-exports.getUserCourses = (user)=>{
+exports.getUserCourses = (user,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -271,9 +271,9 @@ exports.getUsers = (user,cb)=>{
     var quer;
     if(user === null)
       quer = 'SELECT * from users';
-  	else
-  	  quer = 'SELECT * from users where fname = '+user.name;
-    client.query(quer, (err, result) => {
+    else
+     quer = 'SELECT * from users where fname = '+user.name;
+   client.query(quer, (err, result) => {
       // call done to release the client back to the pool:
       done();
 
@@ -293,7 +293,7 @@ exports.getUsers = (user,cb)=>{
       cb(undefined, result.rows);
     });
 
-  });
+ });
 };
 
 // Regular user access to particular user data.
@@ -546,7 +546,7 @@ exports.listUserCourses = (username,cb)=>{
       return;
     }
 
-    var quer = 'select course_list.dept, course_list.num from user_courses join course_list on user_courses.course_id=course_list.course_id join users on user_courses.users_id=users.id where users.username=$1';
+    var quer = 'select course_list.dept, course_list.num, course_list.credits from user_courses join course_list on user_courses.course_id=course_list.course_id join users on user_courses.users_id=users.id where users.username=$1';
     client.query(quer, [username], (err, result) => {
       // call done to release the client back to the pool:
       done();
@@ -569,9 +569,9 @@ exports.listUserCourses = (username,cb)=>{
 };
 
 function insert(course_id,user_id,cb){
-  
 
-pg.connect(constr, (err, client, done) => {
+
+  pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
       cb('could not connect to the database: ' + err);
@@ -594,7 +594,6 @@ pg.connect(constr, (err, client, done) => {
   });
 
 }
-
 
 /*
 

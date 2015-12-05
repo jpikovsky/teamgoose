@@ -3,7 +3,9 @@ var express = require('express');
 // This gives us access to the user "model".
 var model = require('../lib/user');
 
-var helper = require('../lib/course_helper');
+var course_helper = require('../lib/course_helper');
+
+var user_progress = require('../lib/user_progress');
 
 // This creates an express "router" that allows us to separate
 // particular routes from the main application.
@@ -97,16 +99,26 @@ router.get('/profile', (req, res) => {
   }
   else{
     var message = req.flash('profile') || '';
-    helper.listUserCourses(user.name, (error, courses) => {
-        if(error){
-          req.flash('courses', error);
-        }
-        res.render('profile', {
-          name: user.name,
-          message: message,
-          courses: courses
-        });
-      });
+    
+    var courses, credits;
+
+    course_helper.listUserCourses(user.name, (error, result) => {
+      if(error){
+        req.flash('courses', error);
+      }
+      courses = result;
+    var credits=0;
+    for(var i=0;i<courses.length;i++){
+      credits = credits + courses[i].credits;
+    }
+
+    res.render('profile', {
+      name: user.name,
+      message: message,
+      courses: courses,
+      credits: credits,
+    });
+  });
   }
 });
 
@@ -127,16 +139,16 @@ router.post('/profile/change', (req, res) => {
   //    console.log("ERROR");
   //  }
   //});
-  else{
-    model.changePassword(user, newp, (err) => {
-      if(err){
-        req.flash('profile', err);
-      }
-    });
-    user.pass=newp;
-    req.flash('profile' ,'Password Updated!');
-  }
-  res.redirect('/user/profile');
+else{
+  model.changePassword(user, newp, (err) => {
+    if(err){
+      req.flash('profile', err);
+    }
+  });
+  user.pass=newp;
+  req.flash('profile' ,'Password Updated!');
+}
+res.redirect('/user/profile');
 });
 
 router.get('/profile/delete', (req, res) => {
@@ -209,8 +221,8 @@ router.get('/main', function(req, res) {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
     res.render('user', { title   : 'User Main',
-                         message : message,
-                         name    : user.name });
+     message : message,
+     name    : user.name });
   }
 });
 
