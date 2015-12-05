@@ -3,7 +3,7 @@ var express = require('express');
 // This gives us access to the user "model".
 var model = require('../lib/user');
 
-
+var helper = require('../lib/course_helper');
 // A list of users who are online:
 
 //var online = require('../lib/online').online;
@@ -82,9 +82,38 @@ router.get('/courses', (req, res) => {
     res.redirect('/user/main')
   }
   else if (user.admin){
-    res.render('admin-courses');
+    helper.listDepartments( (err, depts) => {
+      if(err){
+        req.flash('admin-courses', err);
+      }
+      helper.listUserCourses(user.name, (error, courses) => {
+        if(error){
+          req.flash('admin-courses', error);
+        }
+        res.render('admin-courses', {
+          depts: depts,
+          courses: courses
+        });
+      });
+    });    
+    //res.render('admin-courses');
+
   }
 });
+
+router.post('/courses/add', (req, res) => {
+  var dept = req.body.dept;
+  var num = req.body.number;
+  var course = {dept : dept, num : num};
+
+  helper.adminAdd(course, (error, new_course) => {
+        if(error){
+          console.log(error);
+        }
+        res.redirect('/admin/courses');
+      });
+  });
+
 
 router.get('/requirements', (req, res) => {
   var user = req.session.user;

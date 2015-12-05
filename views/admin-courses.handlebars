@@ -1,1 +1,37 @@
 <h1>UMass Courses</h1>
+<h2>Add Course</h2>
+<form method="post" action="/admin/courses/add">
+  <label>Department:</label>
+  <select name="dept">
+    <option value=""></option>
+    {{#each depts}}
+      <option value={{this.dept}}>{{this.dept}}</option>
+    {{/each}}
+  </select>
+  <br>
+  <label>Number:</label>
+    <input type="text" name="num"> <br>
+  <button>Add Course</button>
+</form>
+
+<h2>Courses</h2>
+<table>
+  <tr>
+    <td>
+      Department:
+    </td>
+    <td>
+      Number:
+    </td>
+  </tr>
+  {{#each courses}}
+    <tr>
+      <td>
+        {{dept}}
+      </td>
+      <td>
+        {{num}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
