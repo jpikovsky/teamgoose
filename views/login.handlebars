@@ -14,23 +14,30 @@
   -webkit-filter: brightness(100%);
 }
 </style>
-<h1>{{title}}</h1>
-<p>Enter your credentials</p>
-<div>{{message}}</div><br>
+<div align="center">
+  <h1>{{title}}</h1>
+  <br>
+  <p>Enter your credentials</p>
+  <div>{{message}}</div><br>
 
 
 
-<form method="post" action="/user/auth">
-  User Name: <input type="text" name="name"> <br>
-  Password:  <input type="password" name="pass"> <br>
-  <button>Login</button>
-</form>
+  <form method="post" action="/user/auth">
+    User Name: <input type="text" name="name"> <br>
+    <br>
+    Password:  <input type="password" name="pass"> <br>
+    <br>
+    <button>Login</button>
+  </form>
+  <br>
 
 
 
-<br><div>Don't have an account?</div>
 
-<form method="get" action="/user/new">
-  <button>Create Account</button>
-</form><br>
+  <br><div>Don't have an account?</div>
+
+  <form method="get" action="/user/new">
+    <button>Create Account</button>
+  </form><br>
+</div>
 </html>
