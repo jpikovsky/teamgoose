@@ -18,7 +18,7 @@
 [class*="col-"] {
     float: left;
     padding: 15px;
-    border: 1px solid blue;
+    border: 0px solid blue;
 }
 .col-1 {width: 35%;}
 .col-2 {width: 30%;}
@@ -29,9 +29,9 @@
 .col-7 {width: 58.33%;}
 .col-8 {width: 66.66%;}
 .col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
+.col-10 {width: 100%;}
+.col-11 {width: 50%;}
+.col-12 {width: 50%;}
 
 table {
     border-collapse: collapse;
@@ -48,8 +48,15 @@ table, td, th {
  -->
 <div class="col-12">
     <h2 alight="left">{{name}}'s Profile</h2>
-  <p align="right"> <b>Current Major:</b> Computer Science;) <b>Estimated Time of Graduation:</b> Soon </p>
 </div>
+<div class="col-11">
+  <p align="right"> <b>Current Major:</b> Computer Science ;) <b>Estimated Time of Graduation:</b> Soon </p>
+      <br>
+
+</div>
+<div class="col-10">
+  </div>
+
 
 <div class ="col-3">
 <div><p>User Name: {{name}}</p></div>
