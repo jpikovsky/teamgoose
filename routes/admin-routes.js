@@ -190,5 +190,19 @@ router.get('/requirements', (req, res) => {
   }
 });
 
+router.post('/major/select', (req, res) => {
+  // console.log(req.body);
+  // console.log(req.body.selection);
+  if(req.body.selection === 'major'){
+    var major = req.body.major;
+    res.redirect('/admin/requirements/?major='+major);
+  }
+  else{
+    var major = req.body.major;
+    var concentration = req.body.concentration;
+    res.redirect('/admin/requirements/?major='+major+'&concentration='+concentration);
+  }
+});
+
 module.exports = router;
 
