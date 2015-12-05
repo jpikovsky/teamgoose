@@ -86,7 +86,7 @@ router.get('/courses', (req, res) => {
       if(err){
         req.flash('admin-courses', err);
       }
-      helper.listUserCourses(user.name, (error, courses) => {
+      helper.listAllCourses((error, courses) => {
         if(error){
           req.flash('admin-courses', error);
         }
@@ -103,7 +103,7 @@ router.get('/courses', (req, res) => {
 
 router.post('/courses/add', (req, res) => {
   var dept = req.body.dept;
-  var num = req.body.number;
+  var num = req.body.num;
   var course = {dept : dept, num : num};
 
   helper.adminAdd(course, (error, new_course) => {

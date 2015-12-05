@@ -478,7 +478,7 @@ exports.listCourses = (major, concentration, cb) => {
 
       cb(undefined, result.rows);
     });
-  });
+  })};
 
 
 exports.listAllCourses = (cb) => {
