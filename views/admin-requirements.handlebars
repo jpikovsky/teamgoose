@@ -1,1 +1,51 @@
 <h1>Major Requirements</h1>
+
+<form method="post" action="/admin/major/select">
+  <label>Major:</label>
+  <select name="major">
+    <option value=""></option>
+    {{#each majors}}
+      <option value={{this.major}}>{{this.major}}</option>
+    {{/each}}
+  </select>
+  <button name="selection" value="major"> Choose </button>
+  <br>
+  <label>Concentration:</label>
+  <select name="concentration">    
+    <option value=""></option>
+    {{#each concentrations}}
+      <option value={{this.concentration}}>{{this.concentration}}</option>
+    {{/each}}
+  </select>
+  <button name="selection" value="concentration"> Choose </button>
+</form>
+<br>
+<div> Selected Major : {{major}} </div>
+<div> Selected Concentration : {{concentration}} </div>
+<br>
+<table>
+  <tr>
+    <td>
+      Requirement #:
+    </td>
+    <td>
+      Course:
+    </td>
+    <td>
+      Satisfied:
+    </td>
+  </tr>
+  {{#each courses}}
+    <tr>
+      <td>
+        {{req_num}}
+      </td>
+      <td>
+        {{req_desc}}
+      </td>
+      <td>
+        No
+      </td>
+    </tr>
+  {{/each}}
+</table>

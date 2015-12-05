@@ -4,6 +4,7 @@ var express = require('express');
 var model = require('../lib/user');
 
 var helper = require('../lib/course_helper');
+var majorhelper = require('../lib/major_helper');
 // A list of users who are online:
 
 //var online = require('../lib/online').online;
@@ -114,6 +115,17 @@ router.post('/courses/add', (req, res) => {
       });
   });
 
+router.post('/courses/delete', (req, res) => {
+  var dept = req.body.dept;
+  var num = req.body.num;
+  var course = {dept : dept, num : num};
+  helper.deleteCourse(course, (error, new_course) => {
+        if(error){
+          console.log(error);
+        }
+        res.redirect('/admin/courses');
+      });
+  });
 
 router.get('/requirements', (req, res) => {
   var user = req.session.user;
@@ -126,7 +138,69 @@ router.get('/requirements', (req, res) => {
     res.redirect('/user/main')
   }
   else if (user.admin){
-    res.render('admin-requirements');
+
+      var major = req.query.major;
+  var concentration = req.query.concentration;
+  // var list;
+  // helper.list( major, (error, courses) => {
+  //   list = courses || '';
+  // });
+  majorhelper.getMajors( (err, majors) =>{
+    if(err){
+      console.log(err);
+    }
+    if(major){
+      majorhelper.getConcentrations(major, (err, concentrations) => {
+        if(err){
+          console.log(err);
+        }
+        if(concentration){
+          majorhelper.list(major, concentration, (err, list) => {
+            if(err){
+              console.log(err);
+            }
+            var courses = majorhelper.formatCourseInfo(list);
+            res.render('admin-requirements', {
+              major: major,
+              concentration: concentration,
+              majors: majors,
+              concentrations: concentrations,
+              courses: courses
+            });
+          });
+        }
+        else{
+          res.render('admin-requirements', {
+            major: major,
+            concentration: concentration,
+            majors: majors,
+            concentrations: concentrations
+          });
+        }
+      });
+    }
+    else{
+      res.render('admin-requirements', {
+        major: major,
+        concentration: concentration,
+        majors: majors
+      });
+    }
+  });
+  }
+});
+
+router.post('/major/select', (req, res) => {
+  // console.log(req.body);
+  // console.log(req.body.selection);
+  if(req.body.selection === 'major'){
+    var major = req.body.major;
+    res.redirect('/admin/requirements/?major='+major);
+  }
+  else{
+    var major = req.body.major;
+    var concentration = req.body.concentration;
+    res.redirect('/admin/requirements/?major='+major+'&concentration='+concentration);
   }
 });
 
