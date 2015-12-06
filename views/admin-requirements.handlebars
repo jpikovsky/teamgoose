@@ -13,7 +13,7 @@
   <button name="selection" value="major"> Choose </button>
   <br>
   <label>Concentration:</label>
-  <select name="concentration" id="major">    
+  <select name="concentration" id="concentration">    
     <option value=""></option>
     {{#each concentrations}}
       <option value={{this.concentration}}>{{this.concentration}}</option>
@@ -42,9 +42,9 @@
   document.getElementById('concentration').value=concentration;
 </script>
 
-<h3>Add Requirement</h3>
+<h3>Add Requirement to {{major}} : {{concentration}}</h3>
 
-<form visible={{major}} method="post" action="/admin/courses/add" >
+<form method="post" action="/courses/add">
   <label>Department:</label>
   <select name="dept">
     <option value=""></option>
@@ -67,9 +67,6 @@
     <td>
       Course:
     </td>
-    <td>
-      Satisfied:
-    </td>
   </tr>
   {{#each courses}}
     <tr>
@@ -78,9 +75,6 @@
       </td>
       <td>
         {{req_desc}}
-      </td>
-      <td>
-        No
       </td>
     </tr>
   {{/each}}

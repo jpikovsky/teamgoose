@@ -160,13 +160,20 @@ router.get('/requirements', (req, res) => {
               console.log(err);
             }
             var courses = majorhelper.formatCourseInfo(list);
-            res.render('admin-requirements', {
+            helper.listDepartments((err, depts) => {
+              if(err){
+                req.flash('admin-requirements', err);
+                }
+                res.render('admin-requirements', {
               major: major,
+              depts: depts,
               concentration: concentration,
               majors: majors,
               concentrations: concentrations,
               courses: courses
+             });
             });
+
           });
         }
         else{
