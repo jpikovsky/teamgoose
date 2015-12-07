@@ -7,23 +7,45 @@ var router = express.Router();
 router.get('/', (req, res) => {
   var major = req.query.major;
   var concentration = req.query.concentration;
+  var message = req.flash('login') || '';
   // var list;
   // helper.list( major, (error, courses) => {
   //   list = courses || '';
   // });
   helper.getMajors( (err, majors) =>{
     if(err){
-      console.log(err);
+      message = err;
+      res.render('major', {
+        major: major,
+        concentration: concentration,
+        message: message
+      });
+      return;
     }
     if(major){
       helper.getConcentrations(major, (err, concentrations) => {
         if(err){
-          console.log(err);
+          message = err;
+          res.render('major', {
+            major: major,
+            majors: majors,
+            concentration: concentration,
+            message: message
+          });
+          return;
         }
         if(concentration){
           helper.list(major, concentration, (err, list) => {
             if(err){
-              console.log(err);
+              message = err;
+              res.render('major', {
+                major: major,
+                majors: majors,
+                concentration: concentration,
+                concentrations: concentrations,
+                message: message
+              });
+              return;
             }
             var courses = helper.formatCourseInfo(list);
             res.render('major', {
@@ -31,7 +53,8 @@ router.get('/', (req, res) => {
               concentration: concentration,
               majors: majors,
               concentrations: concentrations,
-              courses: courses
+              courses: courses,
+              message: message
             });
           });
         }
@@ -40,7 +63,8 @@ router.get('/', (req, res) => {
             major: major,
             concentration: concentration,
             majors: majors,
-            concentrations: concentrations
+            concentrations: concentrations,
+            message: message
           });
         }
       });
@@ -49,7 +73,8 @@ router.get('/', (req, res) => {
       res.render('major', {
         major: major,
         concentration: concentration,
-        majors: majors
+        majors: majors,
+        message: message
       });
     }
   });
