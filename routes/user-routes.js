@@ -78,14 +78,20 @@ router.post('/new/create', (req, res) => {
   var user = {name : name, pass : pass, admin : admin};
   model.add(user, (error, newuser) => {
     if(error){
-      console.log("ERROR");
+      req.flash('create_user', error);
+      res.redirect('/user/new');
+    }
+    else{
+      res.redirect('/user/login');
     }
   });
-  res.redirect('/user/login');
 });
 
 router.get('/new', function(req, res) {
-  res.render('create_user');
+  var message = req.flash('create_user') || '';
+  res.render('create_user', {
+    message: message
+  });
 });
 
 router.get('/profile', (req, res) => {
