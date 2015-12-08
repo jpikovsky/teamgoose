@@ -2,9 +2,12 @@ var express = require('express');
 
 var helper = require('../lib/major_helper');
 
+var course_helper = require('../lib/course_helper');
+
 var router = express.Router();
 
 router.get('/', (req, res) => {
+  var user = req.session.user;
   var major = req.query.major;
   var concentration = req.query.concentration;
   var message = req.flash('login') || '';
@@ -47,15 +50,33 @@ router.get('/', (req, res) => {
               });
               return;
             }
-            var courses = helper.formatCourseInfo(list);
-            res.render('major', {
-              major: major,
-              concentration: concentration,
-              majors: majors,
-              concentrations: concentrations,
-              courses: courses,
-              message: message
-            });
+            if(user){
+              course_helper.listUserCourses(user.name, (error, courses) => {
+                if(error){
+                  message = err;
+                }
+                var info = helper.formatCourseInfo(list, courses);
+                res.render('major', {
+                  major: major,
+                  concentration: concentration,
+                  majors: majors,
+                  concentrations: concentrations,
+                  courses: info,
+                  message: message
+                });
+              });
+            }
+            else{
+              var courses = helper.formatCourseInfo(list, undefined);
+              res.render('major', {
+                major: major,
+                concentration: concentration,
+                majors: majors,
+                concentrations: concentrations,
+                courses: courses,
+                message: message
+              });
+            }
           });
         }
         else{

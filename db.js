@@ -654,32 +654,58 @@ exports.listUserCourses = (username,cb)=>{
   });
 };
 
-function insert(course_id,user_id,cb){
-
-
+exports.isSatisfied = (username, dept, num)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
-      cb('could not connect to the database: ' + err);
-      return;
+      return false;
     }
 
-    quer = 'insert into student_courses values ($1,$2)';
-
-    client.query(quer, [course_id,user_id], (err, result) => {
+    var quer = 'select * from user_courses where course_id=(select course_id from course_list where dept=$1 and num=$2) and users_id=(select id from users where username=$3)';
+    client.query(quer, [dept, num, username], (err, result) => {
       // call done to release the client back to the pool:
       done();
+
       // (4) check if there was an error querying database:
       if (err) {
-        cb('could not connect to the database: ' + err);
-        return;
+        return false;
       }
-      
-      cb(undefined);
-    });
+      // (7) otherwise, we invoke the callback with the user data.
+      if(result.rows.length > 0){
+        console.log('there was a result');
+        return true;
+      }
+      return false;
+    }); 
   });
+};
 
-}
+// function insert(course_id,user_id,cb){
+
+
+//   pg.connect(constr, (err, client, done) => {
+//     // (2) check for an error connecting:
+//     if (err) {
+//       cb('could not connect to the database: ' + err);
+//       return;
+//     }
+
+//     quer = 'insert into student_courses values ($1,$2)';
+
+//     client.query(quer, [course_id,user_id], (err, result) => {
+//       // call done to release the client back to the pool:
+//       done();
+//       // (4) check if there was an error querying database:
+//       if (err) {
+//         cb('could not connect to the database: ' + err);
+//         return;
+//       }
+      
+//       cb(undefined);
+//     });
+//   });
+
+// }
 
 /*
 
