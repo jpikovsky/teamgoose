@@ -56,12 +56,15 @@ router.get('/', (req, res) => {
                   message = err;
                 }
                 var info = helper.formatCourseInfo(list, courses);
+                var stats = helper.calculateStats(info);
                 res.render('major', {
                   major: major,
                   concentration: concentration,
                   majors: majors,
                   concentrations: concentrations,
                   courses: info,
+                  num_completed: stats[0],
+                  num_remaining: stats[1],
                   message: message
                 });
               });
@@ -113,6 +116,10 @@ router.post('/select', (req, res) => {
     var concentration = req.body.concentration;
     res.redirect('/major/?major='+major+'&concentration='+concentration);
   }
+});
+
+router.get('/inspire', (req, res) => {
+  res.render('inspire');
 });
 
 module.exports = router;
