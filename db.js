@@ -618,10 +618,10 @@ exports.addUserCourse = (course,username,cb)=>{
       }
       // (7) otherwise, we invoke the callback with the user data.
 
-      if(result.rows.length < 1){
-        cb("no results returned");
-        return;
-      }
+      // if(result.rows.length < 1){
+      //   cb("no results returned");
+      //   return;
+      // }
       cb(undefined);
 
     }); 
