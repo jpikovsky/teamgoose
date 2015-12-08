@@ -663,7 +663,7 @@ exports.addRequirement = (req,major,concentration,cb)=>{
     }
 
     //var quer = 'INSERT INTO reqs values ($1, $2, $4, $4)';
-    var quer = 'INSERT INTO reqs values ((select major_id from majors where major=$1 and concetration=$2),$3,(select course_id from course_list where dept = $4 and num = $5))'
+    var quer = 'INSERT INTO reqs values ((select major_id from majors where major=$1 and concentration=$2),$3,(select course_id from course_list where dept = $4 and num = $5))'
   
     client.query(quer,[major, concentration,req.req_num,req.dept,req.num], (err, result) => {
       // call done to release the client back to the pool:
