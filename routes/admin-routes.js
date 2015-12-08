@@ -199,6 +199,19 @@ router.get('/requirements', (req, res) => {
   }
 });
 
+router.post('/requirements/add', (req, res) => {
+  var dept = req.body.dept;
+  var num = req.body.num;
+  var course = {dept : dept, num : num};
+
+  helper.adminAdd(course, (error, new_course) => {
+        if(error){
+          req.flash('admin-courses', error);
+        }
+        res.redirect('/admin/courses');
+      });
+  });
+
 router.post('/major/select', (req, res) => {
   // console.log(req.body);
   // console.log(req.body.selection);
