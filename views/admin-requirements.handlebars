@@ -26,41 +26,23 @@
 <div> Selected Concentration : {{concentration}} </div>
 <br>
 
-<script type="text/javascript">
-  function getParamValuesByName (queryString) {
-    var qstring = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < qstring.length; i++){
-      var urlparam = qstring[i].split('=');
-      if(urlparam[0] == queryString) {
-        return urlparam[1];
-      }
-    }
-  }
-  var major = getParamValuesByName('major');
-  var concentration = getParamValuesByName('concentration');
-  document.getElementById('major').value=major;
-  document.getElementById('concentration').value=concentration;
-</script>
+
 
 <h3>Add Requirement to {{major}} : {{concentration}}</h3>
 
 <form method="post" action="/admin/requirements/add">
-  <label>Major:</label>
-  <select name="major" id="major">
+  <select name="major" id="hidden_major" style="display:none">
     <option value=""></option>
     {{#each majors}}
       <option value={{this.major}}>{{this.major}}</option>
     {{/each}}
   </select>
-  <br>
-  <label>Concentration:</label>
-  <select name="concentration" id="concentration">    
+  <select name="concentration" id="hidden_concentration" style="display:none">    
     <option value=""></option>
     {{#each concentrations}}
       <option value={{this.concentration}}>{{this.concentration}}</option>
     {{/each}}
   </select>
-  <br>
   <label>Department:</label>
   <select name="dept">
     <option value=""></option>
@@ -78,6 +60,24 @@
 
 
 </form>
+
+<script type="text/javascript">
+  function getParamValuesByName (queryString) {
+    var qstring = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < qstring.length; i++){
+      var urlparam = qstring[i].split('=');
+      if(urlparam[0] == queryString) {
+        return urlparam[1];
+      }
+    }
+  }
+  var major = getParamValuesByName('major');
+  var concentration = getParamValuesByName('concentration');
+  document.getElementById('major').value=major;
+  document.getElementById('concentration').value=concentration;
+  document.getElementById('hidden_major').value=major;
+  document.getElementById('hidden_concentration').value=concentration;
+</script>
 
 <br>
 <table>
