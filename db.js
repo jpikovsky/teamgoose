@@ -654,31 +654,35 @@ exports.listUserCourses = (username,cb)=>{
   });
 };
 
-exports.isSatisfied = (username, dept, num)=>{
+exports.addRequirement = (req,major,concentration,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
-      return false;
+      cb('could not connect to the database: ' + err);
+      return;
     }
 
-    var quer = 'select * from user_courses where course_id=(select course_id from course_list where dept=$1 and num=$2) and users_id=(select id from users where username=$3)';
-    client.query(quer, [dept, num, username], (err, result) => {
+    //var quer = 'INSERT INTO reqs values ($1, $2, $4, $4)';
+    var quer = 'INSERT INTO reqs values ((select major_id from majors where major=$1 and concentration=$2),$3,(select course_id from course_list where dept = $4 and num = $5))'
+  
+    client.query(quer,[major, concentration,req.req_num,req.dept,req.num], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
       // (4) check if there was an error querying database:
       if (err) {
-        return false;
+        cb('could not connect to the database: ' + err);
+        return;
       }
+
       // (7) otherwise, we invoke the callback with the user data.
-      if(result.rows.length > 0){
-        console.log('there was a result');
-        return true;
-      }
-      return false;
-    }); 
+      cb(undefined);
+    });
+
   });
 };
+
+
 
 // function insert(course_id,user_id,cb){
 

@@ -44,7 +44,23 @@
 
 <h3>Add Requirement to {{major}} : {{concentration}}</h3>
 
-<form method="post" action="/courses/add">
+<form method="post" action="/admin/requirements/add">
+  <label>Major:</label>
+  <select name="major" id="major">
+    <option value=""></option>
+    {{#each majors}}
+      <option value={{this.major}}>{{this.major}}</option>
+    {{/each}}
+  </select>
+  <br>
+  <label>Concentration:</label>
+  <select name="concentration" id="concentration">    
+    <option value=""></option>
+    {{#each concentrations}}
+      <option value={{this.concentration}}>{{this.concentration}}</option>
+    {{/each}}
+  </select>
+  <br>
   <label>Department:</label>
   <select name="dept">
     <option value=""></option>
@@ -53,9 +69,14 @@
     {{/each}}
   </select>
   <br>
-  <label>Number:</label>
+  <label>Req Number:</label>
+    <input type="text" name="req_num"> <br>
+    <label>Number:</label>
     <input type="text" name="num"> <br>
   <button>Add Course</button>
+
+
+
 </form>
 
 <br>

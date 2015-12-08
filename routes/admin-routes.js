@@ -199,6 +199,22 @@ router.get('/requirements', (req, res) => {
   }
 });
 
+router.post('/requirements/add', (req, res) => {
+  var major = req.body.major;
+  var dept = req.body.dept;
+  var concentration = req.body.concentration;
+  var num = req.body.num;
+  var req_num = req.body.req_num;
+  var reqs = {dept : dept, num : num, req_num : req_num};
+
+  majorhelper.addRequirement(reqs,major,concentration, (error, new_course) => {
+        if(error){
+          req.flash('admin-requirements', error);
+        }
+        res.redirect('/admin/requirements');
+      });
+  });
+
 router.post('/major/select', (req, res) => {
   // console.log(req.body);
   // console.log(req.body.selection);
