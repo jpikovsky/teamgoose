@@ -91,9 +91,11 @@ router.get('/courses', (req, res) => {
         if(error){
           req.flash('admin-courses', error);
         }
+        var message = req.flash('admin-courses') || '';
         res.render('admin-courses', {
           depts: depts,
-          courses: courses
+          courses: courses,
+          message: message
         });
       });
     });    
@@ -109,7 +111,7 @@ router.post('/courses/add', (req, res) => {
 
   helper.adminAdd(course, (error, new_course) => {
         if(error){
-          console.log(error);
+          req.flash('admin-courses', error);
         }
         res.redirect('/admin/courses');
       });
@@ -121,7 +123,7 @@ router.post('/courses/delete', (req, res) => {
   var course = {dept : dept, num : num};
   helper.deleteCourse(course, (error, new_course) => {
         if(error){
-          console.log(error);
+          req.flash('admin-courses', error);
         }
         res.redirect('/admin/courses');
       });

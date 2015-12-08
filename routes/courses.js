@@ -22,9 +22,11 @@ router.get('/', (req, res) => {
         if(error){
           req.flash('courses', error);
         }
+        var message = req.flash('courses') || '';
         res.render('courses', {
           depts: depts,
-          courses: courses
+          courses: courses,
+          message: message
         });
       });
     });
@@ -51,7 +53,7 @@ router.post('/add', (req, res) => {
       var course = {dept : dept, num : num};
       helper.userAdd(course, user.name, (error, new_course) => {
         if(error){
-          console.log(error);
+          req.flash('courses', error);
         }
         res.redirect('/courses');
       });
