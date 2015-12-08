@@ -114,10 +114,11 @@ router.get('/profile', (req, res) => {
       }
       courses = result;
     var credits=0;
-    for(var i=0;i<courses.length;i++){
-      credits = credits + courses[i].credits;
+    if(courses != undefined){
+      for(var i=0;i<courses.length;i++){
+        credits = credits + courses[i].credits;
+      }
     }
-
     res.render('profile', {
       name: user.name,
       message: message,
