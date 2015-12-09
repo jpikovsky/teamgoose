@@ -206,13 +206,15 @@ router.post('/requirements/add', (req, res) => {
   var num = req.body.num;
   var req_num = req.body.req_num;
   var reqs = {dept : dept, num : num, req_num : req_num};
-
-  majorhelper.addRequirement(reqs,major,concentration, (error, new_course) => {
+  majorhelper.addRequirement(reqs,major,concentration, (error) => {
         if(error){
           req.flash('admin-requirements', error);
         }
-        res.redirect('/admin/requirements');
+
+        res.redirect('/admin/requirements/?major='+major+'&concentration='+concentration);
+
       });
+
   });
 
 router.post('/major/select', (req, res) => {

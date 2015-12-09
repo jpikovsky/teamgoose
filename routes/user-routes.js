@@ -5,6 +5,8 @@ var model = require('../lib/user');
 
 var course_helper = require('../lib/course_helper');
 
+var major_helper = require('../lib/major_helper');
+
 var user_progress = require('../lib/user_progress');
 
 // This creates an express "router" that allows us to separate
@@ -98,14 +100,14 @@ router.get('/profile', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
 
-  // Redirects user to login if they are no logged in
+  // Redirects user to login if they are not logged in
   if (!user) {
     req.flash('login', 'You must be logged in to access your profile');
     res.redirect('/user/login');
   }
   else{
     var message = req.flash('profile') || '';
-    
+
     var courses, credits;
 
     course_helper.listUserCourses(user.name, (error, result) => {
@@ -119,13 +121,19 @@ router.get('/profile', (req, res) => {
         credits = credits + courses[i].credits;
       }
     }
-    res.render('profile', {
-      name: user.name,
-      message: message,
-      courses: courses,
-      credits: credits,
+    major_helper.getMajors( (err, majors) =>{
+      if(err){
+        message = err;
+      }
+        res.render('profile', {
+          name: user.name,
+          message: message,
+          courses: courses,
+          credits: credits,
+          majors: majors
+        });
+      });
     });
-  });
   }
 });
 

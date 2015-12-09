@@ -56,6 +56,16 @@ table, td, th {
 
 </div>
 <div class="col-10">
+  <form method="post" action="/major/select">
+    <label>Major:</label>
+    <select name="major" id="major">
+      <option value=""></option>
+      {{#each majors}}
+        <option value={{this.major}}>{{this.major}}</option>
+      {{/each}}
+    </select>
+    <button name="selection" value="major"> Choose </button>
+    <br>
   </div>
 
 

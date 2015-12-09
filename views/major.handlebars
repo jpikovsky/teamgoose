@@ -2,7 +2,12 @@
 <html>
 <h1>Major</h1>
 
-<div>{{message}}</div><br>
+<div>{{message}}</div>
+
+<div>Not sure what major you want to be? Click this button for inspiration!</div>
+<form action="/major/inspire">
+<button> getInSPIREd </button>
+</form><br>
 
 <form method="post" action="/major/select">
   <label>Major:</label>
@@ -44,6 +49,9 @@
 
 <div> Selected Major : {{major}} </div>
 <div> Selected Concentration : {{concentration}} </div>
+<div> Completed Requirements : {{num_completed}} </div>
+<div> Remaining Requirements : {{num_remaining}} </div>
+
 <br>
 <table>
   <tr>
