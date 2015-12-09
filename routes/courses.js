@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
         res.render('courses', {
           depts: depts,
           courses: courses,
-          message: message
+          message: message,
         });
       });
     });
@@ -72,6 +72,33 @@ router.post('/userAdd', (req, res) => {
       req.flash('profile',error);
     res.redirect('/profile');
   });
+});
+
+router.post('/details', (req, res) => {
+  // Grab the session if the user is logged in.
+  
+  helper.getCourse(req.body.dept,req.body.course,req.body.sem,(err,result)=>{
+    if(err){
+      console.log("GEt COurse "+err);
+      req.flash('/courses',err);
+      res.redirect('/courses');
+    }
+    else{
+      var instr = result.instr;
+      var descr = result.descr;
+      console.log(instr);
+      helper.getCoursePreReqs(result.course_id,(err,result)=>{
+        if(err){
+          console.log("Get PreReq "+err);
+          req.flash('/courses',err);
+          res.redirect('/courses');
+        }
+        else{
+          res.render('course_details',{instr:instr,descr:descr,prereqs:result});
+        }
+      });
+    }
+});
 });
 
 module.exports = router;

@@ -1,22 +1,25 @@
 <h1>Course Details</h1>
 <h3>Select Course</h3>
-<form method="post" action="/admin/user">
+<form method="post" action="/courses/details">
   Major:
-    <select name="Select Major">
-      <option value="Computer Science">CMPSCI</option>
-      <option value="Mathematics">MATH</option>
+    <select name="dept">
+      {{#each depts}}
+      <option value={{dept}}> {{dept}} </option>
+      {{/each}}
     </select>
     Course:
-    <select name="Select Course">
-      <option value="CS 121">CS 121</option>
-      <option value="CS 187">CS 187</option>
+    <select name="course">
+      {{#each courses}}
+      <option value={{this.num}}> {{this.num}} </option>
+      {{/each}}
     </select>
     Semester:
-    <select name="Semester">
+    <select name="sem">
       <option value="Fall">Fall</option>
       <option value="Spring">Spring</option>
     </select>
     </br>
+    <input type="submit" value="Submit">
 </form>
 
 <form method="post" action="/admin/user">
@@ -29,9 +32,22 @@
   </br>
 </form>
 
-
-
-
+<div>
+  <label> Instructor: {{instr}} </label>
+  <textarea>Description: {{descr}}  </textarea>
+  <table>
+    <tr>
+      <th> Pre-Requisites </th>
+      <th> Completed </th>
+    </tr>
+    {{#each prereqs}}
+    <tr>
+      <td> {{this.dept}} {{this.num}} </td>
+      <td> No </td>
+    </tr>
+    {{/each}}  
+  </table>
+</div
 
 <img src="/img/explore_courses_view.png" />
 

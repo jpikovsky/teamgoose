@@ -11,6 +11,8 @@ var session    = require('express-session');
 var flash      = require('connect-flash');
 // The cookie parser is used to parse cookies in an HTTP header.
 var cookieParser = require('cookie-parser');
+var course = require('./lib/course_helper');
+
 // Morgan for server logging.
 // var morgan = require('morgan');
 
@@ -71,7 +73,7 @@ function testmw(req, res, next) {
   // then showTests will be set to a "truthy" value. We can then
   // use that in our handlebars views to conditionally include tests.
   res.locals.showTests = app.get('env') !== 'production' &&
-                         req.query.test;
+  req.query.test;
   // Passes the request to the next route handler.
   next();
 }
@@ -142,7 +144,7 @@ app.get('/team', (req, res) => {
         members: result.data,
         pageTestScript: '/qa/tests-team.js'
       });
-  }
+    }
   }
 });
 
@@ -157,7 +159,7 @@ app.get('/about', (req, res) => {
     });
 
 
-});
+  });
 
 // app.get('/login', (req, res) => {
 //   res.render('login');
@@ -172,7 +174,22 @@ app.get('/profile', (req, res) => {
 // });
 
 app.get('/course_details', (req, res) => {
-  res.render('course_details');
+
+  course.listAllCourses((err,courses)=>{
+    if(err){
+      internalServerError500(err,req,res);
+    }
+    else{
+      course.listDepartments((err,depts)=>{
+        if(err){
+          internalServerError500(err,req,res);
+        }
+        else{
+          res.render('course_details',{courses:courses,depts:depts});
+        }
+      });
+    }
+  });
 });
 
 //app.get('/major', (req, res) => {
@@ -232,6 +249,6 @@ app.use(internalServerError500);
 // up and running.
 app.listen(app.get('port'), () => {
   console.log('Express started on http://localhost:' +
-              app.get('port') + '; press Ctrl-C to terminate');
+    app.get('port') + '; press Ctrl-C to terminate');
 });
 

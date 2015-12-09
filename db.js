@@ -27,6 +27,33 @@ exports.addCourse = (course,cb)=>{
 
   });
 };
+// Get a certain course
+exports.getCourse = (dept,num,sem,cb)=>{
+  console.log(dept+num+sem);
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+    var quer  = 'select * from course_list where dept=$1 and num =$2';
+
+    client.query(quer,[dept,num],(err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+      console.log(result.rows[0]);
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined,result.rows[0]);
+    });
+
+  });
+};
 
 // Get all courses for given semester and year
 
@@ -62,6 +89,32 @@ exports.getAllCourses = (semester, year,cb,c_num,c_dept)=>{
 });
 };
 
+exports.getCoursePreReqs = (course_id,cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+    var quer  = 'select * from course_list where course_id in (select prereq_id from course_prereqs where course=$1)';
+
+    client.query(quer, [course_id], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined,result.rows);
+    });
+
+  });
+};
+
 exports.getUserCourses = (user,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -70,7 +123,7 @@ exports.getUserCourses = (user,cb)=>{
       return;
     }
 
-    var quer = 'SELECT * from student_courses where user_id = $1';
+    var quer = 'SELECT * from user_courses where user_id = $1';
 
     client.query(quer, [user.id], (err, result) => {
       // call done to release the client back to the pool:
@@ -94,14 +147,6 @@ exports.getUserCourses = (user,cb)=>{
   });
 };
 
-// Get course description for given semester and year
-
-exports.getCourseDesc = (c_num,c_dept,semester, year,cb)=>{
-  var result = getAllCourses(semester,year,cb,c_num,c_dept);
-  if(result != NULL){
-  	return result;
-  }
-};
 
 // Only admin should be able access to remove course
 exports.removeCourse = (c,cb)=>{
@@ -112,7 +157,7 @@ exports.removeCourse = (c,cb)=>{
       cb('could not connect to the database: ' + err);
       return;
     }
-    var quer  = "DELETE from course_list where dept = $1 and num = $2";
+    var quer  = 'DELETE from course_list where dept = $1 and num = $2';
 
     client.query(quer, [c.dept, c.num], (err, result) => {
       // call done to release the client back to the pool:
@@ -462,7 +507,7 @@ exports.listCourses = (major, concentration, cb) => {
       return;
     }
 
-    var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id  where majors.major=$1 and majors.concentration=$2';
+    var quer = 'select from course_list where dept=$1 and num=$2 union select from course_prereqs where course=(select course_id from course_list where dept=$1 and num=$2)';
     client.query(quer, [major, concentration], (err, result) => {
       done();
 
@@ -681,35 +726,6 @@ exports.addRequirement = (req,major,concentration,cb)=>{
 
   });
 };
-
-
-
-// function insert(course_id,user_id,cb){
-
-
-//   pg.connect(constr, (err, client, done) => {
-//     // (2) check for an error connecting:
-//     if (err) {
-//       cb('could not connect to the database: ' + err);
-//       return;
-//     }
-
-//     quer = 'insert into student_courses values ($1,$2)';
-
-//     client.query(quer, [course_id,user_id], (err, result) => {
-//       // call done to release the client back to the pool:
-//       done();
-//       // (4) check if there was an error querying database:
-//       if (err) {
-//         cb('could not connect to the database: ' + err);
-//         return;
-//       }
-      
-//       cb(undefined);
-//     });
-//   });
-
-// }
 
 /*
 
