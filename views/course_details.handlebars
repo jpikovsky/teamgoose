@@ -1,6 +1,7 @@
 <h1>Course Details</h1>
 <h3>Select Course</h3>
 <form method="post" action="/courses/details">
+  
   Major:
     <select name="dept">
       {{#each depts}}
@@ -19,7 +20,8 @@
       <option value="Spring">Spring</option>
     </select>
     </br>
-    <input type="submit" value="Submit">
+    <input type="hidden" name="username" value={{username}} />
+    <input type="submit" value="Submit" />
 </form>
 
 <form method="post" action="/admin/user">
@@ -43,7 +45,7 @@
     {{#each prereqs}}
     <tr>
       <td> {{this.dept}} {{this.num}} </td>
-      <td> No </td>
+      <td> {{lookup ../prereqsTaken @index}} </td>
     </tr>
     {{/each}}  
   </table>

@@ -16,7 +16,7 @@
   <button>Add Course</button>
 </form>
 
-<h2>Courses</h2>
+<h2>Your Courses</h2>
 <table>
   <tr>
     <td>
@@ -25,14 +25,20 @@
     <td>
       Number:
     </td>
+    <td>
+      Credits
+    </td>
   </tr>
   {{#each courses}}
     <tr>
       <td>
-        {{dept}}
+        {{this.dept}}
       </td>
       <td>
-        {{num}}
+        {{this.num}}
+      </td>
+      <td>
+        {{this.credits}}
       </td>
     </tr>
   {{/each}}

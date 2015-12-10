@@ -29,7 +29,6 @@ exports.addCourse = (course,cb)=>{
 };
 // Get a certain course
 exports.getCourse = (dept,num,sem,cb)=>{
-  console.log(dept+num+sem);
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -47,7 +46,6 @@ exports.getCourse = (dept,num,sem,cb)=>{
         cb('could not connect to the database: ' + err);
         return;
       }
-      console.log(result.rows[0]);
       // (7) otherwise, we invoke the callback with the user data.
       cb(undefined,result.rows[0]);
     });
@@ -114,7 +112,7 @@ exports.getCoursePreReqs = (course_id,cb)=>{
 
   });
 };
-
+/*
 exports.getUserCourses = (user,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
@@ -146,7 +144,7 @@ exports.getUserCourses = (user,cb)=>{
 
   });
 };
-
+*/
 
 // Only admin should be able access to remove course
 exports.removeCourse = (c,cb)=>{
@@ -334,7 +332,6 @@ exports.getUsers = (user,cb)=>{
       }
 
       // (7) otherwise, we invoke the callback with the user data.
-      console.log(result.rows);
       cb(undefined, result.rows);
     });
 
@@ -681,7 +678,7 @@ exports.listUserCourses = (username,cb)=>{
       return;
     }
 
-    var quer = 'select course_list.dept, course_list.num, course_list.credits from user_courses join course_list on user_courses.course_id=course_list.course_id join users on user_courses.users_id=users.id where users.username=$1';
+    var quer = 'select course_list.dept, course_list.num, course_list.credits, course_list.course_id from user_courses join course_list on user_courses.course_id=course_list.course_id join users on user_courses.users_id=users.id where users.username=$1';
     client.query(quer, [username], (err, result) => {
       // call done to release the client back to the pool:
       done();
