@@ -51,8 +51,44 @@ table, td, th {
     	{{/each}}
   		</select>
   		<button value="major"> Choose </button>
-  	</form>
+  </form>
+  <br>
+  <div> Selected Major : {{major}} </div>
+  <div> Closest Concentration : {{concentration}} </div>
+  <div> Completed Requirements : {{num_completed}} </div>
+  <div> Remaining Requirements : {{num_remaining}} </div>
+  <form method="post" action="/major/inspire/concentration/reqs">
+    <select name="major" id="hidden_major" style="display:none">
+    <option value=""></option>
+    {{#each majors}}
+      <option value={{this.major}}>{{this.major}}</option>
+    {{/each}}
+    </select>
+    <select name="concentration" id="hidden_concentration" style="display:none">    
+      <option value=""></option>
+      {{#each concentrations}}
+        <option value={{this.concentration}}>{{this.concentration}}</option>
+      {{/each}}
+    </select>
+    <button value="reqs"> Show Requirements </button>
+  </form>
 </div>
+
+<script type="text/javascript">
+  function getParamValuesByName (queryString) {
+    var qstring = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < qstring.length; i++){
+      var urlparam = qstring[i].split('=');
+      if(urlparam[0] == queryString) {
+        return urlparam[1];
+      }
+    }
+  }
+  var major = getParamValuesByName('major');
+  var concentration = getParamValuesByName('concentration');
+  document.getElementById('hidden_major').value=major;
+  document.getElementById('hidden_concentration').value=concentration;
+</script>
 
 <div class="col-3">
 	<div> Find a major </div>
