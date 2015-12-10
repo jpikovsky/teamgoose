@@ -1,1 +1,72 @@
-<h1> GET INSPIRED </h1>
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+* {
+    box-sizing: border-box;
+}
+.header {
+    border: 1px solid red;
+    padding: 15px;
+}
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 0px solid blue;
+}
+.col-1 {width: 100%;}
+.col-2 {width: 33.33%}
+.col-3 {width: 33.33%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 100%;}
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 0px solid black;
+}
+
+</style>
+
+<div class="col-1">
+<h1> Get InSPIREd </h1>
+</div>
+
+<div class="col-2">
+	<div> Find concentration based on major </div>
+	<form method="post" action="/major/inspire/concentration">
+  		<label>Major:</label>
+  		<select name="major" id="major">
+    	<option value=""></option>
+    	{{#each majors}}
+      		<option value={{this.major}}>{{this.major}}</option>
+    	{{/each}}
+  		</select>
+  		<button value="major"> Choose </button>
+  	</form>
+</div>
+
+<div class="col-3">
+	<div> Find a major </div>
+	<form method="post" action="/major/inspire/major">
+		<button value="major"> Find </button>
+  	</form>
+</div>
+
+<div class="col-4">
+	<div> Find majors involving this course </div>
+</div>
+
+<div class="col-5">
+	<br>
+</div>
+
+</html>
