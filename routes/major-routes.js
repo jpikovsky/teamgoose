@@ -217,16 +217,34 @@ router.get('/inspire', (req, res) => {
 });
 
 router.post('/inspire/concentration', (req, res) => {
+  var user = req.session.user;
   var major = req.body.major;
   // var concentration = 'GENCOMPSCI';
-  var courses = undefined;
-  helper.inspireConcentration(major, courses, (err, concentration) => {
-    if(err){
-      console.log(err);
-      req.flash('inspire', err);
-    }
-    res.redirect('/major/inspire/?form=concentration&major='+major+'&concentration='+concentration);
-  })
+  if(user){
+    course_helper.listUserCourses(user.name, (error, courses) => {
+      if(error){
+        console.log(error);
+      }
+      helper.inspireConcentration(major, courses, (err, concentration) => {
+        if(err){
+          console.log(err);
+          req.flash('inspire', err);
+        }
+        console.log(concentration);
+        res.redirect('/major/inspire/?form=concentration&major='+major+'&concentration='+concentration);
+      });
+    });
+  }
+  else{
+    helper.inspireConcentration(major, undefined, (err, concentration) => {
+      if(err){
+        console.log(err);
+        req.flash('inspire', err);
+      }
+      console.log(concentration);
+      res.redirect('/major/inspire/?form=concentration&major='+major+'&concentration='+concentration);
+    });
+  }
 });
 
 router.post('/inspire/concentration/reqs', (req, res) => {
