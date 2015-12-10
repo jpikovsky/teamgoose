@@ -41,37 +41,112 @@ table, td, th {
 </div>
 
 <div class="col-2">
-	<div> Find concentration based on major </div>
+	<div> Find closest concentration for a major: </div>
 	<form method="post" action="/major/inspire/concentration">
   		<label>Major:</label>
-  		<select name="major" id="major">
+  		<select name="major" id="inspire_for_major">
     	<option value=""></option>
     	{{#each majors}}
       		<option value={{this.major}}>{{this.major}}</option>
     	{{/each}}
   		</select>
-  		<button value="major"> Choose </button>
+      <br>
+  		<button> Choose </button>
   </form>
   <br>
-  <div> Selected Major : {{major}} </div>
-  <div> Closest Concentration : {{concentration}} </div>
-  <div> Completed Requirements : {{num_completed}} </div>
-  <div> Remaining Requirements : {{num_remaining}} </div>
-  <form method="post" action="/major/inspire/concentration/reqs">
-    <select name="major" id="hidden_major" style="display:none">
+  <div id="concentration" style="display:none">
+    <div> Selected Major : {{major}} </div>
+    <div> Closest Concentration : {{concentration}} </div>
+    <div> Completed Requirements : {{num_completed}} </div>
+    <div> Remaining Requirements : {{num_remaining}} </div>
+    <form method="post" action="/major/inspire/concentration/reqs">
+      <select name="major" id="hidden_major" style="display:none">
+      <option value=""></option>
+      {{#each majors}}
+        <option value={{this.major}}>{{this.major}}</option>
+      {{/each}}
+      </select>
+      <select name="concentration" id="hidden_concentration" style="display:none">    
+        <option value=""></option>
+        {{#each concentrations}}
+          <option value={{this.concentration}}>{{this.concentration}}</option>
+        {{/each}}
+      </select>
+      <button value="reqs"> Show Requirements </button>
+    </form>
+  </div>
+</div>
+
+<div class="col-3">
+	<div> Find closest major: </div>
+	<form method="post" action="/major/inspire/major">
+		<button> Find </button>
+  </form>
+  <br>
+  <div id="major" style="display:none">
+    <div> Closest Major : {{major}} </div>
+    <div> Closest Concentration : {{concentration}} </div>
+    <div> Completed Requirements : {{num_completed}} </div>
+    <div> Remaining Requirements : {{num_remaining}} </div>
+    <form method="post" action="/major/inspire/major/reqs">
+      <select name="major" id="hidden_major" style="display:none">
+      <option value=""></option>
+      {{#each majors}}
+        <option value={{this.major}}>{{this.major}}</option>
+      {{/each}}
+      </select>
+      <select name="concentration" id="hidden_concentration" style="display:none">    
+        <option value=""></option>
+        {{#each concentrations}}
+          <option value={{this.concentration}}>{{this.concentration}}</option>
+        {{/each}}
+      </select>
+      <button value="reqs"> Show Requirements </button>
+    </form>
+  </div>
+</div>
+<div class="col-4">
+	<div> Find majors involving this course: </div>
+  <form method="post" action="/major/inspire/course">
+    <label>Dept:</label>
+    <select name="dept" id="dept">
     <option value=""></option>
-    {{#each majors}}
-      <option value={{this.major}}>{{this.major}}</option>
+    {{#each depts}}
+        <option value={{this.dept}}>{{this.dept}}</option>
     {{/each}}
     </select>
-    <select name="concentration" id="hidden_concentration" style="display:none">    
-      <option value=""></option>
-      {{#each concentrations}}
-        <option value={{this.concentration}}>{{this.concentration}}</option>
-      {{/each}}
-    </select>
-    <button value="reqs"> Show Requirements </button>
+    <br>
+    <label>Num:</label>
+    <input type="text" name="num"></input>
+    <br>
+    <button value="major"> Choose </button>
   </form>
+  <br>
+  <div id="course" style="display:none">
+    <div> Closest Major : {{major}} </div>
+    <div> Closest Concentration : {{concentration}} </div>
+    <div> Completed Requirements : {{num_completed}} </div>
+    <div> Remaining Requirements : {{num_remaining}} </div>
+    <form method="post" action="/major/inspire/course/reqs">
+      <select name="major" id="hidden_major" style="display:none">
+      <option value=""></option>
+      {{#each majors}}
+        <option value={{this.major}}>{{this.major}}</option>
+      {{/each}}
+      </select>
+      <select name="concentration" id="hidden_concentration" style="display:none">    
+        <option value=""></option>
+        {{#each concentrations}}
+          <option value={{this.concentration}}>{{this.concentration}}</option>
+        {{/each}}
+      </select>
+      <button value="reqs"> Show Requirements </button>
+    </form>
+  </div>
+</div>
+
+<div class="col-5">
+	<br>
 </div>
 
 <script type="text/javascript">
@@ -86,23 +161,11 @@ table, td, th {
   }
   var major = getParamValuesByName('major');
   var concentration = getParamValuesByName('concentration');
+  var form = getParamValuesByName('form');
+  document.getElementById('inspire_for_major').value=major;
   document.getElementById('hidden_major').value=major;
   document.getElementById('hidden_concentration').value=concentration;
+  document.getElementById(form).style="display:block";
 </script>
-
-<div class="col-3">
-	<div> Find a major </div>
-	<form method="post" action="/major/inspire/major">
-		<button value="major"> Find </button>
-  	</form>
-</div>
-
-<div class="col-4">
-	<div> Find majors involving this course </div>
-</div>
-
-<div class="col-5">
-	<br>
-</div>
 
 </html>

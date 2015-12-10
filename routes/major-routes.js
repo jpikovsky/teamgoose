@@ -210,7 +210,7 @@ router.get('/inspire', (req, res) => {
         major: major,
         concentration: concentration,
         majors: majors,
-        message: message
+        message: message,
       });
     }
   });
@@ -225,6 +225,30 @@ router.post('/inspire/concentration', (req, res) => {
 router.post('/inspire/concentration/reqs', (req, res) => {
   var major = req.body.major;
   var concentration = req.body.concentration;
+  res.redirect('/major/?&major='+major+'&concentration='+concentration);
+});
+
+router.post('/inspire/major', (req, res) => {
+  var major = 'COMPSCI';
+  var concentration = 'GENCOMPSCI';
+  res.redirect('/major/inspire/?form=major&major='+major+'&concentration='+concentration);
+});
+
+router.post('/inspire/major/reqs', (req, res) => {
+  var major = req.body.major;
+  var concentration = req.body.concentration;
+  res.redirect('/major/?&major='+major+'&concentration='+concentration);
+});
+
+router.post('/inspire/course', (req, res) => {
+  var major = 'COMPSCI';
+  var concentration = 'GENCOMPSCI';
+  res.redirect('/major/inspire/?form=course&major='+major+'&concentration='+concentration);
+});
+
+router.post('/inspire/course/reqs', (req, res) => {
+  var major = 'COMPSCI';
+  var concentration = 'GENCOMPSCI';
   res.redirect('/major/?&major='+major+'&concentration='+concentration);
 });
 
