@@ -89,13 +89,13 @@ table, td, th {
     <div> Completed Requirements : {{num_completed}} </div>
     <div> Remaining Requirements : {{num_remaining}} </div>
     <form method="post" action="/major/inspire/major/reqs">
-      <select name="major" id="hidden_major" style="display:none">
+      <select name="major" id="hidden_major2" style="display:none">
       <option value=""></option>
       {{#each majors}}
         <option value={{this.major}}>{{this.major}}</option>
       {{/each}}
       </select>
-      <select name="concentration" id="hidden_concentration" style="display:none">    
+      <select name="concentration" id="hidden_concentration2" style="display:none">    
         <option value=""></option>
         {{#each concentrations}}
           <option value={{this.concentration}}>{{this.concentration}}</option>
@@ -165,6 +165,8 @@ table, td, th {
   document.getElementById('inspire_for_major').value=major;
   document.getElementById('hidden_major').value=major;
   document.getElementById('hidden_concentration').value=concentration;
+  document.getElementById('hidden_major2').value=major;
+  document.getElementById('hidden_concentration2').value=concentration;
   document.getElementById(form).style="display:block";
 </script>
 
