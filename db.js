@@ -503,8 +503,10 @@ exports.listCourses = (major, concentration, cb) => {
       cb('could not connect to the database: ' +err);
       return;
     }
+    //this query below didn't work and always got no results returned, so I changed it back to the original one
+    // var quer = 'select from course_list where dept=$1 and num=$2 union select from course_prereqs where course=(select course_id from course_list where dept=$1 and num=$2)';
+    var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id where majors.major=$1 and majors.concentration=$2';
 
-    var quer = 'select from course_list where dept=$1 and num=$2 union select from course_prereqs where course=(select course_id from course_list where dept=$1 and num=$2)';
     client.query(quer, [major, concentration], (err, result) => {
       done();
 
