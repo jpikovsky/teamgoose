@@ -218,8 +218,15 @@ router.get('/inspire', (req, res) => {
 
 router.post('/inspire/concentration', (req, res) => {
   var major = req.body.major;
-  var concentration = 'GENCOMPSCI';
-  res.redirect('/major/inspire/?form=concentration&major='+major+'&concentration='+concentration);
+  // var concentration = 'GENCOMPSCI';
+  var courses = undefined;
+  helper.inspireConcentration(major, courses, (err, concentration) => {
+    if(err){
+      console.log(err);
+      req.flash('inspire', err);
+    }
+    res.redirect('/major/inspire/?form=concentration&major='+major+'&concentration='+concentration);
+  })
 });
 
 router.post('/inspire/concentration/reqs', (req, res) => {
