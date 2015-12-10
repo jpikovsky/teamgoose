@@ -206,6 +206,10 @@ app.get('/layout', (req, res) => {
   res.render('admin');
 });*/
 
+app.get('/professors', (req, res) => {
+  res.render('professors');
+});
+
 
 //////////////////////////////////////////////////////////////////////
 ///// Error Middleware ///////////////////////////////////////////////
