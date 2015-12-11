@@ -126,6 +126,7 @@ router.get('/profile', (req, res) => {
         message = err;
       }
         res.render('profile', {
+          user:user,
           name: user.name,
           message: message,
           courses: courses,
@@ -176,7 +177,7 @@ router.get('/profile/delete', (req, res) => {
   }
   else{
     var message = req.flash('delete_user') || '';
-    res.render('delete_user',{name: user.name, message: message});
+    res.render('delete_user',{user:user,name: user.name, message: message});
   }
 });
 
@@ -235,9 +236,7 @@ router.get('/main', function(req, res) {
   else {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
-    res.render('user', { title   : 'User Main',
-     message : message,
-     name    : user.name });
+    res.render('profile', {user:user});
   }
 });
 

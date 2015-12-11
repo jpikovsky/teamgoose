@@ -1,6 +1,5 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>Welcome  {{user.name}}</h1>
 
-<div>{{message}}</div><br>
-
-<p>username: {{name}}</p>
+{{#if message}}
+{{message}}
+{{/if}}

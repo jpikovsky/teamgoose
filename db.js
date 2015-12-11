@@ -579,6 +579,34 @@ exports.listAllCourses = (cb) => {
   });
 };
 
+exports.listDeptCourses = (dept,cb) => {
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' +err);
+      return;
+    }
+
+    var quer = 'select num from course_list where dept=$1';
+    client.query(quer,[dept] ,(err, result) => {
+      done();
+
+      if(err) {
+        cb(err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+  });
+};
+
+
 exports.alreadyCourse = (course, cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:

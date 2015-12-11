@@ -3,7 +3,7 @@
 <form method="post" action="/courses/details">
   
   Major:
-    <select name="dept">
+    <select name="dept" id>
       {{#each depts}}
       <option value={{dept}}> {{dept}} </option>
       {{/each}}
@@ -20,7 +20,7 @@
       <option value="Spring">Spring</option>
     </select>
     </br>
-    <input type="hidden" name="username" value={{username}} />
+    <input type="hidden" name="username" value={{user}} />
     <input type="submit" value="Submit" />
 </form>
 

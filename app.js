@@ -118,7 +118,8 @@ app.use('/major', require('./routes/major-routes'));
 var team = require('./lib/team.js');
 
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('home',{
+        user:req.session.user,});
 });
 
 app.get('/team', (req, res) => {
@@ -131,7 +132,8 @@ app.get('/team', (req, res) => {
     } else {
       res.render('team', {
         members: result.data,
-        pageTestScript: '/qa/tests-team.js'
+        pageTestScript: '/qa/tests-team.js',
+        user:req.session.user,
       });
     }
   }
@@ -142,7 +144,8 @@ app.get('/team', (req, res) => {
     } else {
       res.render('teammember', {
         members: result.data,
-        pageTestScript: '/qa/tests-team.js'
+        pageTestScript: '/qa/tests-team.js',
+        user:req.session.user,
       });
     }
   }
@@ -153,10 +156,11 @@ app.get('/about', (req, res) => {
     res.render('about', {
       //about,
       
-      pageTestScript: '/qa/tests-team.js'
+      pageTestScript: '/qa/tests-team.js',
+      user:req.session.user,
       
       
-    });
+  });
 
 
   });
@@ -166,17 +170,15 @@ app.get('/about', (req, res) => {
 // });
 
 app.get('/profile', (req, res) => {
-  res.render('profile',{name:req.session.user.name});
+  res.render('profile',{user:req.session.user.name});
 });
 
 // app.get('/courses', (req, res) => {
 //   res.render('courses');
 // });
 
-app.get('/course_details', (req, res) => {
+app.get('/course/details', (req, res) => {
   var name = req.session.user.name;
-  console.log(req.session.user);
-  console.log(req.session.user.name);
   course.listAllCourses((err,courses)=>{
     if(err){
       internalServerError500(err,req,res);
@@ -187,7 +189,7 @@ app.get('/course_details', (req, res) => {
           internalServerError500(err,req,res);
         }
         else{
-          res.render('course_details',{courses:courses,depts:depts,username:name});
+          res.render('course_details',{courses:courses,depts:depts,user:name});
         }
       });
     }
@@ -199,7 +201,8 @@ app.get('/course_details', (req, res) => {
 //});
 
 app.get('/layout', (req, res) => {
-  res.render('layout');
+
+  res.render('layout',{user:req.session.user});
 });
 
 /*app.get('/admin', (req, res) => {
@@ -207,7 +210,7 @@ app.get('/layout', (req, res) => {
 });*/
 
 app.get('/professors', (req, res) => {
-  res.render('professors');
+  res.render('professors',{user:req.session.user});
 });
 
 

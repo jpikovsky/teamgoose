@@ -27,6 +27,7 @@ router.get('/', (req, res) => {
           depts: depts,
           courses: courses,
           message: message,
+          user:user
         });
       });
     });
@@ -77,53 +78,68 @@ router.post('/userAdd', (req, res) => {
 router.post('/details', (req, res) => {
   // Grab the session if the user is logged in.
   var username = req.body.username;
-  helper.getCourse(req.body.dept,req.body.course,req.body.sem,(err,result)=>{
+  helper.listAllCourses((err,courses)=>{
     if(err){
-      req.flash('/courses',err);
-      res.redirect('/courses');
+      internalServerError500(err,req,res);
     }
     else{
-      var instr = result.instr;
-      var descr = result.descr;
-      helper.getCoursePreReqs(result.course_id,(err,result)=>{
+      helper.listDepartments((err,depts)=>{
         if(err){
-          req.flash('/courses',err);
-          res.redirect('/courses');
+          internalServerError500(err,req,res);
         }
         else{
-          var prereqs = result;
-          console.log(prereqs);
-          var userCourses;
-          helper.listUserCourses(username,(err,result)=>{
+          helper.getCourse(req.body.dept,req.body.course,req.body.sem,(err,result)=>{
             if(err){
               req.flash('/courses',err);
               res.redirect('/courses');
             }
             else{
-              console.log(result);
-              var prereqsTaken =[];
-              for(var i=0;i<prereqs.length;i++){
-                var breakVal =0;
-                for(var j=0;j<result.length;j++){
-                  if(prereqs[i].course_id == result[j].course_id){
-                    prereqsTaken.push("Yes");
-                    breakVal =1;
-                    break;
-                  }
-                  if(breakVal==0)
-                    prereqsTaken.push("No");
-                  
+              var instr = result.instr;
+              var descr = result.descr;
+              helper.getCoursePreReqs(result.course_id,(err,result)=>{
+                if(err){
+                  req.flash('/courses',err);
+                  res.redirect('/courses');
                 }
-                
-              }
+                else{
+                  var prereqs = result;
+                  console.log(prereqs);
+                  var userCourses;
+                  helper.listUserCourses(username,(err,result)=>{
+                    if(err){
+                      req.flash('/courses',err);
+                      res.redirect('/courses');
+                    }
+                    else{
+                      console.log(result);
+                      var prereqsTaken =[];
+                      for(var i=0;i<prereqs.length;i++){
+                        var breakVal =0;
+                        for(var j=0;j<result.length;j++){
+                          if(prereqs[i].course_id == result[j].course_id){
+                            prereqsTaken.push("Yes");
+                            breakVal =1;
+                            break;
+                          }
+                          if(breakVal==0)
+                            prereqsTaken.push("No"); 
+                        }
 
-              console.log(prereqsTaken);
-              res.render('course_details',{instr:instr,descr:descr,prereqs:prereqs,prereqsTaken:prereqsTaken});
-            }
-          });
-        }
-      });
-    }
-  });
+                      }
+
+                      console.log(prereqsTaken);
+                      res.render('course_details',{instr:instr,descr:descr,prereqs:prereqs,prereqsTaken:prereqsTaken,courses:courses,depts:depts,user:username});
+                    }
+                  });
+}
 });
+}
+});
+}
+});
+}
+});
+});
+
+
 module.exports = router;

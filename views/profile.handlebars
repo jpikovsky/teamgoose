@@ -42,12 +42,10 @@ table, td, th {
 }
 
 </style>
-<!-- <h1>{{name}}'s Profile</h1>
 
-<div><p>User: {{name}}</p><div><br>
  -->
 <div class="col-12">
-    <h2 alight="left">{{name}}'s Profile</h2>
+    <h2 alight="left"><b>Welcome {{user.name}}</b></h2>
     <p>{{message}}</p><br>
 </div>
 <div class="col-11">
@@ -70,7 +68,7 @@ table, td, th {
 
 
 <div class ="col-3">
-<div><p>User Name: {{name}}</p></div>
+<div><b>Change password</b></div>
 <table>
   <form method="post" action="/user/profile/change">
     <tr><td>Old Password: </td> <td><input type="password" name="old"> </td></tr>

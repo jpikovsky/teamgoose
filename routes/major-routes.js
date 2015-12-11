@@ -21,7 +21,8 @@ router.get('/', (req, res) => {
       res.render('major', {
         major: major,
         concentration: concentration,
-        message: message
+        message: message,
+        user:user,
       });
       return;
     }
@@ -33,7 +34,8 @@ router.get('/', (req, res) => {
             major: major,
             majors: majors,
             concentration: concentration,
-            message: message
+            message: message,
+            user:user,
           });
           return;
         }
@@ -46,7 +48,8 @@ router.get('/', (req, res) => {
                 majors: majors,
                 concentration: concentration,
                 concentrations: concentrations,
-                message: message
+                message: message,
+                user:user,
               });
               return;
             }
@@ -65,7 +68,8 @@ router.get('/', (req, res) => {
                   courses: info,
                   num_completed: stats[0],
                   num_remaining: stats[1],
-                  message: message
+                  message: message,
+                  user:user,
                 });
               });
             }
@@ -77,7 +81,8 @@ router.get('/', (req, res) => {
                 majors: majors,
                 concentrations: concentrations,
                 courses: courses,
-                message: message
+                message: message,
+                user:user,
               });
             }
           });
@@ -88,7 +93,8 @@ router.get('/', (req, res) => {
             concentration: concentration,
             majors: majors,
             concentrations: concentrations,
-            message: message
+            message: message,
+            user:user,
           });
         }
       });
@@ -98,7 +104,8 @@ router.get('/', (req, res) => {
         major: major,
         concentration: concentration,
         majors: majors,
-        message: message
+        message: message,
+        user:user,
       });
     }
   });
@@ -133,7 +140,8 @@ router.get('/inspire', (req, res) => {
       res.render('inspire', {
         major: major,
         concentration: concentration,
-        message: message
+        message: message,
+        user:user,
       });
       return;
     }
@@ -145,7 +153,8 @@ router.get('/inspire', (req, res) => {
             major: major,
             majors: majors,
             concentration: concentration,
-            message: message
+            message: message,
+            user:user,
           });
           return;
         }
@@ -158,7 +167,8 @@ router.get('/inspire', (req, res) => {
                 majors: majors,
                 concentration: concentration,
                 concentrations: concentrations,
-                message: message
+                message: message,
+                user:user,
               });
               return;
             }
@@ -177,7 +187,8 @@ router.get('/inspire', (req, res) => {
                   courses: info,
                   num_completed: stats[0],
                   num_remaining: stats[1],
-                  message: message
+                  message: message,
+                  user:user,
                 });
               });
             }
@@ -189,7 +200,8 @@ router.get('/inspire', (req, res) => {
                 majors: majors,
                 concentrations: concentrations,
                 courses: courses,
-                message: message
+                message: message,
+                user:user,
               });
             }
           });
@@ -200,7 +212,8 @@ router.get('/inspire', (req, res) => {
             concentration: concentration,
             majors: majors,
             concentrations: concentrations,
-            message: message
+            message: message,
+            user:user,
           });
         }
       });
@@ -211,6 +224,7 @@ router.get('/inspire', (req, res) => {
         concentration: concentration,
         majors: majors,
         message: message,
+        user:user,
       });
     }
   });

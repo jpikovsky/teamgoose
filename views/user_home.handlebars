@@ -7,12 +7,24 @@
 <table width="100%" border="0">
   <tr>
     <td colspan="2" bgcolor="3300FF">
-      <h1 style="color:#eee;text-align:center;">Welcome to getInSPIREd!</h1>
+      <h1>Welcome to getInSPIREd!</h1>
     </td>
   </tr>
   <tr valign="top">
-  <td bgcolor="#eee" width="200" height="200">
-
+    <td bgcolor="FFFF33" width="50">
+      <b><ins>Main Menu</ins></b><br />
+    <a href="/user_home">Home</a> <br>
+    <a href="/about">About</a> <br>
+    <a href="/profile">Profile</a> <br>
+    <a href="/courses">Courses</a> <br>
+    <a href="/course_details">Course Details</a> <br>
+    <a href="/major">Major</a> <br>
+    {{if admin}}
+    <a href="/admin">Admin</a> <br>
+    {{/if}}
+    <a href="/user/logout">Logout</a> <br>
+    </td>
+    <td bgcolor="#eee" width="100" height="200">
 <b>getInSpired</b> is a web application designed to simplify the user experience involved in trudging through SPIRE(UMass Amherst's student management system).
 Our application aims to help students navigate their academic requirements and learn more about other major requirements. Students can see what courses they have left to take in an easy to read list, and even see what order would be the most efficient.
 <br>

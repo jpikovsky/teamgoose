@@ -102,15 +102,18 @@ a:active {
 <ul style="align:right" id="menu">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
-  <li><a href="/team">Team</a></li>
-  <li><a href="/user/login">Login</a></li>
+  {{#if user}}
   <li><a href="/user/profile">Profile</a></li>
   <li><a href="/courses">Courses</a></li>
-  <li><a href="/course_details">Course Details</a></li>
+  <li><a href="/course/details">Course Details</a></li>
   <li><a href="/major">Major</a></li>
   <li><a href="/admin">Admin</a></li>
   <li><a href="/user/logout">Logout</a></li>
   <li><a href="/professors"> Search Professors</a><br>
+  {{else}}
+  <li><a href="/team">Team</a></li>
+  <li><a href="/user/login">Login</a></li>
+  {{/if}}
 </ul>  
 
 	</header>
