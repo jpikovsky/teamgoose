@@ -15,6 +15,7 @@
     <input type="hidden" name="username" value={{user}} />
     <button name="selection" value="dept"> Choose </button>
 </form>
+{{#if depart}}
 <form method="post" action="/courses/details">
 
     Course:
@@ -30,19 +31,13 @@
     <input type="submit" value="Submit" />
 </form>
 
-<form method="post" action="/admin/user">
-</br>
-    Required Class:
-    <select name="Required Class?">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </br>
-</form>
+{{#if cour}}
 
 <div>
-  <label> Instructor: {{instr}} </label>
-  <textarea>Description: {{descr}}  </textarea>
+  <label> <b> Instructor: {{instr}} </b> </label>
+  <br>
+  <p><b>Description:</b> {{descr}}  </p>
+  <br>
   <table>
     <tr>
       <th> Pre-Requisites </th>
@@ -55,7 +50,7 @@
     </tr>
     {{/each}}  
   </table>
-</div
-
-<img src="/img/explore_courses_view.png" />
+</div>
+{{/if}}
+{{/if}}
 
