@@ -318,8 +318,9 @@ exports.removeUser = (name,cb) => {
       return;
     }
     var quer  = "DELETE from users where username = $1";
+    // var quer  = "DELETE from user_courses where users_id=(select id from users where username=$1); DELETE from users where username = $2";
 
-    client.query(quer, [name], (err, result) => {
+    client.query(quer, [name, name], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
