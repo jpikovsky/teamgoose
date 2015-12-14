@@ -1,8 +1,8 @@
-<h1>UMass Courses</h1>
+<h1>UMass Courses - Admin View</h1>
 
 <div>{{message}}</div>
 
-<h2>Add Course</h2>
+<h2>Add Course to Database</h2>
 <form method="post" action="/admin/courses/add">
   <label>Department:</label>
   <select name="dept">
@@ -17,7 +17,7 @@
   <button>Add Course</button>
 </form>
 
-<h2>Delete Course</h2>
+<h2>Delete Course from Database</h2>
 <form method="post" action="/admin/courses/delete">
   <label>Department:</label>
   <select name="dept">
@@ -32,7 +32,7 @@
   <button>Delete Course</button>
 </form>
 
-<h2>Courses</h2>
+<h2>Current Courses</h2>
 <table>
   <tr>
     <td>
