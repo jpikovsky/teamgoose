@@ -236,7 +236,7 @@ router.get('/main', function(req, res) {
   else {
     // capture the user object or create a default.
     var message = req.flash('main') || 'Login Successful';
-    res.render('profile', {user:user});
+    res.redirect('/user/profile');
   }
 });
 

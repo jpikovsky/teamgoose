@@ -107,7 +107,9 @@ a:active {
   <li><a href="/courses">Courses</a></li>
   <li><a href="/course/details">Course Details</a></li>
   <li><a href="/major">Major</a></li>
+  {{#if admin}}
   <li><a href="/admin">Admin</a></li>
+  {{/if}}
   <li><a href="/user/logout">Logout</a></li>
   <li><a href="/professors"> Search Professors</a><br>
   {{else}}
