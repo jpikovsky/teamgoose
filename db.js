@@ -28,7 +28,7 @@ exports.addCourse = (course,cb)=>{
   });
 };
 // Get a certain course
-exports.getCourse = (dept,num,sem,cb)=>{
+exports.getCourse = (dept,num,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -51,40 +51,6 @@ exports.getCourse = (dept,num,sem,cb)=>{
     });
 
   });
-};
-
-// Get all courses for given semester and year
-
-exports.getAllCourses = (semester, year,cb,c_num,c_dept)=>{
-  pg.connect(constr, (err, client, done) => {
-    // (2) check for an error connecting:
-    if (err) {
-      cb('could not connect to the database: ' + err);
-      return;
-    }
-
-    var quer = 'SELECT * from courses where semester = $1 and year = $2)';
-
-  client.query(quer, [course.semester, course.year], (err, result) => {
-      // call done to release the client back to the pool:
-      done();
-
-      // (4) check if there was an error querying database:
-      if (err) {
-        cb('could not connect to the database: ' + err);
-        return;
-      }
-
-      if(result.rows.length == 0){
-      	cb("No results returned.");
-      	return;
-      }
-
-      // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined,result);
-    });
-
-});
 };
 
 exports.getCoursePreReqs = (course_id,cb)=>{
@@ -112,39 +78,7 @@ exports.getCoursePreReqs = (course_id,cb)=>{
 
   });
 };
-/*
-exports.getUserCourses = (user,cb)=>{
-  pg.connect(constr, (err, client, done) => {
-    // (2) check for an error connecting:
-    if (err) {
-      cb('could not connect to the database: ' + err);
-      return;
-    }
 
-    var quer = 'SELECT * from user_courses where user_id = $1';
-
-    client.query(quer, [user.id], (err, result) => {
-      // call done to release the client back to the pool:
-      done();
-
-      // (4) check if there was an error querying database:
-      if (err) {
-        cb('could not connect to the database: ' + err);
-        return;
-      }
-
-      if(result.rows.length == 0){
-        cb("No results returned.");
-        return;
-      }
-
-      // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined,result);
-    });
-
-  });
-};
-*/
 
 // Only admin should be able access to remove course
 exports.removeCourse = (c,cb)=>{
@@ -505,7 +439,7 @@ exports.listCourses = (major, concentration, cb) => {
     }
     //this query below didn't work and always got no results returned, so I changed it back to the original one
     // var quer = 'select from course_list where dept=$1 and num=$2 union select from course_prereqs where course=(select course_id from course_list where dept=$1 and num=$2)';
-    var quer = 'select reqs.req_num, course_list.dept, course_list.num, reqs.num_courses from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id where majors.major=$1 and majors.concentration=$2';
+    var quer = 'select reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id where majors.major=$1 and majors.concentration=$2';
 
     client.query(quer, [major, concentration], (err, result) => {
       done();
@@ -781,8 +715,3 @@ exports.addRequirement = (req,major,concentration,cb)=>{
   });
 };
 
-/*
-
-db.getRequirements;
-
-*/
