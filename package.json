@@ -1,0 +1,12 @@
+{
+	"name" : "getInSPIRED",
+	"description" : "We help students make major changes to their academic career",
+	"homepage" : "https://github.com/tcontois1/teamgoose",
+	"keywords" : ["inspire", "spire", "beautiful ui"],
+	"author" : "Team Goose",
+	"contributors" : ["Tim Contois", "Niketh Murali", "Alex Lassalle", "Josh Pikovsky", "Riley Condon", "Andrew Gramigna"],
+	"dependencies" : [],
+	"repository" : {"type": "git", "url": "https://github.com/tcontois1/teamgoose.git"},
+	"main" : "app.js",
+	"version" : "1.0"
+}
