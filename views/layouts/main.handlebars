@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
-	<head>
 		<style>
 
 .grow img{
 transition: 0.4s ease;
+left: 8px;
+top: 8px;
+position: absolute;
 }
-.grow img:hover{
--webkit-transform: scale(1.4);
--ms-transform: scale(1.4);
-transform: scale(1.4);
-transition: 0.5s ease;
-background-position: left;
-}
+
 body{
 	background-color: #F5F5F5;
 }
 
 #example1 {
     background-image: url("/img/umass2.jpg");
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 60px;
+    padding-top: 20px;
+    padding-bottom: 0px;
 }
 
-ul#menu {
+/*ul#menu {
 	float: right;
     padding: 0px;
+    width: 85%;
+
 }
 
 ul#menu li {
     display: inline;
+    width: 85%;
+
 }
 
 ul#menu li a {
@@ -40,6 +41,65 @@ ul#menu li a {
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 4px 4px 0 0;
+    width: 85%;
+}
+
+ul#menu li a:hover {
+    background-color: yellow;
+    color: black;
+    width: 85%;
+
+}*/
+/*ul {
+    list-style-type: none;
+    margin: 1px;
+    padding: 0px;
+    overflow: hidden;
+    border: 0px solid white;
+    background-color: blue;
+    color: white;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 15px;
+/*    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: yellow;
+    color: black;
+}
+
+li a.active {
+    color: white;
+    background-color: #00008B;
+}*/
+
+ul#menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: blue;
+}
+
+ul#menu li {
+    float: right;
+}
+
+ul#menu li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 ul#menu li a:hover {
@@ -47,6 +107,8 @@ ul#menu li a:hover {
     color: black;
 }
 
+
+/*
 a:link {
     color: green;
     background-color: transparent;
@@ -67,7 +129,7 @@ a:active {
     color: yellow;
     background-color: transparent;
     text-decoration: underline;
-}
+}*/
 
 .alignleft {
 	float: left;
@@ -91,34 +153,43 @@ a:active {
 		<!-- We add the jQuery library because we will be using it
 		     to manipulate HTML in the browser. -->
 		<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-	</head>
+
 	<header>
-		<div class="grow">
+				<div class="grow">
 		<a href="/">
-		<img src="/img/logo.png" alt="Logo" style="float:left;width:110px;height:110px;"> 
+		<img src="/img/logo.png" alt="Logo" style="float:left;width:133px;height:133px;clear:left;"> 
 		</a>
 		<h2 style="text-align:right"><span style="color:blue">getInSPIREd</span>: We help students make <i>major</i> changes to their academic career ;)</h2>
 		</div>
-<ul style="align:right" id="menu">
-  <li><a href="/">Home</a></li>
-  <li><a href="/about">About</a></li>
+
+<ul id="menu">
+
   {{#if user}}
-  <li><a href="/user/profile">Profile</a></li>
-  <li><a href="/courses">Courses</a></li>
-  <li><a href="/course/details">Course Details</a></li>
-  <li><a href="/major">Major</a></li>
-  <li><a href="/admin">Admin</a></li>
   <li><a href="/user/logout">Logout</a></li>
-  <li><a href="/professors"> Search Professors</a><br>
+  <li><a href="/admin">Admin</a></li>
+  <li><a href="/professors"> Search Professors</a>
+  <li><a href="/major">Major</a></li>
+  <li><a href="/course/details">Course Details</a></li>
+  <li><a href="/courses">Courses</a></li>
+  <li><a href="/user/profile">Profile</a></li>
+
+
+
+
   {{else}}
   <li><a href="/team">Team</a></li>
   <li><a href="/user/login">Login</a></li>
   {{/if}}
+  <li><a href="/about">About</a></li>
+  <li><a href="/">Home</a></li>
 </ul>  
 
+
+						</div>
 	</header>
-	</div>
-					<hr>
+
+
+
 	<body>
 
 		{{{body}}}
@@ -141,16 +212,6 @@ a:active {
 	</body>
 	<hr>
 	<footer>               
-<!-- 	<a href="/">Home</a>
-		<a href="/about">About</a>
-		<a href="/team">Team</a>
-		<a href="/user/login">Login</a>
-		<a href="/user/profile">Profile</a>
-		<a href="/courses">Courses</a>
-		<a href="/course_details">Course Details</a>
-		<a href="/major">Major</a>
-		<a href="/admin">Admin</a>
-		<a href="/user/logout">Logout</a> -->
 		
 
 	<div id="footer">
