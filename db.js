@@ -28,7 +28,7 @@ exports.addCourse = (course,cb)=>{
   });
 };
 // Get a certain course
-exports.getCourse = (dept,num,sem,cb)=>{
+exports.getCourse = (dept,num,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
     if (err) {
@@ -51,40 +51,6 @@ exports.getCourse = (dept,num,sem,cb)=>{
     });
 
   });
-};
-
-// Get all courses for given semester and year
-
-exports.getAllCourses = (semester, year,cb,c_num,c_dept)=>{
-  pg.connect(constr, (err, client, done) => {
-    // (2) check for an error connecting:
-    if (err) {
-      cb('could not connect to the database: ' + err);
-      return;
-    }
-
-    var quer = 'SELECT * from courses where semester = $1 and year = $2)';
-
-  client.query(quer, [course.semester, course.year], (err, result) => {
-      // call done to release the client back to the pool:
-      done();
-
-      // (4) check if there was an error querying database:
-      if (err) {
-        cb('could not connect to the database: ' + err);
-        return;
-      }
-
-      if(result.rows.length == 0){
-      	cb("No results returned.");
-      	return;
-      }
-
-      // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined,result);
-    });
-
-});
 };
 
 exports.getCoursePreReqs = (course_id,cb)=>{
@@ -112,39 +78,7 @@ exports.getCoursePreReqs = (course_id,cb)=>{
 
   });
 };
-/*
-exports.getUserCourses = (user,cb)=>{
-  pg.connect(constr, (err, client, done) => {
-    // (2) check for an error connecting:
-    if (err) {
-      cb('could not connect to the database: ' + err);
-      return;
-    }
 
-    var quer = 'SELECT * from user_courses where user_id = $1';
-
-    client.query(quer, [user.id], (err, result) => {
-      // call done to release the client back to the pool:
-      done();
-
-      // (4) check if there was an error querying database:
-      if (err) {
-        cb('could not connect to the database: ' + err);
-        return;
-      }
-
-      if(result.rows.length == 0){
-        cb("No results returned.");
-        return;
-      }
-
-      // (7) otherwise, we invoke the callback with the user data.
-      cb(undefined,result);
-    });
-
-  });
-};
-*/
 
 // Only admin should be able access to remove course
 exports.removeCourse = (c,cb)=>{
@@ -781,8 +715,3 @@ exports.addRequirement = (req,major,concentration,cb)=>{
   });
 };
 
-/*
-
-db.getRequirements;
-
-*/

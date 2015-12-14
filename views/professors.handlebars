@@ -22,6 +22,8 @@
 	</form>
 	<br>
 	<div id="output"><br></div>
+	
+	<div id="output1"><br></div>
 	<br>
 
 	<script type="text/javascript"> 
@@ -35,14 +37,18 @@
         	var string = professors[i];
         	var lcString = string.toLowerCase()
         	if(lcString.indexOf(lcName) != -1)
-        		print('Professor Rating: ' + string.substring(0,3));
-
-		
+        		printRating('Professor Rating: ' + lcString.substring(0,3) + '<br>' + "Based on: " + lcString.substring(string.length-11, string.length));
+        		
+	
 		}
     }
 
-    function print(value) {
+    function printRating(value) {
     	document.getElementById('output').innerHTML = value;
+	}
+
+	function printNumRating(value) {
+    	document.getElementById('output1').innerHTML = value;
 	}
 
 
@@ -51,7 +57,7 @@
 </body>
 </html>
 
-<!--onclick="execute(document.getElementById('search').value)"-->
+<!--(string.length-11, string.length)-->
 
 
 

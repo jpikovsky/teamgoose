@@ -2,19 +2,31 @@
 
 <div>{{message}}</div>
 <br>
-<form method="post" action="/courses/add">
+<form method="post" action="/courses/select">
   <label>Department:</label>
   <select name="dept">
-    <option value=""></option>
+    <option value={{dept}}>{{dept}}</option>
     {{#each depts}}
       <option value={{this.dept}}>{{this.dept}}</option>
     {{/each}}
   </select>
+  <button name="selection"> Choose </button>
   <br>
+  </form>
+{{#if courses}}
+<form method="post" action="/courses/add">
   <label>Number:</label>
-    <input type="text" name="num"> <br>
-  <button>Add Course</button>
+    <select name="num">
+    <option value=""></option>
+    {{#each courses}}
+      <option value={{this.num}}>{{this.num}}</option>
+    {{/each}}
+
+  </select>
+    <input type="hidden" name="dept" value={{dept}} />
+    <input type="submit" value="Add Course" />
 </form>
+{{/if}}
 
 <h2>Your Courses</h2>
 <table>
@@ -29,7 +41,7 @@
       Credits
     </td>
   </tr>
-  {{#each courses}}
+  {{#each user_courses}}
     <tr>
       <td>
         {{this.dept}}

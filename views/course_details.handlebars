@@ -1,25 +1,31 @@
 <h1>Course Details</h1>
 <h3>Select Course</h3>
-<form method="post" action="/courses/details">
-  
+
+<p> {{message}} </p>
+
+
+<form method="post" action="/courses/details_helper">
   Major:
-    <select name="dept" id>
+    <select name="dept">
+    <option value={{depart}}> {{depart}} </option>
       {{#each depts}}
-      <option value={{dept}}> {{dept}} </option>
+      <option value={{this.dept}}> {{this.dept}} </option>
       {{/each}}
     </select>
+    <input type="hidden" name="username" value={{user}} />
+    <button name="selection" value="dept"> Choose </button>
+</form>
+<form method="post" action="/courses/details">
+
     Course:
     <select name="course">
+    <option value={{cour}}> {{cour}} </option>
       {{#each courses}}
       <option value={{this.num}}> {{this.num}} </option>
       {{/each}}
     </select>
-    Semester:
-    <select name="sem">
-      <option value="Fall">Fall</option>
-      <option value="Spring">Spring</option>
-    </select>
     </br>
+    <input type="hidden" name="dept" value={{depart}} />
     <input type="hidden" name="username" value={{user}} />
     <input type="submit" value="Submit" />
 </form>

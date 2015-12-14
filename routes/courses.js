@@ -7,7 +7,8 @@ var router = express.Router();
 router.get('/', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
-
+  var dept = req.query.dept || req.body.dept;
+  console.log("Dept = "+dept);
   // Redirects user to login if they are no logged in
   if (!user) {
     req.flash('login', 'You must be logged in to access your courses');
@@ -18,21 +19,58 @@ router.get('/', (req, res) => {
       if(err){
         req.flash('courses', err);
       }
-      helper.listUserCourses(user.name, (error, courses) => {
-        if(error){
-          req.flash('courses', error);
+      else{
+        helper.listUserCourses(user.name, (error, user_courses) => {
+          if(error){
+           req.flash('courses', error);
+           return;
+         }
+         else{
+          if(dept===undefined){
+            var message = req.flash('courses') || '';
+            res.render('courses', {
+             depts: depts,
+             user_courses: user_courses,
+             message: message,
+             user:user.name,
+             admin:user.admin
+           });
+          }
+          else{
+            helper.listDeptCourses(dept, (error, courses) => {
+              if(error){
+                req.flash('courses', error);
+                return;
+              }
+              else{
+                var message = req.flash('courses') || '';
+
+                res.render('courses', {
+                  dept: dept,
+                  depts: depts,
+                  user_courses: user_courses,
+                  courses,courses,
+                  message: message,
+                  user:user.name,
+                  admin:user.admin
+                });
+              }
+            });
+          }
         }
-        var message = req.flash('courses') || '';
-        res.render('courses', {
-          depts: depts,
-          courses: courses,
-          message: message,
-          user:user
-        });
-      });
-    });
-  }
+          });
+        }
 });
+}
+});
+
+router.post('/select', (req, res) => {
+  // console.log(req.body);
+  // console.log(req.body.selection);
+    var dept = req.body.dept;
+    res.redirect('/courses/?dept='+dept);
+});
+
 
 router.post('/add', (req, res) => {
   // Grab the session if the user is logged in.
@@ -46,6 +84,7 @@ router.post('/add', (req, res) => {
   else{
     var dept = req.body.dept;
     var num = req.body.num;
+    console.log("add course "+num);
     if(!dept || !num){
       req.flash('courses', 'Not enough information given');
       res.redirect('/courses')
@@ -76,7 +115,8 @@ router.post('/userAdd', (req, res) => {
 });
 
 router.post('/details', (req, res) => {
-  // Grab the session if the user is logged in.
+
+
   var username = req.body.username;
   helper.listAllCourses((err,courses)=>{
     if(err){
@@ -88,7 +128,7 @@ router.post('/details', (req, res) => {
           internalServerError500(err,req,res);
         }
         else{
-          helper.getCourse(req.body.dept,req.body.course,req.body.sem,(err,result)=>{
+          helper.getCourse(req.body.dept,req.body.course,(err,result)=>{
             if(err){
               req.flash('/courses',err);
               res.redirect('/courses');
@@ -98,20 +138,18 @@ router.post('/details', (req, res) => {
               var descr = result.descr;
               helper.getCoursePreReqs(result.course_id,(err,result)=>{
                 if(err){
-                  req.flash('/courses',err);
-                  res.redirect('/courses');
+                  req.flash('/courses/details',err);
+                  res.redirect('/courses/details');
                 }
                 else{
                   var prereqs = result;
-                  console.log(prereqs);
                   var userCourses;
                   helper.listUserCourses(username,(err,result)=>{
                     if(err){
-                      req.flash('/courses',err);
-                      res.redirect('/courses');
+                      req.flash('/courses/details',err);
+                      res.redirect('/courses/details');
                     }
                     else{
-                      console.log(result);
                       var prereqsTaken =[];
                       for(var i=0;i<prereqs.length;i++){
                         var breakVal =0;
@@ -127,8 +165,7 @@ router.post('/details', (req, res) => {
 
                       }
 
-                      console.log(prereqsTaken);
-                      res.render('course_details',{instr:instr,descr:descr,prereqs:prereqs,prereqsTaken:prereqsTaken,courses:courses,depts:depts,user:username});
+                      res.render('course_details',{instr:instr,descr:descr,prereqs:prereqs,prereqsTaken:prereqsTaken,courses:courses,depts:depts,user:username,depart:req.body.dept,cour:req.body.course});
                     }
                   });
 }
@@ -139,6 +176,28 @@ router.post('/details', (req, res) => {
 });
 }
 });
+});
+
+router.post('/details_helper', (req, res) => {
+  var dept = req.body.dept;
+  helper.listDeptCourses(dept,(err,result)=>{
+    if(err){
+      req.flash('/courses/details',err);
+      res.redirect('courses/details');
+    }
+    else{
+      var courses = result;
+      helper.listDepartments((err,result)=>{
+        if(err){
+          req.flash('/courses/details',err);
+          res.redirect('courses/details');
+        }
+        else{
+          res.render('course_details',{depts:result,courses:courses,depart:dept,user:req.body.username});
+        }
+      });
+    }
+  });
 });
 
 
