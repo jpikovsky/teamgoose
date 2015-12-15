@@ -48,6 +48,19 @@ router.post('/users/create', (req, res) => {
   });
 });
 
+router.post('/users/delete', (req, res) => {
+  var name = req.body.name;
+  model.removeUser(name, (err)=>{
+    if(err){
+      req.flash('admin-users',err);
+    }
+    else{
+      req.flash('admin-users', 'User successfully deleted');
+    }
+    res.redirect('/admin/users');
+    });
+});
+
 router.get('/users', (req, res) => {
   var user = req.session.user;
   if (!user){
