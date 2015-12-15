@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
     req.flash('login', 'You must be logged in to access your courses');
     res.redirect('/user/login');
   }
+  else{
     var major = req.query.major;
     var concentration = req.query.concentration;
     var message = req.flash('login') || '';
@@ -24,6 +25,7 @@ router.get('/', (req, res) => {
           concentration: concentration,
           message: message,
           user:user,
+        admin:user.admin,
         });
         return;
       }
@@ -37,6 +39,7 @@ router.get('/', (req, res) => {
               concentration: concentration,
               message: message,
               user:user,
+        admin:user.admin,
             });
             return;
           }
@@ -51,6 +54,7 @@ router.get('/', (req, res) => {
                   concentrations: concentrations,
                   message: message,
                   user:user,
+        admin:user.admin,
                 });
                 return;
               }
@@ -71,6 +75,7 @@ router.get('/', (req, res) => {
                     num_remaining: stats[1],
                     message: message,
                     user:user,
+        admin:user.admin,
                   });
                 });
               }
@@ -84,6 +89,7 @@ router.get('/', (req, res) => {
                   courses: courses,
                   message: message,
                   user:user,
+        admin:user.admin,
                 });
               }
             });
@@ -96,6 +102,7 @@ router.get('/', (req, res) => {
           concentrations: concentrations,
           message: message,
           user:user,
+        admin:user.admin,
         });
       }
     });
@@ -107,9 +114,11 @@ router.get('/', (req, res) => {
       majors: majors,
       message: message,
       user:user,
+        admin:user.admin,
     });
     }
   });
+}
 });
 
 router.post('/select', (req, res) => {
@@ -148,7 +157,8 @@ course_helper.listDepartments( (err, depts) => {
         concentration: concentration,
         message: message,
         depts: depts,
-        user:user
+        user:user,
+        admin:user.admin,
       });
       return;
     }
@@ -163,6 +173,7 @@ course_helper.listDepartments( (err, depts) => {
             message: message,
             depts: depts,
             user:user,
+        admin:user.admin,
           });
           return;
         }
@@ -178,6 +189,7 @@ course_helper.listDepartments( (err, depts) => {
                 message: message,
                 depts: depts,
                 user:user,
+        admin:user.admin,
               });
               return;
             }
@@ -199,6 +211,7 @@ course_helper.listDepartments( (err, depts) => {
                   message: message,
                   depts: depts,
                   user:user,
+        admin:user.admin,
                 });
               });
             }
@@ -213,6 +226,7 @@ course_helper.listDepartments( (err, depts) => {
                 message: message,
                 depts: depts,
                 user:user,
+        admin:user.admin,
               });
             }
           });
@@ -226,6 +240,7 @@ else{
     message: message,
     depts: depts,
     user:user,
+        admin:user.admin,
   });
 }
 });
@@ -244,7 +259,8 @@ else if(dept && num){
       message: message,
       course_majors: course_majors,
       depts: depts,
-      user:user
+      user:user,
+        admin:user.admin,
     });
   });
 }
@@ -256,6 +272,7 @@ else{
     message: message,
     depts: depts,
     user:user,
+        admin:user.admin,
   });
 }
 });

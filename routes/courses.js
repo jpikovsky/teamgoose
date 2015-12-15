@@ -25,6 +25,7 @@ router.get('/', (req, res) => {
            return;
          }
          else{
+          console.log(user.admin);
           if(dept===undefined){
             var message = req.flash('courses') || '';
             res.render('courses', {
@@ -42,6 +43,7 @@ router.get('/', (req, res) => {
                 return;
               }
               else{
+                console.log(user.admin);
                 var message = req.flash('courses') || '';
 
                 res.render('courses', {
