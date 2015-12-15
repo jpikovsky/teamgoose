@@ -317,10 +317,37 @@ exports.removeUser = (name,cb) => {
       cb('could not connect to the database: ' + err);
       return;
     }
-    var quer  = "DELETE from users where username = $1";
-    // var quer  = "DELETE from user_courses where users_id=(select id from users where username=$1); DELETE from users where username = $2";
+    var quer  = 'DELETE from users where username = $1';
 
-    client.query(quer, [name, name], (err, result) => {
+    client.query(quer, [name], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined);
+    });
+
+  });
+
+};
+
+exports.removeUserCourses = (name,cb) => {
+
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+    var quer  = 'delete from user_courses where users_id=(select id from users where username=$1)';
+
+    client.query(quer, [name], (err, result) => {
       // call done to release the client back to the pool:
       done();
 
