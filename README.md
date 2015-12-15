@@ -14,6 +14,7 @@ _We help_ _students_ _make_ _**major**_ _changes_ _to_ _their_ _academic career_
 In order to run our application, all you will need to do is enter: "node app.js" into your favorite command line!
 To login: Go to login page and login with username: "test" and password "test"
 To login as admin: Go to login page and login with username "admin" and password "admin"
+Here is a screenshot of the node_modules used https://github.com/tcontois1/teamgoose/blob/master/node_modules_screenshot.PNG
 
 ####Views:
 * **Home**: This is essentially an About Page, describes the purpose of getinSPIREd and its origin story
