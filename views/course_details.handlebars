@@ -1,8 +1,30 @@
+<div align="center">
 <h1>Course Details</h1>
 <h3>Select Course</h3>
 
 <p> {{message}} </p>
+<style>
 
+* {
+    box-sizing: border-box;
+}
+.header {
+    border: 1px solid red;
+    padding: 10px;
+}
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+.col-1 {
+float:center;
+    position:relative;
+    left: -37px;
+}
+.col-1 {}
+
+</style>
 
 <form method="post" action="/courses/details_helper">
   Major:
@@ -16,6 +38,7 @@
     <button name="selection" value="dept"> Choose </button>
 </form>
 {{#if depart}}
+<div class="col-1">
 <form method="post" action="/courses/details">
 
     Course:
@@ -30,13 +53,14 @@
     <input type="hidden" name="username" value={{user}} />
     <input type="submit" value="Submit" />
 </form>
-
+</div>
 {{#if cour}}
 
 <div>
+<br>
   <label> <b> Instructor: {{instr}} </b> </label>
   <br>
-  <p><b>Description:</b> {{descr}}  </p>
+  <p align="justify"><b>Description:</b> {{descr}}  </p>
   <br>
   <table>
     <tr>
@@ -54,3 +78,4 @@
 {{/if}}
 {{/if}}
 
+</div>
