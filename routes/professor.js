@@ -19,6 +19,11 @@ router.get('/', (req, res) => {
 
 router.post('/helper', (req, res) => {
     var user = req.session.user;
+    if (!user) {
+    req.flash('login', 'You must be logged in to access your courses');
+    res.redirect('/user/login');
+  }
+  else{
     db.getProfessors(req.body.last,req.body.first,(err,result)=>{
     if(err){
       req.flash('/professors',err);
@@ -29,7 +34,7 @@ router.post('/helper', (req, res) => {
                 }       
 
   });
-
+}
 
   });
 
