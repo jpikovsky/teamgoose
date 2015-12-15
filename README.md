@@ -45,6 +45,7 @@ To see a figure of our database tables go to the /db_figures folder.
 (https://github.com/tcontois1/teamgoose/tree/master/db_figures)
 To see our commercial visit this link:
 https://youtu.be/1bgpnTplcgE
+
 Final Document:
 https://github.com/tcontois1/teamgoose/blob/master/TeamGooseFinalDocument.pdf
 
