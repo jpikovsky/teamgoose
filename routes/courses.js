@@ -57,8 +57,8 @@ router.get('/', (req, res) => {
             });
           }
         }
-          });
-        }
+      });
+}
 });
 }
 });
@@ -66,8 +66,8 @@ router.get('/', (req, res) => {
 router.post('/select', (req, res) => {
   // console.log(req.body);
   // console.log(req.body.selection);
-    var dept = req.body.dept;
-    res.redirect('/courses/?dept='+dept);
+  var dept = req.body.dept;
+  res.redirect('/courses/?dept='+dept);
 });
 
 
@@ -110,12 +110,12 @@ router.post('/userAdd', (req, res) => {
     res.redirect('/user/login');
   }
   else{
-  helper.userAdd(course,user.name,(error, new_course) => {
-    if(error)
-      req.flash('profile',error);
-    res.redirect('/profile');
-  });
-}
+    helper.userAdd(course,user.name,(error, new_course) => {
+      if(error)
+        req.flash('profile',error);
+      res.redirect('/profile');
+    });
+  }
 });
 
 router.post('/details', (req, res) => {

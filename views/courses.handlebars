@@ -1,7 +1,47 @@
-<h1>Add Course</h1>
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 
-<div>{{message}}</div>
+* {
+    box-sizing: border-box;
+}
+.header {
+    border: 1px solid red;
+    padding: 10px;
+}
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 0px solid blue;
+}
+.col-1 {width: 100%;}
+.col-2 {width: 50.00%;}
+.col-3 {width: 50.00%;}
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 0px solid black;
+}
+
+</style>
+
+<div id = "container" style = "width:100%">
+
+
+<div class="col-1"> {{message}} </div>
 <br>
+
+<div class="col-2">
+<h1>Add Course</h1>
 <form method="post" action="/courses/select">
   <label>Department:</label>
   <select name="dept">
@@ -27,31 +67,40 @@
     <input type="submit" value="Add Course" />
 </form>
 {{/if}}
+</div>
+
+<div class="col-3">
 
 <h2>Your Courses</h2>
-<table>
-  <tr>
-    <td>
-      Department:
-    </td>
-    <td>
-      Number:
-    </td>
-    <td>
-      Credits
-    </td>
-  </tr>
-  {{#each user_courses}}
+    <table>
     <tr>
       <td>
-        {{this.dept}}
+        Department:
       </td>
       <td>
-        {{this.num}}
+        Number:
       </td>
       <td>
-        {{this.credits}}
+        Credits
       </td>
     </tr>
-  {{/each}}
-</table>
+    {{#each user_courses}}
+      <tr>
+        <td>
+          {{this.dept}}
+        </td>
+        <td>
+          {{this.num}}
+        </td>
+        <td>
+        {{this.credits}}
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+<div class="col-1"> </div>
+
+</div>
+
+</html>
