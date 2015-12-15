@@ -115,6 +115,8 @@ app.use('/courses', require('./routes/courses'));
 app.use('/user', require('./routes/user-routes'));
 app.use('/admin', require('./routes/admin-routes'));
 app.use('/major', require('./routes/major-routes'));
+app.use('/professors', require('./routes/professor'));
+
 var team = require('./lib/team.js');
 
 app.get('/', (req, res) => {
@@ -207,11 +209,11 @@ app.get('/course/details', (req, res) => {
   });
 }
 });
-
-//app.get('/major', (req, res) => {
-// res.render('major');
-//});
-
+/*
+app.get('/professors', (req, res) => {
+ res.render('professors',{user:req.session.user,admin:req.session.user.admin});
+});
+*/
 app.get('/layout', (req, res) => {
   if(!req.session.user){
     req.flash('login', 'You must be logged in to access your courses');
@@ -225,15 +227,6 @@ app.get('/layout', (req, res) => {
 /*app.get('/admin', (req, res) => {
   res.render('admin');
 });*/
-
-app.get('/professors', (req, res) => {
-  if(!req.session.user){
-    req.flash('login', 'You must be logged in to access your courses');
-    res.redirect('/user/login');
-  }
-  else
-    res.render('professors',{user:req.session.user,admin:req.session.user.admin,});
-});
 
 
 //////////////////////////////////////////////////////////////////////

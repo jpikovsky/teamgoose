@@ -53,6 +53,34 @@ exports.getCourse = (dept,num,cb)=>{
   });
 };
 
+exports.getProfessors = (last,first,cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select * from professors where last=$1 and first=$2';
+    // var quer = 'select * professors where last=$1 and first=$2';
+
+    client.query(quer, [last,first], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+      // (7) otherwise, we invoke the callback with the user data.
+      cb(undefined,result.rows[0]);
+    });
+
+  });
+};
+
+
 exports.getCoursePreReqs = (course_id,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
