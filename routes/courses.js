@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
            return;
          }
          else{
-          console.log(user.admin);
+          // console.log(user.admin);
           if(dept===undefined){
             var message = req.flash('courses') || '';
             res.render('courses', {
@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
                 return;
               }
               else{
-                console.log(user.admin);
+                // console.log(user.admin);
                 var message = req.flash('courses') || '';
 
                 res.render('courses', {
@@ -85,7 +85,7 @@ router.post('/add', (req, res) => {
   else{
     var dept = req.body.dept;
     var num = req.body.num;
-    console.log("add course "+num);
+    // console.log("add course "+num);
     if(!dept || !num){
       req.flash('courses', 'Not enough information given');
       res.redirect('/courses')
@@ -93,6 +93,34 @@ router.post('/add', (req, res) => {
     else{
       var course = {dept : dept, num : num};
       helper.userAdd(course, user.name, (error, new_course) => {
+        if(error){
+          req.flash('courses', error);
+        }
+        res.redirect('/courses');
+      });
+    }
+  }
+});
+
+router.post('/delete', (req, res) => {
+  // Grab the session if the user is logged in.
+  var user = req.session.user;
+
+  // Redirects user to login if they are no logged in
+  if (!user) {
+    req.flash('login', 'You must be logged in to access your courses');
+    res.redirect('/user/login');
+  }
+  else{
+    var dept = req.body.dept;
+    var num = req.body.num;
+    if(!dept || !num){
+      req.flash('courses', 'Not enough information given');
+      res.redirect('/courses')
+    }
+    else{
+      var course = {dept : dept, num : num};
+      helper.userDeleteCourse(course, user.name, (error, new_course) => {
         if(error){
           req.flash('courses', error);
         }
