@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     res.redirect('/user/main')
   }
   else if (user.admin){
-    res.render('admin');
+    res.render('admin',{user:user});
   }
 });
 
@@ -66,7 +66,7 @@ router.get('/users', (req, res) => {
       }
       else{
         var errmess = req.flash('admin-users') || '';
-        res.render('admin-users', {users : arr, message : errmess});
+        res.render('admin-users', {user:user,users : arr, message : errmess});
       }
     });
   }
@@ -93,6 +93,7 @@ router.get('/courses', (req, res) => {
         }
         var message = req.flash('admin-courses') || '';
         res.render('admin-courses', {
+          user: user,
           depts: depts,
           courses: courses,
           message: message
@@ -167,6 +168,7 @@ router.get('/requirements', (req, res) => {
                 req.flash('admin-requirements', err);
                 }
                 res.render('admin-requirements', {
+                  user: user,
               major: major,
               depts: depts,
               concentration: concentration,
@@ -180,6 +182,7 @@ router.get('/requirements', (req, res) => {
         }
         else{
           res.render('admin-requirements', {
+            user :user,
             major: major,
             concentration: concentration,
             majors: majors,
@@ -190,6 +193,7 @@ router.get('/requirements', (req, res) => {
     }
     else{
       res.render('admin-requirements', {
+        user:user,
         major: major,
         concentration: concentration,
         majors: majors
