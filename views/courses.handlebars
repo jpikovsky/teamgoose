@@ -67,6 +67,34 @@ table, td, th {
     <input type="submit" value="Add Course" />
 </form>
 {{/if}}
+
+<h1>Delete Course</h1>
+<form method="post" action="/courses/select">
+  <label>Department:</label>
+  <select name="dept">
+    <option value={{dept}}>{{dept}}</option>
+    {{#each depts}}
+      <option value={{this.dept}}>{{this.dept}}</option>
+    {{/each}}
+  </select>
+  <button name="selection"> Choose </button>
+  <br>
+  </form>
+{{#if courses}}
+<form method="post" action="/courses/delete">
+  <label>Number:</label>
+    <select name="num">
+    <option value=""></option>
+    {{#each courses}}
+      <option value={{this.num}}>{{this.num}}</option>
+    {{/each}}
+
+  </select>
+    <input type="hidden" name="dept" value={{dept}} />
+    <input type="submit" value="Delete Course" />
+</form>
+{{/if}}
+
 </div>
 
 <div class="col-3">

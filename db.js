@@ -751,6 +751,36 @@ exports.addUserCourse = (course,username,cb)=>{
   });
 };
 
+exports.deleteUserCourse = (course,username,cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'delete from user_courses where course_id=(select course_id from course_list where dept=$1 and num=$2) and users_id=(select id from users where username=$3)';
+    client.query(quer, [course.dept,course.num,username], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+      // (7) otherwise, we invoke the callback with the user data.
+
+      // if(result.rows.length < 1){
+      //   cb("no results returned");
+      //   return;
+      // }
+      cb(undefined);
+
+    }); 
+  });
+};
+
 exports.listUserCourses = (username,cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
