@@ -49,3 +49,16 @@ https://youtu.be/1bgpnTplcgE
 Final Document:
 https://github.com/tcontois1/teamgoose/blob/master/TeamGooseFinalDocument.pdf
 
+Screencasts:
+* https://youtu.be/aCk2lyp2HF4
+* https://youtu.be/DTd0dRPyh_s
+* https://youtu.be/T3qUFH6rpbs
+* https://youtu.be/IqU9LQVtVvg
+* https://youtu.be/zJor4VVYQuY
+* https://youtu.be/hFzndJMv6Ts
+* https://youtu.be/cIi2JRlullE
+* https://youtu.be/gqy6PoBdLFs
+* https://youtu.be/90Ya4OG3qs0
+* https://youtu.be/lq2BlWYvzt8
+* https://youtu.be/qOiJwaBe_7g
+* https://youtu.be/VycmkizUnZ8
