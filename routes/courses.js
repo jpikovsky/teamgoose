@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
   var dept = req.query.dept || req.body.dept;
-  console.log("Dept = "+dept);
   // Redirects user to login if they are no logged in
   if (!user) {
     req.flash('login', 'You must be logged in to access your courses');
@@ -106,12 +105,17 @@ router.post('/userAdd', (req, res) => {
   var num = req.body.num;
   var user = req.session.user;
   var course = {dept : dept, num : num};
-
+  if(!user){
+    req.flash('login', 'You must be logged in to access your courses');
+    res.redirect('/user/login');
+  }
+  else{
   helper.userAdd(course,user.name,(error, new_course) => {
     if(error)
       req.flash('profile',error);
     res.redirect('/profile');
   });
+}
 });
 
 router.post('/details', (req, res) => {

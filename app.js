@@ -170,6 +170,11 @@ app.get('/about', (req, res) => {
 // });
 
 app.get('/profile', (req, res) => {
+  if(!req.session.user){
+    req.flash('login', 'You must be logged in to access your courses');
+    res.redirect('/user/login');
+  }
+  else
   res.render('profile',{user:req.session.user.name});
 });
 
@@ -178,7 +183,13 @@ app.get('/profile', (req, res) => {
 // });
 
 app.get('/course/details', (req, res) => {
+  if(!req.session.user){
+    req.flash('login', 'You must be logged in to access your courses');
+    res.redirect('/user/login');
+  }
+  else{
   var name = req.session.user.name;
+  
   course.listAllCourses((err,courses)=>{
     if(err){
       internalServerError500(err,req,res);
@@ -194,6 +205,7 @@ app.get('/course/details', (req, res) => {
       });
     }
   });
+}
 });
 
 //app.get('/major', (req, res) => {
@@ -210,7 +222,12 @@ app.get('/layout', (req, res) => {
 });*/
 
 app.get('/professors', (req, res) => {
-  res.render('professors',{user:req.session.user});
+  if(!req.session.user){
+    req.flash('login', 'You must be logged in to access your courses');
+    res.redirect('/user/login');
+  }
+  else
+    res.render('professors',{user:req.session.user});
 });
 
 
