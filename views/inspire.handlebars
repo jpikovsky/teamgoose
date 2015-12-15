@@ -123,25 +123,25 @@ table, td, th {
   </form>
   <br>
   <div id="course" style="display:none">
-    <div> Closest Major : {{major}} </div>
-    <div> Closest Concentration : {{concentration}} </div>
-    <div> Completed Requirements : {{num_completed}} </div>
-    <div> Remaining Requirements : {{num_remaining}} </div>
-    <form method="post" action="/major/inspire/course/reqs">
-      <select name="major" id="hidden_major" style="display:none">
-      <option value=""></option>
-      {{#each majors}}
-        <option value={{this.major}}>{{this.major}}</option>
-      {{/each}}
-      </select>
-      <select name="concentration" id="hidden_concentration" style="display:none">    
-        <option value=""></option>
-        {{#each concentrations}}
-          <option value={{this.concentration}}>{{this.concentration}}</option>
+    <table>
+      <tr>
+        <td>
+          Major
+        </td>
+        <td>
+          Concentration
+        </td>
+        {{#each course_majors}}
+          <tr>
+            <td>
+              {{this.major}}
+            </td>
+            <td>
+              {{this.concentration}}
+            </td>
+          </tr>
         {{/each}}
-      </select>
-      <button value="reqs"> Show Requirements </button>
-    </form>
+      </table>
   </div>
 </div>
 
@@ -167,7 +167,7 @@ table, td, th {
   document.getElementById('hidden_concentration').value=concentration;
   document.getElementById('hidden_major2').value=major;
   document.getElementById('hidden_concentration2').value=concentration;
-  document.getElementById(form).style="display:block";
+  document.getElementById('concentration').style="display:block";
 </script>
 
 </html>

@@ -19,7 +19,7 @@
   </select>
   <button name="selection" value="major"> Choose </button>
   <br>
-
+{{#if major}}
   <label>Concentration:</label>
   <select name="concentration" id="concentration">    
     <option value=""></option>
@@ -28,6 +28,7 @@
     {{/each}}
   </select>
   <button name="selection" value="concentration"> Choose </button>
+  {{/if}}
 </form>
 <br>
 

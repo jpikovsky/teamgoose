@@ -400,6 +400,37 @@ exports.getConcentrations = (major, cb)=>{
   });
 };
 
+exports.getMajorsWithCourse = (course, cb)=>{
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' + err);
+      return;
+    }
+
+    var quer = 'select majors.major, majors.concentration from reqs join majors on reqs.major_id=majors.major_id where course_id=(select course_id from course_list where dept=$1 and num=$2)';
+
+    client.query(quer, [course.dept, course.num], (err, result) => {
+      // call done to release the client back to the pool:
+      done();
+
+      // (4) check if there was an error querying database:
+      if (err) {
+        cb('could not connect to the database: ' + err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+
+  });
+};
+
 exports.listDepartments = (cb)=>{
   pg.connect(constr, (err, client, done) => {
     // (2) check for an error connecting:
