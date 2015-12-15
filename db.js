@@ -488,7 +488,8 @@ exports.listCourses = (major, concentration, cb) => {
 
       cb(undefined, result.rows);
     });
-  })};
+  });
+};
 
 exports.listConcentrationCourses = (major, cb) => {
   pg.connect(constr, (err, client, done) => {
@@ -516,7 +517,37 @@ exports.listConcentrationCourses = (major, cb) => {
 
       cb(undefined, result.rows);
     });
-  })};
+  });
+};
+
+exports.listAllMajorsAndConcentrationCourses = (cb) => {
+  pg.connect(constr, (err, client, done) => {
+    // (2) check for an error connecting:
+    if (err) {
+      cb('could not connect to the database: ' +err);
+      return;
+    }
+    //this query below didn't work and always got no results returned, so I changed it back to the original one
+    // var quer = 'select from course_list where dept=$1 and num=$2 union select from course_prereqs where course=(select course_id from course_list where dept=$1 and num=$2)';
+    var quer = 'select majors.major, majors.concentration, reqs.req_num, course_list.dept, course_list.num from reqs join majors on reqs.major_id=majors.major_id join course_list on course_list.course_id=reqs.course_id';
+
+    client.query(quer, (err, result) => {
+      done();
+
+      if(err) {
+        cb(err);
+        return;
+      }
+
+      if(result.rows.length == 0){
+        cb("No results returned");
+        return;
+      }
+
+      cb(undefined, result.rows);
+    });
+  });
+};
 
 exports.listAllCourses = (cb) => {
   pg.connect(constr, (err, client, done) => {
