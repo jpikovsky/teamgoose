@@ -35,7 +35,7 @@ router.get('/login', (req, res) => {
 router.post('/auth', (req, res) => {
   // Grab the session if the user is logged in.
   var user = req.session.user;
-  // Redirect to main if session and user is online:
+  // Redirect to main if session and user is online
   if (user) {
     res.redirect('/user/main');
   }
@@ -126,6 +126,7 @@ router.get('/profile', (req, res) => {
         message = err;
       }
         res.render('profile', {
+          admin:user.admin,
           user:user,
           name: user.name,
           message: message,

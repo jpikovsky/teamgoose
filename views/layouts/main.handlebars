@@ -167,7 +167,9 @@ a:active {
   {{#if user}}
   
   <li><a href="/user/logout">Logout</a></li>
+  {{#if admin}}
   <li><a href="/admin">Admin</a></li>
+  {{/if}}
   <li><a href="/major">Major</a></li>
   <li><a href="/course/details">Course Details</a></li>
   <li><a href="/courses">Courses</a></li>
