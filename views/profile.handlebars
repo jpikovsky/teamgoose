@@ -62,20 +62,36 @@ table, td, th {
       {{/each}}
     </select>
     <button name="selection" value="major"> Choose </button>
-    <br>
+  </form>
   </div>
 
 
 <div class ="col-3">
-<div><b>Change password</b></div>
-<table>
+<h3>Change password</h3>
   <form method="post" action="/user/profile/change">
-    <tr><td>Old Password: </td> <td><input type="password" name="old"> </td></tr>
-    <tr><td>New Password:  </td> <td> <input type="password" name="newp"> </td> </tr>
-    <tr><td>Confirm New Password: </td>  <td><input type="password" name="confirm"> </td></tr>
-    <tr><td><button>Update</button></td></tr>
+    <table>
+      <tr><td>
+        <label>Old Password: </label>
+      </td>
+      <td>
+      <input type="password" name="old"></input>
+      </td></tr>
+      <tr><td>
+      <label>New Password: </label>
+      </td>
+      <td>
+      <input type="password" name="newp"></label>
+      </td></tr>
+      <tr><td>
+      <label>Confirm New Password: </label>
+      </td>
+      <td>
+      <input type="password" name="confirm"></label>
+      </td></tr>
+    </table>
+    <button>Update</button>
   </form>
-</table><br>
+<h3>Delete Account</h3>
 <form method="get" action="/user/profile/delete">
 <button>Delete Account</button>
 </form>
