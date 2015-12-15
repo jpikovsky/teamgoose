@@ -152,11 +152,11 @@ router.post('/details', (req, res) => {
 
 
   var username = req.body.username;
-  helper.listAllCourses((err,courses)=>{
-    if(err){
-      internalServerError500(err,req,res);
-    }
-    else{
+  if(!username){
+    req.flash('course_detail',"Error");
+    res.redirect('/courses/details');
+  }
+  else{
       helper.listDepartments((err,depts)=>{
         if(err){
           internalServerError500(err,req,res);
@@ -198,8 +198,8 @@ router.post('/details', (req, res) => {
                         }
 
                       }
-
-                      res.render('course_details',{instr:instr,descr:descr,prereqs:prereqs,prereqsTaken:prereqsTaken,courses:courses,depts:depts,user:username,depart:req.body.dept,cour:req.body.course});
+                      console.log(req.body.course);
+                      res.render('course_details',{instr:instr,descr:descr,prereqs:prereqs,prereqsTaken:prereqsTaken,depts:depts,user:username,depart:req.body.dept,cour:req.body.course});
                     }
                   });
 }
@@ -209,7 +209,6 @@ router.post('/details', (req, res) => {
 }
 });
 }
-});
 });
 
 router.post('/details_helper', (req, res) => {
